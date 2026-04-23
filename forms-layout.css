@@ -1,0 +1,604 @@
+/**
+ * APOS-HC 調査票 form0〜form19 共通レイアウト
+ * 各 HTML に埋めていた重複 <style> を集約
+ * 読み込み順: main.css のあと（こちらで上書き・補完）
+ *
+ * 画面部位の目安:
+ *   - .container 内: タイトル・設問・表・canvas
+ *   - 画面下: .progress-*（進捗バー）、main.css の #pageNavBottom（ページ遷移）
+ */
+
+/* --- フォーム内: 設問ブロック .section を常に表示 --- */
+.section {
+  display: block !important;
+}
+
+/* --- form16 設問エリア: 褥瘡・痛みブロックの表示切替（JS が .show-* を付与） --- */
+#surveyForm:not(.show-bedsore) .bedsore-section {
+  display: none !important;
+}
+#surveyForm:not(.show-pain) .pain-section {
+  display: none !important;
+}
+
+/* ========== 768px 以上: カード型メインエリア全体 ========== */
+@media screen and (min-width: 768px) {
+  /* ページ地: 中央寄せ・下に固定フッタ用の余白 */
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 120px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* 白カード: 調査票の主要枠（見出し〜設問〜表まで） */
+  .container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 15px 0;
+    position: relative;
+  }
+
+  /* カード内 最上段: 調査票タイトル h1 */
+  h1 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 15px;
+  }
+
+  /* カード内: 大見出し（セクション見出し）h2 */
+  h2 {
+    font-size: 1.4em;
+    color: #34495e;
+    margin: 25px 0 15px 0;
+    padding: 10px 0;
+    border-left: 4px solid #3498db;
+    padding-left: 15px;
+    background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+  }
+
+  /* 設問グループ枠 fieldset とその見出し legend */
+  fieldset {
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #fafbfc;
+    transition: all 0.3s ease;
+  }
+
+  fieldset:hover {
+    border-color: #3498db;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+  }
+
+  legend {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 0 10px;
+    background: #fff;
+    border-radius: 6px;
+    border: 2px solid #3498db;
+  }
+
+  /* 各入力のラベル */
+  label {
+    display: block;
+    margin: 10px 0 5px 0;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1em;
+  }
+
+  /* テキスト・日付・select・textarea の入力枠 */
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1em;
+    border: 2px solid #e0e6ed;
+    border-radius: 6px;
+    background: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* 複数行テキスト */
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+  }
+
+  /* 家族構成など: グラデ見出しの表 .family-table */
+  .family-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .family-table th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 20px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .family-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e8f4f8;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .family-table td:first-child {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1em;
+  }
+
+  .family-table input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.05em;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+
+  .family-table input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+
+  .family-table tr:hover {
+    background: #f8f9fa;
+  }
+
+  /* 1日のリズム等: 時刻・行動の表 .daily-rhythm-table */
+  .daily-rhythm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .daily-rhythm-table th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 12px 10px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .daily-rhythm-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e8f4f8;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .daily-rhythm-table td:first-child {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9em;
+    width: 150px;
+  }
+
+  .daily-rhythm-table input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.9em;
+    border: 2px solid #e0e6ed;
+    border-radius: 6px;
+    background: #fff;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+
+  .daily-rhythm-table input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+
+  .daily-rhythm-table tr:hover {
+    background: #f8f9fa;
+  }
+
+  /* 注意書き・注釈（帯左アクセント） */
+  .note {
+    font-size: 1em;
+    color: #7f8c8d;
+    margin-top: 15px;
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 8px;
+    border-left: 4px solid #95a5a6;
+  }
+
+  /* カード内フッタ付近: 戻る / 次へ ボタン行 */
+  .nav-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .nav-buttons button {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+  }
+
+  .nav-buttons button:first-child {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+  }
+
+  .nav-buttons button:last-child {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+  }
+
+  .nav-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-buttons button:active {
+    transform: translateY(-1px);
+  }
+
+  /* 家族1人分などの囲い .family-block */
+  .family-block {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: #f8f9fa;
+  }
+
+  /* 図解・図面など canvas 枠 */
+  canvas {
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  /* 設問内 ON/OFF スイッチ風 .toggle */
+  .toggle {
+    appearance: none;
+    width: 60px;
+    height: 30px;
+    background: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .toggle:checked {
+    background: #4caf50;
+  }
+
+  .toggle:before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s ease;
+  }
+
+  .toggle:checked:before {
+    transform: translateX(30px);
+  }
+
+  /* ----- 画面下固定: 進捗バー（何ページ中何ページ目） ----- */
+  .progress-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  /* 進捗エリア内の最大幅ラッパ */
+  .progress-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* 細い横棒と塗りつぶし */
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #f0f0f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #003366;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    width: 5%;
+  }
+
+  /* 「◯ / ◯ ページ」テキスト行 */
+  .progress-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .progress-page {
+    color: #003366;
+    font-weight: 600;
+  }
+
+  .progress-total {
+    color: #999;
+  }
+
+  /* form11 等: .container 直下 form 内の汎用 table */
+  .container form table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .container form table th,
+  .container form table td {
+    padding: 10px;
+  }
+}
+
+/* --- 768〜1024px: 家族表・日課表の列幅と入力の細かい調整 --- */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .family-table input {
+    font-size: 1em;
+    padding: 10px 12px;
+  }
+
+  .daily-rhythm-table td:first-child {
+    width: 140px;
+  }
+
+  .daily-rhythm-table input {
+    font-size: 0.85em;
+    padding: 6px 8px;
+  }
+}
+
+/* --- 入力・fieldset の無効化・グレー塗り（インライン style 併用の見た目揃え） --- */
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[style*="background:#ededed"],
+textarea[style*="background:#ededed"],
+select[style*="background:#ededed"],
+[style*="background:#ededed"],
+[style*="background: #ededed"],
+[style*="background:#e0e0e0"],
+[style*="background: #e0e0e0"] {
+  background: #bfbfbf !important;
+  color: #555 !important;
+}
+
+fieldset[style*="background: #f0f0f0"],
+fieldset[style*="background:#f0f0f0"] {
+  background: #d0d0d0 !important;
+}
+
+fieldset[style*="opacity: 0.8"] label,
+fieldset[style*="opacity:0.8"] label {
+  color: #555 !important;
+}
+
+/* --- form11: はい/いいえをピル型ボタン風にした .yesno-group --- */
+.yesno-group {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.yesno-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.98em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+}
+.yesno-group label:first-of-type {
+  background: #e3eff8;
+  color: #206694;
+  border-color: #a5c9e0;
+}
+.yesno-group label:first-of-type:hover {
+  background: #c8e0f0;
+}
+.yesno-group label:last-of-type {
+  background: #f5fafd;
+  color: #5b7c99;
+  border-color: #dbe4ed;
+}
+.yesno-group label:last-of-type:hover {
+  background: #e7eff6;
+}
+.yesno-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.yesno-group label:has(input[type="radio"]:checked):first-of-type {
+  background: #206694;
+  color: #fff;
+  border-color: #123e5a;
+  box-shadow: 0 2px 8px rgba(32, 102, 148, 0.35);
+}
+.yesno-group label:has(input[type="radio"]:checked):last-of-type {
+  background: #5b7c99;
+  color: #fff;
+  border-color: #435e75;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* --- form17: 服薬・撮影まわり（ボタン・ファイル選択・注意枠） --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  user-select: none;
+}
+/* 服薬テーブル用の汎用ボタン: 主ボタン/補助/成功色 */
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+.btn--primary {
+  background: linear-gradient(135deg, #3498db 0%, #2d80bf 100%);
+  color: #fff;
+  border-color: #2d80bf;
+}
+.btn--primary:hover {
+  filter: brightness(1.06);
+}
+.btn--light {
+  background: #f2f6fb;
+  color: #003366;
+  border-color: #b0c7e6;
+}
+.btn--light:hover {
+  background: #eaf2fb;
+}
+.btn--success {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #fff;
+  border-color: #27ae60;
+}
+.btn--success:hover {
+  filter: brightness(1.06);
+}
+/* カメラ起動・再撮影・ファイル選択の横並び */
+.upload-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+/* ファイル input（本体と「ファイルを選択」ボタン部） */
+input.med-file {
+  font-size: 0.95em;
+  color: #003366;
+}
+input.med-file::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #b0c7e6;
+  background: #f2f6fb;
+  color: #003366;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+input.med-file::file-selector-button:hover {
+  background: #eaf2fb;
+}
+input[class$="-file"] {
+  font-size: 0.95em;
+  color: #003366;
+}
+input[class$="-file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #b0c7e6;
+  background: #f2f6fb;
+  color: #003366;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+input[class$="-file"]::file-selector-button:hover {
+  background: #eaf2fb;
+}
+/* 撮影/アップロードの状態テキスト */
+#medPhotoStatus,
+.med-upload-status {
+  color: #2c3e50;
+}
+/* 狭い画面: 服薬テーブル上の注意枠 #medTable_main_notice の折返し用 */
+@media (max-width: 600px) {
+  #medTable_main_notice {
+    font-size: 1em !important;
+    padding: 13px 6vw 13px 10vw !important;
+  }
+  #medTable_main_notice .sp_br {
+    display: unset !important;
+  }
+}

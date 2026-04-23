@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ニーズ領域抽出システム</title>
+  <link rel="stylesheet" href="display.css" />
+</head>
+<body class="newneed">
+  <header class="newneed-header">
+    <h1 class="newneed-title">ニーズ領域抽出システム</h1>
+    <p class="newneed-subtitle">事業所番号_個人番号とアセスメント回次を指定すると、該当するニーズ領域と内容を表示します。</p>
+    <nav class="newneed-nav">
+      <a href="/frontend/index.html" class="newneed-nav-link" id="backToMainForm">メインフォームに戻る</a>
+    </nav>
+  </header>
+
+  <button type="button" class="newneed-pagetop-btn" id="pagetopBtn" title="ページトップへ">↑ ページトップ</button>
+  <section class="newneed-form">
+    <div class="newneed-form-inner">
+      <div class="newneed-field">
+        <label for="office_id">事業所番号</label>
+        <input type="text" id="office_id" placeholder="例: A001" />
+      </div>
+      <div class="newneed-field">
+        <label for="person_id">個人番号</label>
+        <input type="text" id="person_id" placeholder="例: 0001" />
+      </div>
+      <div class="newneed-field">
+        <label for="round">回次</label>
+        <select id="round">
+          <option value="1">1回目</option>
+          <option value="2">2回目</option>
+          <option value="3">3回目</option>
+        </select>
+      </div>
+      <div class="newneed-field">
+        <button type="button" class="newneed-btn" id="btn">表示</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="newneed-overview-section" id="overviewSection" aria-labelledby="overviewHeading">
+    <h2 class="newneed-overview-heading" id="overviewHeading">回次をまたいだニーズ</h2>
+    <p class="newneed-overview-lead">1〜3回のアセスに該当したニーズ領域を比較できます。経過の評価・記録は、表内のリンクから開く<strong>看護計画</strong>画面で行ってください。</p>
+    <div class="newneed-overview-btns">
+      <button type="button" class="newneed-overview-btn" id="btnNeedsCompare" disabled>ニーズ領域の比較をする</button>
+    </div>
+    <div id="overviewPanel" class="newneed-overview-panel" hidden></div>
+  </section>
+
+  <div id="result" class="newneed-result"></div>
+
+  <footer class="newneed-footer">
+     — 該当する項目に値が入った項目のみ表示
+  </footer>
+
+  <script>
+    (function() {
+      // 「メインフォームに戻る」は、常にトップ画面(frontend/index.html)へ戻す。
+      // ローカルで :8000 側から開いていても、入力画面は :5500 側で開く。
+      var backToMainFormEl = document.getElementById("backToMainForm");
+      if (backToMainFormEl) {
+        var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        if (isLocal) {
+          backToMainFormEl.href =
+            window.location.protocol + "//" + window.location.hostname + ":5500/frontend/index.html";
+        } else {
+          backToMainFormEl.href = "/frontend/index.html";
+        }
+      }
+
+      // form.html で localStorage に保存されていれば事業所番号・個人番号・回次を反映
+      try {
+        var storedOffice = localStorage.getItem("office_id");
+        var storedPersonal = localStorage.getItem("personal_id");
+        if (storedOffice != null) {
+          var officeEl = document.getElementById("office_id");
+          if (officeEl) officeEl.value = storedOffice;
+        }
+        if (storedPersonal != null) {
+          var personEl = document.getElementById("person_id");
+          if (personEl) personEl.value = storedPersonal;
+        }
+        var storedRound = localStorage.getItem("session");
+        if (storedRound === "1" || storedRound === "2" || storedRound === "3") {
+          var roundEl = document.getElementById("round");
+          if (roundEl) roundEl.value = storedRound;
+        }
+      } catch (e) {}
+
+      var btn = document.getElementById("btn");
+      var resultEl = document.getElementById("result");
+      var btnNeedsCompare = document.getElementById("btnNeedsCompare");
+      var overviewPanel = document.getElementById("overviewPanel");
+
+      function getUidFromForm() {
+        var officeId = document.getElementById("office_id").value.trim();
+        var personId = document.getElementById("person_id").value.trim();
+        return officeId && personId ? officeId + "_" + personId : "";
+      }
+
+      function updateOverviewButtonsEnabled() {
+        var ok = !!getUidFromForm();
+        if (btnNeedsCompare) btnNeedsCompare.disabled = !ok;
+      }
+
+      ["office_id", "person_id"].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", updateOverviewButtonsEnabled);
+          el.addEventListener("change", updateOverviewButtonsEnabled);
+        }
+      });
+      updateOverviewButtonsEnabled();
+
+      function renderOverviewCompare(data, base) {
+        var uid = data.user_id || "";
+        var rows = data.needs_comparison || [];
+        var tqc = data.total_question_counts || {};
+        if (!rows.length) {
+          return "<p class=\"newneed-ov-empty-msg\">いずれの回にも該当したニーズ領域はありません。</p>";
+        }
+        var html = "<div class=\"newneed-ov-table-wrap\"><table class=\"newneed-ov-table\"><thead><tr>";
+        html += "<th class=\"newneed-ov-th-need\">ニーズ領域</th>";
+        html += "<th>1回目<br><span class=\"newneed-ov-th-sub\">該当項目</span></th>";
+        html += "<th>2回目<br><span class=\"newneed-ov-th-sub\">該当項目</span></th>";
+        html += "<th>3回目<br><span class=\"newneed-ov-th-sub\">該当項目</span></th>";
+        html += "<th class=\"newneed-ov-th-action\">看護計画</th>";
+        html += "</tr></thead><tbody>";
+        html += "<tr class=\"newneed-ov-sum-row\"><td><strong>全ニーズの該当項目 合計</strong></td>";
+        ["1", "2", "3"].forEach(function(r) {
+          var v = tqc[r];
+          html += "<td class=\"newneed-ov-td-mark newneed-ov-td-sumcell\">" + (v != null ? "<strong>" + v + "</strong> 件" : "—") + "</td>";
+        });
+        html += "<td></td></tr>";
+        rows.forEach(function(row) {
+          var nid = row.need_id || "";
+          var name = row.need_name_jp || "";
+          var pr = row.present || {};
+          var cc = row.content_count_by_round || {};
+          html += "<tr><td class=\"newneed-ov-td-need\"><strong>" + escapeHtml(nid) + "</strong> " + escapeHtml(name) + "</td>";
+          ["1", "2", "3"].forEach(function(r) {
+            var on = pr[r] === true;
+            // cc[r] が無い（古いAPI・キー不一致）ときは 0 に落とさず未表示扱いにする
+            var n = cc[r];
+            html += "<td class=\"newneed-ov-td-mark\">";
+            if (on && n != null && n > 0) {
+              html += "<span class=\"newneed-ov-mark\">○</span> <span class=\"newneed-ov-num\">" + n + " 件</span>";
+            } else if (on && n === 0) {
+              html += "<span class=\"newneed-ov-mark\">○</span> <span class=\"newneed-ov-num\">0 件</span>";
+            } else if (on) {
+              html += "<span class=\"newneed-ov-mark\">○</span> <span class=\"newneed-ov-num\">—</span>";
+            } else {
+              html += "<span class=\"newneed-ov-dash\">—</span>";
+            }
+            html += "</td>";
+          });
+          html += "<td class=\"newneed-ov-td-links\">";
+          ["1", "2", "3"].forEach(function(r) {
+            if (pr[r] !== true) return;
+            var href = base + "/static/care-plan.html?user_id=" + encodeURIComponent(uid) + "&round=" + encodeURIComponent(r) + "&need_id=" + encodeURIComponent(nid);
+            html += "<a class=\"newneed-ov-link-mini\" href=\"" + escapeAttr(href) + "\">" + r + "回</a> ";
+          });
+          html += "</td></tr>";
+        });
+        html += "</tbody></table></div>";
+        html += "<p class=\"newneed-ov-footnote\">件数はそのニーズ内でアセスに該当した質問の数です。合計行で回次ごとの全体件数の増減が分かります。</p>";
+        return html;
+      }
+
+      function fetchAndShowOverviewCompare() {
+        var uid = getUidFromForm();
+        if (!uid || !overviewPanel) return;
+        overviewPanel.hidden = false;
+        overviewPanel.innerHTML = "<p class=\"newneed-result-loading\">読み込み中...</p>";
+        var base = getBasePath();
+        var url = base + "/display/overview?user_id=" + encodeURIComponent(uid);
+        fetch(url)
+          .then(function(res) {
+            if (!res.ok) throw new Error(res.status === 404 ? "データを取得できません" : res.statusText);
+            return res.json();
+          })
+          .then(function(data) {
+            overviewPanel.innerHTML = renderOverviewCompare(data, base);
+          })
+          .catch(function(err) {
+            overviewPanel.innerHTML = "<p class=\"newneed-result-error\">" + escapeHtml(err.message) + "</p>";
+          });
+      }
+
+      if (btnNeedsCompare) {
+        btnNeedsCompare.addEventListener("click", function() {
+          fetchAndShowOverviewCompare();
+        });
+      }
+
+      function getBasePath() {
+        // ローカルで static サーバー(:5500)から開いた場合はAPI(:8000)へ向ける。
+        var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        if (isLocal && window.location.port !== "8000") {
+          return window.location.protocol + "//" + window.location.hostname + ":8000/api/newneed";
+        }
+        return window.location.origin + "/api/newneed";
+      }
+
+      function escapeHtml(s) {
+        if (s == null) return "";
+        var div = document.createElement("div");
+        div.textContent = String(s);
+        return div.innerHTML;
+      }
+
+      function escapeAttr(s) {
+        if (s == null) return "";
+        return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      }
+
+      function splitQuestionAnswer(text) {
+        if (text == null) text = "";
+        var s = String(text).trim();
+        var idx = -1;
+        for (var i = 0; i < s.length; i++) {
+          if (s[i] === " " || s[i] === "\u3000") idx = i;
+        }
+        if (idx < 0) return { question: s, answer: "" };
+        var q = s.slice(0, idx).trim();
+        var a = s.slice(idx).trim();
+        if (!a) return { question: s, answer: "" };
+        return { question: q, answer: a };
+      }
+
+      // ニーズ領域ごとのアンカーIDを生成
+      function makeAnchorId(needId) {
+        var s = String(needId || "");
+        // id に使えない文字を削除
+        s = s.replace(/[^A-Za-z0-9_-]/g, "");
+        if (!s) s = "need";
+        return "need-" + s;
+      }
+
+      btn.addEventListener("click", function() {
+        var officeId = document.getElementById("office_id").value.trim();
+        var personId = document.getElementById("person_id").value.trim();
+        var uid = officeId && personId ? officeId + "_" + personId : "";
+        var r = document.getElementById("round").value;
+
+        if (!uid) {
+          resultEl.innerHTML = "<p class=\"newneed-result-error\">事業所番号と個人番号を入力してください。</p>";
+          return;
+        }
+
+        resultEl.innerHTML = "<p class=\"newneed-result-loading\">読み込み中...</p>";
+        btn.disabled = true;
+
+        var base = getBasePath();
+        var url = base + "/display?user_id=" + encodeURIComponent(uid) + "&round=" + encodeURIComponent(r);
+
+        fetch(url)
+          .then(function(res) {
+            if (!res.ok) {
+              throw new Error(res.status === 404 ? "レコードが見つかりません" : res.statusText);
+            }
+            return res.json();
+          })
+          .then(function(data) {
+            var items = data.items || [];
+            btn.disabled = false;
+
+            if (items.length === 0) {
+              resultEl.innerHTML = "<p class=\"newneed-result-empty\">該当した項目はありません。</p>";
+              return;
+            }
+
+            var uid = data.user_id || "";
+            var roundNum = data.assessment_round || "1";
+            var html = "";
+
+            // 抽出されたニーズ領域の目次
+            html += "<nav class=\"newneed-toc\">";
+            html += "<h2 class=\"newneed-toc-title\">抽出されたニーズ領域</h2>";
+            html += "<ul class=\"newneed-toc-list\">";
+            items.forEach(function(it) {
+              var anchorId = makeAnchorId(it.need_id);
+              var label = "";
+              if (it.need_id) {
+                label += escapeHtml(it.need_id) + " ";
+              }
+              label += escapeHtml(it.need_name_jp || "");
+              html += "<li class=\"newneed-toc-item\">";
+              html += "<button type=\"button\" class=\"newneed-toc-link\" data-target=\"" + anchorId + "\">" + label + "</button>";
+              html += "</li>";
+            });
+            html += "</ul>";
+            html += "</nav>";
+
+            // ニーズ領域ごとの内容
+            html += "<div class=\"newneed-items\">";
+            items.forEach(function(it) {
+              var anchorId = makeAnchorId(it.need_id);
+              html += "<div class=\"newneed-item\" id=\"" + anchorId + "\">";
+              html += "<div class=\"newneed-item-header\">";
+              html += "<span class=\"need-id\">" + escapeHtml(it.need_id) + "</span>" + escapeHtml(it.need_name_jp || "");
+              var carePlanUrl = base + "/static/care-plan.html?user_id=" + encodeURIComponent(uid) + "&round=" + encodeURIComponent(roundNum) + "&need_id=" + encodeURIComponent(it.need_id || "");
+              html += "<a href=\"" + carePlanUrl + "\" class=\"newneed-care-plan-btn\">看護計画を書く</a>";
+              html += "</div>";
+              html += "<div class=\"newneed-item-contents\">";
+              (it.contents || []).forEach(function(c) {
+                var raw = c.display_text || c.column || "";
+                if (/^enjoyment_[123]_なし$/.test(raw)) raw = "なし";
+                var parts = splitQuestionAnswer(raw);
+                html += "<div class=\"newneed-item-content\">";
+                html += "<span class=\"content-question\">" + escapeHtml(parts.question) + "</span>";
+                if (parts.answer) html += "<span class=\"content-answer\">" + escapeHtml(parts.answer) + "</span>";
+                html += "</div>";
+              });
+              html += "</div></div>";
+            });
+            html += "</div>";
+
+            resultEl.innerHTML = html;
+
+            // 目次クリックで該当ニーズ領域へスクロール
+            var tocLinks = resultEl.querySelectorAll(".newneed-toc-link");
+            tocLinks.forEach(function(link) {
+              link.addEventListener("click", function() {
+                var targetId = this.getAttribute("data-target");
+                if (!targetId) return;
+                var target = document.getElementById(targetId);
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              });
+            });
+          })
+          .catch(function(err) {
+            btn.disabled = false;
+            resultEl.innerHTML = "<p class=\"newneed-result-error\">" + escapeHtml(err.message) + "</p>";
+          });
+      });
+
+      var pagetopBtn = document.getElementById("pagetopBtn");
+      function togglePagetopBtn() {
+        var show = window.scrollY > 300;
+        pagetopBtn.classList.toggle("is-visible", show);
+      }
+      window.addEventListener("scroll", togglePagetopBtn, { passive: true });
+      togglePagetopBtn();
+      pagetopBtn.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    })();
+  </script>
+</body>
+</html>

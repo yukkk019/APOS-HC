@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>看護計画書</title>
+  <link rel="stylesheet" href="display.css" />
+  <style>
+    .care-plan-page { max-width: 960px; margin: 0 auto; }
+    .care-plan-back { margin-bottom: 1rem; }
+    .care-plan-back a { color: var(--newneed-primary); text-decoration: none; font-size: 0.875rem; }
+    .care-plan-back a:hover { text-decoration: underline; }
+    .care-plan-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 768px) { .care-plan-layout { grid-template-columns: 1fr; } }
+    .care-plan-panel { min-width: 0; background: var(--newneed-card); border: 1px solid var(--newneed-border); border-radius: var(--newneed-radius); padding: 1rem; }
+    .care-plan-panel h3 { margin: 0 0 0.75rem; font-size: 1rem; color: var(--newneed-text); }
+    .care-plan-contents { font-size: 0.875rem; color: var(--newneed-text); min-width: 0; max-height: 70vh; overflow-y: auto; overflow-wrap: break-word; word-break: break-word; }
+    .care-plan-contents .content-item { padding: 0.5rem 0 0.5rem 1rem; position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0; border-bottom: 1px solid var(--newneed-border); }
+    .care-plan-contents .content-item:last-child { border-bottom: none; }
+    .care-plan-contents .content-item::before { content: "・"; position: absolute; left: 0; color: var(--newneed-text-muted); }
+    .care-plan-contents .content-item .content-question { flex: 1 1 100%; min-width: 0; overflow-wrap: break-word; word-break: break-word; line-height: 1.5; }
+    .care-plan-contents .content-item .content-answer { flex: 0 0 auto; display: inline-block; font-weight: 600; color: var(--newneed-primary); background: var(--newneed-accent); padding: 0.25rem 0.5rem; border-radius: 4px; margin-top: 0.25rem; overflow-wrap: break-word; word-break: break-word; font-size: 0.8125rem; line-height: 1.4; }
+    .care-plan-form label { display: block; margin-top: 1rem; margin-bottom: 0.25rem; font-weight: 600; font-size: 0.875rem; }
+    .care-plan-form textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 0.5rem;
+      border: 1px solid var(--newneed-border);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      box-sizing: border-box;
+    }
+    /* iPad などタブレットでもしっかり書けるよう、看護目標と具体的ケア内容はさらに縦長にする */
+    #care_goal {
+      min-height: 180px;
+    }
+    #care_plan_text {
+      min-height: 260px;
+    }
+    .care-plan-prev { margin-top: 0.5rem; }
+    .care-plan-prev h3 { font-size: 0.95rem; }
+    .care-plan-prev-list { margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.875rem; }
+    .care-plan-prev-list li { margin: 0.15rem 0; }
+    .care-eval-wrapper { margin-top: 1.25rem; }
+    .care-eval-wrapper h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .care-eval-block { border: 1px solid var(--newneed-border); border-radius: 6px; padding: 0.75rem 0.75rem 0.9rem; margin-top: 0.5rem; background: #f8fafc; }
+    .care-eval-goal { margin-bottom: 0.6rem; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--newneed-border); }
+    .care-eval-goal-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--newneed-text-muted); margin-bottom: 0.2rem; }
+    .care-eval-goal-text { font-size: 0.85rem; color: var(--newneed-text); line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+    .care-eval-header { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; align-items: baseline; margin-bottom: 0.5rem; }
+    .care-eval-label { font-size: 0.8rem; font-weight: 700; color: var(--newneed-primary); padding: 0.1rem 0.45rem; border-radius: 999px; background: #dbeafe; }
+    .care-eval-text { font-size: 0.9rem; font-weight: 600; color: var(--newneed-text); }
+    .care-eval-row { margin-top: 0.4rem; }
+    .care-eval-row-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--newneed-text-muted); margin-bottom: 0.15rem; }
+    .care-eval-level-options { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    .care-eval-level-option { position: relative; }
+    .care-eval-level-option input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .care-eval-level-option span { display: inline-block; padding: 0.25rem 0.55rem; border-radius: 999px; font-size: 0.8rem; border: 1px solid #dbeafe; background: #eff6ff; color: #1d4ed8; }
+    .care-eval-level-option.level-0 input:checked + span { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+    .care-eval-level-option.level-1 input:checked + span { background: #2563eb; border-color: #2563eb; color: #fff; }
+    .care-eval-level-option.level-2 input:checked + span { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+    .care-eval-level-option.level-3 input:checked + span { background: #60a5fa; border-color: #60a5fa; color: #0f172a; }
+    .care-eval-level-option.level-4 input:checked + span { background: #bfdbfe; border-color: #bfdbfe; color: #0f172a; }
+    .care-eval-level-option input:not(:checked) + span { background: #f8fafc; border-color: #e5e7eb; color: var(--newneed-text-muted); }
+    .care-eval-contents-options { display: flex; flex-wrap: wrap; gap: 0.4rem 0.75rem; }
+    .care-eval-contents-options label { font-size: 0.8rem; font-weight: normal; display: flex; align-items: center; gap: 0.25rem; }
+    .care-eval-note-label { font-size: 0.8rem; font-weight: 600; color: var(--newneed-text-muted); margin-bottom: 0.15rem; }
+    .care-eval-note { width: 100%; min-height: 80px; font-size: 0.85rem; padding: 0.4rem; border-radius: 6px; border: 1px solid var(--newneed-border); box-sizing: border-box; }
+    .care-plan-form .support-options { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+    .care-plan-form .support-options label { margin: 0; font-weight: normal; display: flex; align-items: center; gap: 0.35rem; }
+    .care-plan-form .support-options input { margin: 0; }
+    .care-plan-form .change-level-options { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.25rem; }
+    .care-plan-form .change-level-options label { margin: 0; font-weight: normal; display: flex; align-items: center; gap: 0.35rem; }
+    .care-plan-form .change-level-options input { margin: 0; }
+    .care-plan-form .change-contents-options { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.25rem; }
+    .care-plan-form .change-contents-options label { margin: 0; font-weight: normal; display: flex; align-items: center; gap: 0.35rem; }
+    .care-plan-form .change-contents-options input { margin: 0; }
+    .care-plan-form .btn-row { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .care-plan-form .save-btn { padding: 0.5rem 1.25rem; font-size: 0.9375rem; font-weight: 600; color: #fff; background: var(--newneed-primary); border: none; border-radius: 6px; cursor: pointer; }
+    .care-plan-form .save-btn:hover { background: var(--newneed-primary-hover); }
+    .care-plan-form .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .care-plan-form .pdf-btn { padding: 0.5rem 1.25rem; font-size: 0.9375rem; font-weight: 600; color: var(--newneed-primary); background: #fff; border: 1px solid var(--newneed-primary); border-radius: 6px; cursor: pointer; }
+    .care-plan-form .pdf-btn:hover { background: rgba(0,0,0,0.04); }
+    .care-plan-form .pdf-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .care-plan-message { margin-top: 0.75rem; font-size: 0.875rem; }
+    .care-plan-message.success { color: var(--newneed-success); }
+    .care-plan-message.error { color: var(--newneed-error); }
+    .care-plan-block { border: 1px solid var(--newneed-border); border-radius: 8px; padding: 0.75rem 0.9rem 0.9rem; margin-top: 0.25rem; background: #f8fafc; }
+    .care-plan-block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem; }
+    .care-plan-block-title { font-size: 0.9rem; font-weight: 700; color: var(--newneed-primary); }
+    .care-assess-history { margin-top: 0.25rem; }
+    .care-assess-acc { margin: 0.5rem 0; border: 1px solid var(--newneed-border); border-radius: 6px; background: #fff; }
+    .care-assess-acc summary { cursor: pointer; padding: 0.6rem 0.75rem; list-style: none; }
+    .care-assess-acc summary::-webkit-details-marker { display: none; }
+    .care-assess-summary { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: baseline; }
+    .care-assess-summary-q { font-weight: 600; flex: 1 1 100%; min-width: 0; line-height: 1.45; }
+    .care-assess-summary-a { font-size: 0.8rem; color: var(--newneed-text-muted); max-width: 100%; overflow-wrap: break-word; word-break: break-word; }
+    .care-assess-body { padding: 0 0.75rem 0.75rem; }
+    .care-assess-round { margin-top: 0.5rem; padding: 0.5rem; background: #f8fafc; border-radius: 4px; }
+    .care-assess-round-label { font-size: 0.75rem; font-weight: 600; color: var(--newneed-primary); margin-bottom: 0.35rem; }
+    .care-assess-round-content .content-question { display: block; }
+    .care-assess-round-content .content-answer { margin-top: 0.25rem; }
+    .care-assess-supplement { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed var(--newneed-border); }
+    .care-assess-supplement-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--newneed-text-muted); margin-bottom: 0.35rem; }
+    .care-assess-trend-options { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; margin: 0.35rem 0; }
+    .care-assess-trend-opt { font-size: 0.8rem; font-weight: normal; display: flex; align-items: center; gap: 0.25rem; margin: 0; }
+    .care-assess-note-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--newneed-text-muted); margin-top: 0.35rem; margin-bottom: 0.15rem; }
+    .care-assess-qe-note { width: 100%; min-height: 56px; font-size: 0.85rem; padding: 0.4rem; border-radius: 6px; border: 1px solid var(--newneed-border); box-sizing: border-box; }
+    .care-assess-empty { font-size: 0.875rem; color: var(--newneed-text-muted); padding: 0.5rem 0; }
+    .care-plan-add-btn { background: #fff; color: var(--newneed-primary); border: 1px solid var(--newneed-primary); }
+    .care-plan-add-btn:hover { background: rgba(37,99,235,0.06); }
+    #pdfContent { position: fixed; left: 0; top: 0; width: 210mm; box-sizing: border-box; display: none; padding: 24px; background: #fff; color: #333; font-family: "Helvetica Neue", "Hiragino Sans", sans-serif; visibility: hidden; z-index: -1; pointer-events: none; }
+    #pdfContent .pdf-title { font-size: 18pt; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+    #pdfContent .pdf-section { margin-top: 18px; }
+    #pdfContent .pdf-section-title { font-size: 11pt; font-weight: bold; margin-bottom: 8px; color: #333; }
+    #pdfContent .pdf-section-body { font-size: 10pt; line-height: 1.65; color: #333; white-space: pre-wrap; word-break: break-word; }
+    #pdfContent .pdf-list { margin: 0; padding-left: 1.4em; }
+    #pdfContent .pdf-list li { margin: 5px 0; font-size: 10pt; line-height: 1.65; }
+    #pdfContent .pdf-plan-block { margin-top: 18px; padding: 12px 0 12px 14px; border-left: 4px solid #2563eb; background: #f8fafc; }
+    #pdfContent .pdf-eval-block { margin-top: 12px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 4px; background: #fff; page-break-inside: avoid; }
+    #pdfContent .pdf-eval-block .pdf-eval-label { font-size: 9pt; color: #6b7280; margin-bottom: 2px; }
+    #pdfContent .pdf-eval-block .pdf-eval-content { font-size: 10pt; line-height: 1.65; margin-bottom: 8px; }
+    #pdfContent .pdf-eval-block .pdf-eval-content:last-child { margin-bottom: 0; }
+    @media print {
+      body * { visibility: hidden; }
+      #pdfContent, #pdfContent * { visibility: visible; }
+      #pdfContent {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+        padding: 16px !important;
+        margin: 0 !important;
+        background: #fff !important;
+        box-sizing: border-box !important;
+      }
+      #pdfContent .pdf-section { page-break-inside: avoid; }
+      #pdfContent .pdf-eval-block { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="newneed">
+  <div class="care-plan-page">
+    <div class="care-plan-back">
+      <a href="#" id="backLink">← ニーズ領域一覧に戻る</a>
+    </div>
+    <header class="newneed-header">
+      <h1 class="newneed-title" id="pageTitle">看護計画書</h1>
+      <p class="newneed-subtitle" id="pageSubtitle">該当内容を参照しながら看護計画を記入してください。</p>
+    </header>
+
+    <div id="loadError" class="newneed-result-error" style="display:none;"></div>
+    <div id="mainArea" style="display:none;">
+      <div class="care-plan-layout">
+        <div class="care-plan-panel">
+          <h3>このニーズ領域のアセス経過（1〜3回目）</h3>
+          <div class="care-plan-contents care-assess-history" id="assessmentHistoryArea"></div>
+
+          <div id="careEvaluationsWrapper" class="care-eval-wrapper" style="display:none;">
+            <h3 class="care-plan-subtitle">前回のケア計画・ケアごとの評価</h3>
+            <div id="careEvaluationsBody"></div>
+          </div>
+        </div>
+
+        <div class="care-plan-panel">
+          <form class="care-plan-form" id="carePlanForm">
+            <div id="carePlanBlocks">
+              <section class="care-plan-block" data-plan-index="1">
+                <div class="care-plan-block-header">
+                  <span class="care-plan-block-title">計画1</span>
+                </div>
+                <label for="care_goal">看護目標（短期・長期）（最大500字）</label>
+                <textarea id="care_goal" name="care_goal" data-role="care_goal" maxlength="500" placeholder="短期・長期の看護目標を記入してください"></textarea>
+                <label for="care_plan_text">ニーズ領域に対する具体的ケア内容（最大1000字）</label>
+                <textarea id="care_plan_text" name="care_plan_text" data-role="care_plan_text" maxlength="1000" placeholder="具体的なケア内容を記入してください"></textarea>
+                <label>支援方法（公式分類・複数選択可）</label>
+                <div class="support-options" id="supportOptions"></div>
+              </section>
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="save-btn" id="saveBtn">保存</button>
+              <button type="button" class="save-btn care-plan-add-btn" id="addPlanBtn">＋ 計画を追加</button>
+              <button type="button" class="pdf-btn" id="pdfBtn">画面上の情報をPDFで保存</button>
+            </div>
+          </form>
+          <div class="care-plan-message" id="messageArea"></div>
+        </div>
+      </div>
+    </div>
+    <div id="pdfContent" aria-hidden="true"></div>
+  </div>
+
+  <script>
+    (function() {
+      var supportChoices = ["教育・情報提供・相談", "直接ケア", "処置・検査", "ケアマネジメント", "観察・モニタリング"];
+      var changeLevelChoices = ["大きく改善", "ある程度改善", "変化なし", "ある程度低下", "大きく低下"];
+      var changeContentsChoices = ["知識・理解", "行動・反応・活動", "利用者の状態"];
+      function getBasePath() {
+        // ローカルで static サーバー(:5500)から開いた場合はAPI(:8000)へ向ける。
+        var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        if (isLocal && window.location.port !== "8000") {
+          return window.location.protocol + "//" + window.location.hostname + ":8000/api/newneed";
+        }
+        return window.location.origin + "/api/newneed";
+      }
+      function getQuery(name) {
+        var q = window.location.search.slice(1).split("&");
+        for (var i = 0; i < q.length; i++) {
+          var kv = q[i].split("=");
+          if (decodeURIComponent(kv[0]) === name) return decodeURIComponent((kv[1] || "").replace(/\+/g, " "));
+        }
+        return "";
+      }
+      function escapeHtml(s) {
+        if (s == null) return "";
+        var div = document.createElement("div");
+        div.textContent = String(s);
+        return div.innerHTML;
+      }
+      function escapeAttr(s) {
+        if (s == null) return "";
+        return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      }
+      function splitQuestionAnswer(text) {
+        if (text == null) text = "";
+        var s = String(text).trim();
+        var idx = -1;
+        for (var i = 0; i < s.length; i++) {
+          if (s[i] === " " || s[i] === "\u3000") idx = i;
+        }
+        if (idx < 0) return { question: s, answer: "" };
+        var q = s.slice(0, idx).trim();
+        var a = s.slice(idx).trim();
+        if (!a) return { question: s, answer: "" };
+        return { question: q, answer: a };
+      }
+
+      // care_plan_text をケアごとの配列に分解
+      function splitCarePlanIntoItems(text) {
+        if (text == null) text = "";
+        var lines = String(text).split(/\r?\n/);
+        var items = [];
+        lines.forEach(function(line) {
+          var s = String(line || "").trim();
+          if (!s) return;
+          // 先頭の「・」「①」「1.」「1)」「１）」などの記号を除去
+          s = s.replace(/^([0-9０-９]+[\.\)\）]\s*|[①-⑩]|・)\s*/, "");
+          s = s.trim();
+          if (s) items.push(s);
+        });
+        return items;
+      }
+
+      // 現在 round の保存済み計画から表示用のケア項目配列を取得（care_plan_text または care_plans 対応）
+      // 戻り値: [{careText, careGoal}, ...]
+      function getCareItemsWithGoalsFromPlan(cp) {
+        if (!cp) return [];
+        if (cp.care_plans && Array.isArray(cp.care_plans) && cp.care_plans.length > 0) {
+          var items = [];
+          cp.care_plans.forEach(function(p) {
+            var goalVal = (p.care_goal || "").trim();
+            var t = (p.care_plan_text || "").split(/\r?\n/).map(function(l) {
+              return String(l || "").replace(/^・\s*/, "").trim();
+            }).filter(Boolean);
+            t.forEach(function(line) { items.push({ careText: line, careGoal: goalVal }); });
+          });
+          return items;
+        }
+        var texts = splitCarePlanIntoItems(cp.care_plan_text || "");
+        var goalVal = (cp.care_goal || "").trim();
+        return texts.map(function(t) { return { careText: t, careGoal: goalVal }; });
+      }
+
+      // フォームの現在値からケア項目と看護目標を取得
+      function getCareItemsWithGoalsFromForm() {
+        var container = document.getElementById("carePlanBlocks");
+        if (!container) {
+          var goalEl = document.getElementById("care_goal");
+          var textEl = document.getElementById("care_plan_text");
+          var goalVal = goalEl ? (goalEl.value || "").trim() : "";
+          var texts = splitCarePlanIntoItems(textEl ? textEl.value : "");
+          return texts.map(function(t) { return { careText: t, careGoal: goalVal }; });
+        }
+        var blocks = container.querySelectorAll(".care-plan-block");
+        if (!blocks.length) return [];
+        var items = [];
+        blocks.forEach(function(block) {
+          var goalEl = block.querySelector("textarea[data-role='care_goal']");
+          var textEl = block.querySelector("textarea[data-role='care_plan_text']");
+          var goalVal = goalEl ? (goalEl.value || "").trim() : "";
+          var texts = (textEl ? textEl.value : "").split(/\r?\n/).map(function(l) {
+            return String(l || "").replace(/^・\s*/, "").trim();
+          }).filter(Boolean);
+          texts.forEach(function(line) { items.push({ careText: line, careGoal: goalVal }); });
+        });
+        return items;
+      }
+
+      function renderCareEvaluations(careItemsWithGoals, existingEvals) {
+        var wrap = document.getElementById("careEvaluationsWrapper");
+        var body = document.getElementById("careEvaluationsBody");
+        if (!wrap || !body) return;
+        body.innerHTML = "";
+        if (!careItemsWithGoals || !careItemsWithGoals.length) {
+          wrap.style.display = "none";
+          return;
+        }
+        wrap.style.display = "block";
+
+        var evalMap = {};
+        if (existingEvals && existingEvals.length) {
+          existingEvals.forEach(function(ev) {
+            var idx = parseInt(ev.care_index, 10);
+            if (!isNaN(idx) && idx >= 1 && !evalMap[idx]) {
+              evalMap[idx] = ev;
+            }
+          });
+        }
+
+        var html = "";
+        careItemsWithGoals.forEach(function(item, i) {
+          var careText = typeof item === "object" ? (item.careText || "") : String(item);
+          var careGoal = typeof item === "object" ? (item.careGoal || "") : "";
+          var index = i + 1;
+          var ev = evalMap[index] || {};
+          var changeLevelVal = ev.change_level || "";
+          var changeContentsRaw = ev.change_contents;
+          var changeContentsArr = [];
+          if (Array.isArray(changeContentsRaw)) {
+            changeContentsArr = changeContentsRaw.slice();
+          } else if (typeof changeContentsRaw === "string") {
+            changeContentsArr = changeContentsRaw.split(",").map(function(s) { return s.trim(); }).filter(Boolean);
+          }
+          var selectedContents = {};
+          changeContentsArr.forEach(function(v) { selectedContents[v] = true; });
+          var noteVal = ev.note || "";
+
+          var levelName = "care_eval_" + index + "_level";
+          var contentsName = "care_eval_" + index + "_contents";
+          var noteName = "care_eval_" + index + "_note";
+
+          var careLabelNum = index <= 10 ? String.fromCharCode(0x2460 + index - 1) : String(index);
+          html += "<section class=\"care-eval-block\" data-care-index=\"" + index + "\" data-care-text=\"" + escapeHtml(careText) + "\" data-care-goal=\"" + escapeHtml(careGoal) + "\">";
+          if (careGoal) {
+            html += "<div class=\"care-eval-goal\"><span class=\"care-eval-goal-label\">看護目標（短期・長期）</span><div class=\"care-eval-goal-text\">" + escapeHtml(careGoal) + "</div></div>";
+          }
+          html += "<header class=\"care-eval-header\">";
+          html += "<span class=\"care-eval-label\">ケア" + careLabelNum + "</span>";
+          html += "<span class=\"care-eval-text\">" + escapeHtml(careText) + "</span>";
+          html += "</header>";
+          html += "<div class=\"care-eval-body\">";
+
+          // 前回からの変化（5段階）
+          html += "<div class=\"care-eval-row care-eval-level-row\">";
+          html += "<span class=\"care-eval-row-label\">前回からの変化</span>";
+          html += "<div class=\"care-eval-level-options\">";
+          changeLevelChoices.forEach(function(choice, levelIdx) {
+            var checked = changeLevelVal === choice ? " checked" : "";
+            html += "<label class=\"care-eval-level-option level-" + levelIdx + "\">";
+            html += "<input type=\"radio\" name=\"" + levelName + "\" value=\"" + escapeHtml(choice) + "\"" + checked + ">";
+            html += "<span>" + escapeHtml(choice) + "</span>";
+            html += "</label>";
+          });
+          html += "</div></div>";
+
+          // 変化した内容（複数選択）
+          html += "<div class=\"care-eval-row\">";
+          html += "<span class=\"care-eval-row-label\">変化した内容（複数選択可）</span>";
+          html += "<div class=\"care-eval-contents-options\">";
+          changeContentsChoices.forEach(function(choice) {
+            var checked = selectedContents[choice] ? " checked" : "";
+            html += "<label><input type=\"checkbox\" name=\"" + contentsName + "\" value=\"" + escapeHtml(choice) + "\"" + checked + "> " + escapeHtml(choice) + "</label>";
+          });
+          html += "</div></div>";
+
+          // 前回からの変化（理由記述）
+          html += "<div class=\"care-eval-row\">";
+          html += "<span class=\"care-eval-row-label\">前回からの変化（理由記述）</span>";
+          html += "<textarea class=\"care-eval-note\" name=\"" + noteName + "\" placeholder=\"前回アセスメントからの変化があれば記入\" maxlength=\"500\">" + escapeHtml(noteVal) + "</textarea>";
+          html += "</div>";
+
+          html += "</div>";
+          html += "</section>";
+        });
+
+        body.innerHTML = html;
+      }
+
+      // 同じ round の保存済み計画を「前回のケア計画」として表示し、ケアごとの評価を用意する（round ごとに完結）
+      function loadPreviousCarePlanAndEvaluations(userId, round, needId, currentCarePlan) {
+        var wrapEval = document.getElementById("careEvaluationsWrapper");
+        if (wrapEval) wrapEval.style.display = "none";
+
+        var items = getCareItemsWithGoalsFromPlan(currentCarePlan || {});
+        var rawEv = currentCarePlan && currentCarePlan.care_evaluations;
+        var existingEvals = Array.isArray(rawEv) ? rawEv : [];
+
+        if (items.length > 0) {
+          if (wrapEval) wrapEval.style.display = "block";
+          renderCareEvaluations(items, existingEvals);
+        }
+      }
+
+      function collectCareEvaluations() {
+        var wrap = document.getElementById("careEvaluationsWrapper");
+        var body = document.getElementById("careEvaluationsBody");
+        if (!wrap || !body || wrap.style.display === "none") return [];
+        var blocks = body.querySelectorAll(".care-eval-block");
+        var results = [];
+        blocks.forEach(function(block) {
+          var index = parseInt(block.getAttribute("data-care-index"), 10);
+          if (isNaN(index) || index < 1) return;
+          var careText = block.getAttribute("data-care-text") || "";
+          var levelInput = block.querySelector("input[name='care_eval_" + index + "_level']:checked");
+          var changeLevel = levelInput ? levelInput.value : "";
+          var contentsInputs = block.querySelectorAll("input[name='care_eval_" + index + "_contents']:checked");
+          var changeContents = Array.prototype.map.call(contentsInputs, function(n) { return n.value; });
+          var noteEl = block.querySelector("textarea[name='care_eval_" + index + "_note']");
+          var note = noteEl ? noteEl.value : "";
+          if (!careText && !changeLevel && !changeContents.length && !note) return;
+          results.push({
+            care_index: index,
+            care_text: careText,
+            change_level: changeLevel,
+            change_contents: changeContents,
+            note: note
+          });
+        });
+        return results;
+      }
+
+      function buildQuestionEvalMap(list) {
+        var m = {};
+        if (!Array.isArray(list) || !list.length) return m;
+        list.forEach(function(ev) {
+          var col = ev.column;
+          if (col) m[col] = { trend: ev.trend || "", note: ev.note || "" };
+        });
+        return m;
+      }
+
+      function renderAssessmentHistory(history, currentRound, qeMap) {
+        var el = document.getElementById("assessmentHistoryArea");
+        if (!el) return;
+        if (!history || !history.length) {
+          el.innerHTML = "<div class=\"care-assess-empty\">該当するアセス項目はありません。</div>";
+          return;
+        }
+        var roundLabels = { "1": "1回目", "2": "2回目", "3": "3回目" };
+        var trendChoices = ["改善", "維持", "悪化", "該当なし"];
+        var html = "";
+        history.forEach(function(h, idx) {
+          var col = h.column || "";
+          var rounds = h.rounds || {};
+          var qe = qeMap[col] || {};
+          var trend = qe.trend || "";
+          var note = qe.note || "";
+          var headerQ = "";
+          for (var ri = 1; ri <= 3; ri++) {
+            var r = String(ri);
+            var dt = rounds[r];
+            if (dt) {
+              var partsH = splitQuestionAnswer(dt);
+              if (partsH.question) {
+                headerQ = partsH.question;
+                break;
+              }
+            }
+          }
+          if (!headerQ) headerQ = col;
+          var preview = "";
+          var cr = rounds[currentRound];
+          if (cr) {
+            var p = splitQuestionAnswer(cr);
+            preview = (p.answer || p.question || "").trim();
+            if (preview.length > 100) preview = preview.slice(0, 100) + "…";
+          }
+          html += "<details class=\"care-assess-acc\" data-column=\"" + escapeAttr(col) + "\">";
+          html += "<summary class=\"care-assess-summary\">";
+          html += "<span class=\"care-assess-summary-q\">" + escapeHtml(headerQ) + "</span>";
+          if (preview) html += "<span class=\"care-assess-summary-a\">" + escapeHtml(preview) + "</span>";
+          html += "</summary>";
+          html += "<div class=\"care-assess-body\">";
+          ["1", "2", "3"].forEach(function(r) {
+            var dt = rounds[r];
+            if (dt === null || dt === undefined) dt = "";
+            var raw = String(dt);
+            if (/^enjoyment_[123]_なし$/.test(raw)) raw = "なし";
+            var parts = splitQuestionAnswer(raw);
+            html += "<div class=\"care-assess-round\" data-round=\"" + r + "\">";
+            html += "<div class=\"care-assess-round-label\">" + roundLabels[r] + "</div>";
+            html += "<div class=\"care-assess-round-content content-item\">";
+            if (parts.question) html += "<span class=\"content-question\">" + escapeHtml(parts.question) + "</span>";
+            if (parts.answer) html += "<span class=\"content-answer\">" + escapeHtml(parts.answer) + "</span>";
+            else if (!parts.question && raw) html += "<span class=\"content-answer\">" + escapeHtml(raw) + "</span>";
+            else if (!raw) html += "<span class=\"content-question\" style=\"color:var(--newneed-text-muted)\">（該当なし）</span>";
+            html += "</div></div>";
+          });
+          html += "</div>";
+          if (currentRound !== "1") {
+            html += "<div class=\"care-assess-supplement\">";
+            html += "<span class=\"care-assess-supplement-label\">この項目の経過（任意）</span>";
+            html += "<div class=\"care-assess-trend-options\">";
+            trendChoices.forEach(function(t) {
+              var chk = trend === t ? " checked" : "";
+              html += "<label class=\"care-assess-trend-opt\"><input type=\"radio\" name=\"qe_trend_" + idx + "\" value=\"" + escapeHtml(t) + "\"" + chk + "> " + escapeHtml(t) + "</label>";
+            });
+            html += "</div>";
+            html += "<span class=\"care-assess-note-label\">所見（任意）</span>";
+            html += "<textarea class=\"care-assess-qe-note\" maxlength=\"500\" rows=\"2\" placeholder=\"必要に応じて記入\">" + escapeHtml(note) + "</textarea>";
+            html += "</div>";
+          }
+          html += "</details>";
+        });
+        el.innerHTML = html;
+      }
+
+      function collectQuestionEvaluations() {
+        if (round === "1") return [];
+        var details = document.querySelectorAll("#assessmentHistoryArea details.care-assess-acc");
+        var arr = [];
+        details.forEach(function(d, idx) {
+          var col = d.getAttribute("data-column");
+          if (!col) return;
+          var trendInput = d.querySelector("input[name=\"qe_trend_" + idx + "\"]:checked");
+          var noteEl = d.querySelector("textarea.care-assess-qe-note");
+          var trend = trendInput ? trendInput.value : "";
+          var note = noteEl ? noteEl.value.trim() : "";
+          if (!trend && !note) return;
+          arr.push({ column: col, trend: trend, note: note });
+        });
+        return arr;
+      }
+
+      // 複数の計画ブロックから、1つの care_goal / care_plan_text / support_methods にまとめる
+      function collectCarePlans() {
+        var container = document.getElementById("carePlanBlocks");
+        if (!container) {
+          return {
+            careGoal: document.getElementById("care_goal").value || "",
+            carePlanText: document.getElementById("care_plan_text").value || "",
+            supportMethods: Array.prototype.map.call(
+              document.querySelectorAll("input[name=support]:checked"),
+              function(n) { return n.value; }
+            ).join(","),
+          };
+        }
+        var blocks = container.querySelectorAll(".care-plan-block");
+        if (!blocks.length) {
+          return { careGoal: "", carePlanText: "", supportMethods: "" };
+        }
+
+        var goals = [];
+        var texts = [];
+        var supportSet = {};
+
+        blocks.forEach(function(block, idx) {
+          var idx1 = idx + 1;
+          var goalEl = block.querySelector("textarea[data-role='care_goal']");
+          var textEl = block.querySelector("textarea[data-role='care_plan_text']");
+          var goalVal = goalEl ? (goalEl.value || "").trim() : "";
+          var textVal = textEl ? (textEl.value || "").trim() : "";
+
+          if (goalVal) {
+            goals.push("【計画" + idx1 + "】\n" + goalVal);
+          }
+
+          if (textVal) {
+            textVal.split(/\r?\n/).map(function(line) {
+              return String(line || "").trim();
+            }).filter(Boolean).forEach(function(line) {
+              // 2回目以降の参照用に1行1ケアとして「・」付きで保存
+              texts.push("・" + line);
+            });
+          }
+
+          var supportInputs = block.querySelectorAll("input[data-role='support']:checked");
+          Array.prototype.forEach.call(supportInputs, function(n) {
+            var v = (n.value || "").trim();
+            if (v) supportSet[v] = true;
+          });
+        });
+
+        return {
+          careGoal: goals.join("\n\n"),
+          carePlanText: texts.join("\n"),
+          supportMethods: Object.keys(supportSet).join(","),
+        };
+      }
+
+      // PDF用：計画ごとの配列を返す（【計画N】→ 具体的ケア内容 → 支援方法 のブロック組み立て用）
+      function collectCarePlansAsList() {
+        var container = document.getElementById("carePlanBlocks");
+        if (!container) {
+          var goal = (document.getElementById("care_goal") && document.getElementById("care_goal").value) || "";
+          var text = (document.getElementById("care_plan_text") && document.getElementById("care_plan_text").value) || "";
+          var supportNodes = document.querySelectorAll("input[name=support]:checked");
+          var supportStr = Array.prototype.map.call(supportNodes, function(n) { return n.value; }).join("、") || "（未選択）";
+          return [{ careGoal: goal, carePlanText: text, supportMethods: supportStr }];
+        }
+        var blocks = container.querySelectorAll(".care-plan-block");
+        if (!blocks.length) {
+          return [];
+        }
+        var list = [];
+        blocks.forEach(function(block, idx) {
+          var idx1 = idx + 1;
+          var goalEl = block.querySelector("textarea[data-role='care_goal']");
+          var textEl = block.querySelector("textarea[data-role='care_plan_text']");
+          var goalVal = goalEl ? (goalEl.value || "").trim() : "";
+          var textVal = textEl ? (textEl.value || "").trim() : "";
+          var lines = [];
+          if (textVal) {
+            textVal.split(/\r?\n/).map(function(line) { return String(line || "").trim(); }).filter(Boolean).forEach(function(line) {
+              lines.push("・" + line);
+            });
+          }
+          var supportInputs = block.querySelectorAll("input[data-role='support']:checked");
+          var supportArr = [];
+          Array.prototype.forEach.call(supportInputs, function(n) {
+            var v = (n.value || "").trim();
+            if (v) supportArr.push(v);
+          });
+          list.push({
+            careGoal: goalVal,
+            carePlanText: lines.join("\n"),
+            supportMethods: supportArr.length ? supportArr.join("、") : "（未選択）",
+          });
+        });
+        return list;
+      }
+
+      var userId = getQuery("user_id");
+      var round = getQuery("round") || "1";
+      var needId = getQuery("need_id");
+      var base = getBasePath();
+      var lastAssessmentHistory = [];
+      var backLink = document.getElementById("backLink");
+      backLink.href = base + "/static/display.html?user_id=" + encodeURIComponent(userId) + "&round=" + encodeURIComponent(round);
+
+      if (!userId || !needId) {
+        document.getElementById("loadError").style.display = "block";
+        document.getElementById("loadError").textContent = "user_id と need_id を指定してください。";
+        document.getElementById("mainArea").style.display = "none";
+      } else {
+        var url = base + "/care-plan/form?user_id=" + encodeURIComponent(userId) + "&round=" + encodeURIComponent(round) + "&need_id=" + encodeURIComponent(needId);
+        fetch(url)
+          .then(function(res) {
+            if (!res.ok) throw new Error(res.status === 404 ? "レコードが見つかりません" : res.statusText);
+            return res.json();
+          })
+          .then(function(data) {
+            document.getElementById("loadError").style.display = "none";
+            document.getElementById("mainArea").style.display = "block";
+            var item = data.need_item || {};
+            document.getElementById("pageTitle").textContent = "看護計画書 — " + (item.need_id || "") + " " + (item.need_name_jp || "");
+            lastAssessmentHistory = data.assessment_history || [];
+            var cp = data.care_plan || {};
+            var qeMap = buildQuestionEvalMap(cp.question_evaluations);
+            renderAssessmentHistory(lastAssessmentHistory, round, qeMap);
+
+            var planList = data.care_plans && Array.isArray(data.care_plans) ? data.care_plans : [];
+
+            var blocksContainer = document.getElementById("carePlanBlocks");
+            var baseBlock = blocksContainer ? blocksContainer.querySelector(".care-plan-block") : null;
+
+            if (planList.length > 0 && baseBlock && round === "1") {
+              // 複数計画を復元：必要な数だけブロックを用意してから各ブロックに代入
+              var blocks = blocksContainer.querySelectorAll(".care-plan-block");
+              while (blocks.length < planList.length) {
+                var nextIndex = blocks.length + 1;
+                var clone = baseBlock.cloneNode(true);
+                clone.setAttribute("data-plan-index", nextIndex);
+                var title = clone.querySelector(".care-plan-block-title");
+                if (title) title.textContent = "計画" + nextIndex;
+                clone.querySelectorAll("textarea[data-role='care_goal'], textarea[data-role='care_plan_text']").forEach(function(ta) {
+                  ta.value = "";
+                  ta.removeAttribute("id");
+                  ta.removeAttribute("name");
+                });
+                var supportEl = clone.querySelector(".support-options");
+                if (supportEl) {
+                  var sh = "";
+                  supportChoices.forEach(function(choice) {
+                    sh += "<label><input type=\"checkbox\" data-role=\"support\" value=\"" + escapeHtml(choice) + "\"> " + escapeHtml(choice) + "</label>";
+                  });
+                  supportEl.innerHTML = sh;
+                }
+                blocksContainer.appendChild(clone);
+                blocks = blocksContainer.querySelectorAll(".care-plan-block");
+              }
+              blocks = blocksContainer.querySelectorAll(".care-plan-block");
+              planList.forEach(function(plan, idx) {
+                if (idx >= blocks.length) return;
+                var block = blocks[idx];
+                var goalEl = block.querySelector("textarea[data-role='care_goal']");
+                var textEl = block.querySelector("textarea[data-role='care_plan_text']");
+                if (goalEl) goalEl.value = plan.care_goal || "";
+                if (textEl) textEl.value = plan.care_plan_text || "";
+                var savedMethods = (plan.support_methods || "").replace(/、/g, ",").split(",").map(function(s) { return s.trim(); }).filter(Boolean);
+                var supportContainer = block.querySelector(".support-options");
+                if (supportContainer) {
+                  var optsHtml = "";
+                  supportChoices.forEach(function(choice) {
+                    var checked = savedMethods.indexOf(choice) !== -1 ? " checked" : "";
+                    optsHtml += "<label><input type=\"checkbox\" data-role=\"support\" value=\"" + escapeHtml(choice) + "\"" + checked + "> " + escapeHtml(choice) + "</label>";
+                  });
+                  supportContainer.innerHTML = optsHtml;
+                }
+              });
+            } else {
+              // 単一または従来形式：1ブロック目に care_plan を代入
+              document.getElementById("care_goal").value = cp.care_goal || "";
+              document.getElementById("care_plan_text").value = cp.care_plan_text || "";
+              var savedMethods = (cp.support_methods || "").split(",").map(function(s) { return s.trim(); }).filter(Boolean);
+              var optsHtml = "";
+              supportChoices.forEach(function(choice) {
+                var checked = savedMethods.indexOf(choice) !== -1 ? " checked" : "";
+                optsHtml += "<label><input type=\"checkbox\" name=\"support\" data-role=\"support\" value=\"" + escapeHtml(choice) + "\"" + checked + "> " + escapeHtml(choice) + "</label>";
+              });
+              document.getElementById("supportOptions").innerHTML = optsHtml;
+            }
+
+            // 同じ round の保存済み計画があれば「前回のケア計画・ケアごとの評価」を表示（round ごとに完結）
+            loadPreviousCarePlanAndEvaluations(userId, round, needId, cp);
+
+            // 1回目のみ「＋ 計画を追加」ボタンを表示
+            var addBtn = document.getElementById("addPlanBtn");
+            var blocksContainer = document.getElementById("carePlanBlocks");
+            if (addBtn && blocksContainer) {
+              if (round === "1") {
+                addBtn.style.display = "inline-block";
+              } else {
+                addBtn.style.display = "none";
+              }
+
+              if (!addBtn._initialized) {
+                addBtn._initialized = true;
+                addBtn.addEventListener("click", function() {
+                  var baseBlock = blocksContainer.querySelector(".care-plan-block");
+                  if (!baseBlock) return;
+                  var blocks = blocksContainer.querySelectorAll(".care-plan-block");
+                  var nextIndex = blocks.length + 1;
+                  var clone = baseBlock.cloneNode(true);
+                  clone.setAttribute("data-plan-index", nextIndex);
+                  var title = clone.querySelector(".care-plan-block-title");
+                  if (title) title.textContent = "計画" + nextIndex;
+
+                  // テキストエリアは初期化し、id/name は重複しないように外す
+                  clone.querySelectorAll("textarea[data-role='care_goal'], textarea[data-role='care_plan_text']").forEach(function(ta) {
+                    ta.value = "";
+                    ta.removeAttribute("id");
+                    ta.removeAttribute("name");
+                  });
+
+                  // 支援方法のチェックボックスも初期化
+                  var supportEl = clone.querySelector(".support-options");
+                  if (supportEl) {
+                    var html = "";
+                    supportChoices.forEach(function(choice) {
+                      html += "<label><input type=\"checkbox\" data-role=\"support\" value=\"" +
+                        escapeHtml(choice) + "\"> " + escapeHtml(choice) + "</label>";
+                    });
+                    supportEl.innerHTML = html;
+                  }
+
+                  blocksContainer.appendChild(clone);
+                });
+              }
+            }
+          })
+          .catch(function(err) {
+            document.getElementById("loadError").style.display = "block";
+            document.getElementById("loadError").textContent = err.message || "読み込みに失敗しました。";
+          });
+      }
+
+      document.getElementById("carePlanForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        var careEvaluations = collectCareEvaluations();
+        var questionEvaluations = collectQuestionEvaluations();
+        var planAgg = collectCarePlans();
+        var planListForSave = collectCarePlansAsList().map(function(p) {
+          return { care_goal: p.careGoal, care_plan_text: p.carePlanText, support_methods: p.supportMethods };
+        });
+        var payload = {
+          user_id: userId,
+          assessment_round: round,
+          need_id: needId,
+          care_goal: planAgg.careGoal,
+          care_plan_text: planAgg.carePlanText,
+          support_methods: planAgg.supportMethods,
+          care_plans: planListForSave,
+          change_level: "",
+          change_contents: "",
+          change_from_previous: "",
+          care_evaluations: careEvaluations,
+          question_evaluations: questionEvaluations
+        };
+        var btn = document.getElementById("saveBtn");
+        var msg = document.getElementById("messageArea");
+        btn.disabled = true;
+        msg.textContent = "";
+        msg.className = "care-plan-message";
+        fetch(base + "/care-plan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            btn.disabled = false;
+            msg.className = "care-plan-message success";
+            msg.textContent = data.message || "保存しました。";
+            // 保存した内容で左の「前回のケア計画・ケアごとの評価」を更新
+            var newItems = getCareItemsWithGoalsFromForm();
+            if (newItems.length > 0) {
+              var evals = collectCareEvaluations();
+              var wrapEval = document.getElementById("careEvaluationsWrapper");
+              if (wrapEval) wrapEval.style.display = "block";
+              renderCareEvaluations(newItems, evals);
+            }
+            var qeMapSaved = buildQuestionEvalMap(collectQuestionEvaluations());
+            renderAssessmentHistory(lastAssessmentHistory, round, qeMapSaved);
+          })
+          .catch(function(err) {
+            btn.disabled = false;
+            msg.className = "care-plan-message error";
+            msg.textContent = err.message || "保存に失敗しました。";
+          });
+      });
+
+      function getPdfContentHtml() {
+        var titleEl = document.getElementById("pageTitle");
+        var histEl = document.getElementById("assessmentHistoryArea");
+
+        var planList = collectCarePlansAsList();
+
+        var histSection = "";
+        if (histEl) {
+          var accs = histEl.querySelectorAll("details.care-assess-acc");
+          if (accs.length) {
+            accs.forEach(function(acc) {
+              var sum = acc.querySelector("summary");
+              var title = sum ? sum.textContent.replace(/\s+/g, " ").trim() : "";
+              histSection += "<div class=\"pdf-eval-block\">";
+              if (title) {
+                histSection += "<div class=\"pdf-eval-label\">項目</div>";
+                histSection += "<div class=\"pdf-eval-content\">" + escapeHtml(title) + "</div>";
+              }
+              var rounds = acc.querySelectorAll(".care-assess-round");
+              rounds.forEach(function(rn) {
+                histSection += "<div class=\"pdf-eval-content\">" + escapeHtml(rn.textContent.replace(/\s+/g, " ").trim()) + "</div>";
+              });
+              var sup = acc.querySelector(".care-assess-supplement");
+              if (sup) {
+                var tr = sup.querySelector("input[type=radio]:checked");
+                var nt = sup.querySelector("textarea");
+                var line = "経過（任意）: " + (tr ? tr.value : "（未選択）");
+                if (nt && nt.value.trim()) line += " / " + nt.value.trim();
+                histSection += "<div class=\"pdf-eval-content\">" + escapeHtml(line) + "</div>";
+              }
+              histSection += "</div>";
+            });
+          }
+        }
+        if (!histSection) {
+          histSection = "<div class=\"pdf-eval-block\"><div class=\"pdf-eval-content\">該当するアセス項目はありません。</div></div>";
+        }
+
+        var html = "<div class=\"pdf-title\">" + escapeHtml(titleEl ? titleEl.textContent : "看護計画書") + "</div>";
+        html += "<div class=\"pdf-section\"><div class=\"pdf-section-title\">このニーズ領域のアセス経過（1〜3回目）</div>" + histSection + "</div>";
+
+        planList.forEach(function(plan, idx) {
+          var n = idx + 1;
+          html += "<div class=\"pdf-section pdf-plan-block\">";
+          html += "<div class=\"pdf-section-title\">【計画" + n + "】</div>";
+          html += "<div class=\"pdf-section\"><div class=\"pdf-section-title\">看護目標（短期・長期）</div><div class=\"pdf-section-body\">" + (plan.careGoal || "（未記入）") + "</div></div>";
+          html += "<div class=\"pdf-section\"><div class=\"pdf-section-title\">ニーズ領域に対する具体的ケア内容</div><div class=\"pdf-section-body\">" + (plan.carePlanText || "（未記入）") + "</div></div>";
+          html += "<div class=\"pdf-section\"><div class=\"pdf-section-title\">支援方法（公式分類）</div><div class=\"pdf-section-body\">" + escapeHtml(plan.supportMethods) + "</div></div>";
+          html += "</div>";
+        });
+
+        // ケアごとの評価（左カラム）をPDFに含める
+        var careEvalBlocks = document.querySelectorAll(".care-eval-block");
+        if (careEvalBlocks && careEvalBlocks.length > 0) {
+          html += "<div class=\"pdf-section\"><div class=\"pdf-section-title\">前回のケア計画・ケアごとの評価</div>";
+          careEvalBlocks.forEach(function(block) {
+            var careText = block.getAttribute("data-care-text") || "";
+            var careGoal = block.getAttribute("data-care-goal") || "";
+            var levelInput = block.querySelector("input[type=radio]:checked");
+            var changeLevel = levelInput ? levelInput.value : "（未選択）";
+            var contentsInputs = block.querySelectorAll("input[type=checkbox]:checked");
+            var changeContents = Array.prototype.map.call(contentsInputs, function(n) { return n.value; }).join("、") || "（未選択）";
+            var noteEl = block.querySelector("textarea");
+            var note = noteEl ? noteEl.value.trim() : "";
+            html += "<div class=\"pdf-eval-block\">";
+            if (careGoal) {
+              html += "<div class=\"pdf-eval-label\">看護目標（短期・長期）</div>";
+              html += "<div class=\"pdf-eval-content\">" + escapeHtml(careGoal) + "</div>";
+            }
+            html += "<div class=\"pdf-eval-label\">ケア内容</div>";
+            html += "<div class=\"pdf-eval-content\"><strong>" + escapeHtml(careText) + "</strong></div>";
+            html += "<div class=\"pdf-eval-label\">前回からの変化・変化した内容</div>";
+            html += "<div class=\"pdf-eval-content\">" + escapeHtml(changeLevel) + " / " + escapeHtml(changeContents) + "</div>";
+            if (note) {
+              html += "<div class=\"pdf-eval-label\">理由記述</div>";
+              html += "<div class=\"pdf-eval-content\">" + escapeHtml(note) + "</div>";
+            }
+            html += "</div>";
+          });
+          html += "</div>";
+        }
+        return html;
+      }
+
+      document.getElementById("pdfBtn").addEventListener("click", function() {
+        var btn = document.getElementById("pdfBtn");
+        if (btn.disabled) return;
+        document.querySelectorAll("#assessmentHistoryArea details.care-assess-acc").forEach(function(d) {
+          d.setAttribute("open", "");
+        });
+        var pdfContent = document.getElementById("pdfContent");
+        pdfContent.innerHTML = getPdfContentHtml();
+        pdfContent.style.display = "block";
+        pdfContent.style.visibility = "visible";
+        var done = false;
+        function cleanup() {
+          if (done) return;
+          done = true;
+          window.removeEventListener("afterprint", afterPrint);
+          window.removeEventListener("focus", onFocus);
+          pdfContent.style.display = "none";
+          pdfContent.style.visibility = "hidden";
+          pdfContent.innerHTML = "";
+          btn.disabled = false;
+        }
+        function afterPrint() { cleanup(); }
+        function onFocus() { setTimeout(cleanup, 500); }
+        window.addEventListener("afterprint", afterPrint);
+        window.addEventListener("focus", onFocus);
+        btn.disabled = true;
+        window.print();
+      });
+    })();
+  </script>
+</body>
+</html>

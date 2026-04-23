@@ -1,0 +1,187 @@
+// page7: 身体計測（BMI 自動計算を含む）のJSON定義。
+const page7 = {
+  id: 7,
+  formTitle: "APOS-HC 調査票",
+  badge: "No.7",
+  fields: [
+    {
+      type: "group",
+      key: "lifestyleHealth",
+      label: "Ⅰ　生活習慣・健康状態",
+      fields: [
+        {
+          type: "group",
+          key: "bmi",
+          label: "BMI",
+          fields: [
+            { type: "text", key: "height", label: "身長（cm）", inputType: "number", min: 100, max: 250, placeholder: "例: 160" },
+            { type: "text", key: "weight", label: "体重（kg）", inputType: "number", min: 20, max: 200, placeholder: "例: 60" },
+            { type: "text", key: "bmiValue", label: "BMI値", inputType: "number" },
+            {
+              type: "select",
+              key: "category",
+              label: "BMI区分",
+              options: [
+                { value: "", label: "選択してください" },
+                { value: "0", label: "0. 18.5～24.99以下：標準体重" },
+                { value: "1", label: "1. 25.0～29.99：前肥満" },
+                { value: "2", label: "2. 30.0～34.99：肥満1度" },
+                { value: "3", label: "3. 35.0～39.99：肥満2度" },
+                { value: "4", label: "4. 40.0以上：肥満3度" },
+                { value: "5", label: "5. 17.0～18.49：痩せぎみ" },
+                { value: "6", label: "6. 16.0～16.99：痩せ" },
+                { value: "7", label: "7. 16.0未満：痩せすぎ" },
+                { value: "8", label: "8. BMIで判断できない" },
+              ],
+            },
+            {
+              type: "select",
+              key: "weightChange",
+              label: "ここ1ヶ月（30日）の体重変動",
+              visibleIf: { field: "category", equals: "8" },
+              options: [
+                { value: "", label: "選択してください" },
+                { value: "0", label: "0. 変化なし、3％未満" },
+                { value: "1", label: "1. 体重の3～5％の減（中リスク）" },
+                { value: "2", label: "2. 体重の5％以上の減（高リスク）" },
+                { value: "3", label: "3. 測定不能" },
+              ],
+            },
+          ],
+        },
+        {
+          type: "select",
+          key: "nutritionSelfManagement",
+          label: "栄養/食事の自己管理",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "0", label: "0. 常に健康が保てるよう、食べやすいバランスの取れた配食・食材・栄養剤での食事をしている" },
+            { value: "1", label: "1. ある程度食べやすくバランスのとれた食事をしている" },
+            { value: "2", label: "2. 誰かが準備した時のみバランス良く食べる" },
+            { value: "3", label: "3. 出前や売店中心でバランスを考えていない" },
+            { value: "4", label: "4. 栄養より好み優先で食事パターンを変えない" },
+          ],
+        },
+        {
+          type: "group",
+          key: "dietaryTherapy",
+          label: "食事療法",
+          fields: [
+            {
+              type: "select",
+              key: "status",
+              label: "食事療法の有無",
+              options: [
+                { value: "", label: "選択してください" },
+                { value: "0", label: "0. なし" },
+                { value: "1", label: "1. 食事療法あり" },
+              ],
+            },
+            {
+              type: "text",
+              key: "detail",
+              label: "食事療法の内容",
+              placeholder: "内容を記入してください",
+              visibleIf: { field: "status", equals: "1" },
+            },
+          ],
+        },
+        {
+          type: "select",
+          key: "foodForm",
+          label: "食べられる形（咀嚼/嚥下調節食）",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "0", label: "0. 固形食" },
+            { value: "1", label: "1. きざみ食" },
+            { value: "2", label: "2. ソフト食" },
+            { value: "3", label: "3. ムース食" },
+            { value: "4", label: "4. 液体食" },
+            { value: "5", label: "5. 完全流動食" },
+            { value: "6", label: "6. とろみによる水分/水分のみ" },
+          ],
+        },
+        {
+          type: "select",
+          key: "mealFrequency",
+          label: "食事回数",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "0", label: "0. 朝・昼・夕食3回食" },
+            { value: "1", label: "1. 日2回食（朝・昼・夕）" },
+            { value: "2", label: "2. 日1回食（朝・昼・夕）" },
+            { value: "3", label: "3. 4回以上" },
+          ],
+        },
+        {
+          type: "select",
+          key: "mealWithOthers",
+          label: "他者と一緒の食事（過去7日）",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "0", label: "0. 共食の回数は週11回以上" },
+            { value: "1", label: "1. 週10回以下" },
+            { value: "2", label: "2. 週1回もない" },
+          ],
+        },
+        {
+          type: "select",
+          key: "waterIntake",
+          label: "1日の水分量（飲水・食事・点滴含む）",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "0", label: "0. 1000ml～2500ml" },
+            { value: "1", label: "1. 少ない（1000ml未満）" },
+            { value: "2", label: "2. 非常に少ない（500ml未満）" },
+            { value: "3", label: "3. 非常に多い（3000ml以上）" },
+          ],
+        },
+        {
+          type: "select",
+          key: "swallowing",
+          label: "嚥下",
+          options: [
+            { value: "", label: "選択してください" },
+            { value: "swallowing_0", label: "0. 固形物・水を問題なく呑み込める" },
+            { value: "swallowing_1", label: "1. お茶や汁物をむせてしまい吞み込みにくい" },
+            { value: "swallowing_2", label: "2. 固形物がつかえ、吞み込みにくい" },
+            { value: "swallowing_3", label: "3. おかゆ・ぜリー・とろみ食でもむせてしまい呑み込みにくい" },
+            { value: "swallowing_4", label: "4. 嚥下できない" },
+          ],
+        },
+        {
+          type: "table",
+          key: "oralAssessment",
+          label: "口腔内評価",
+          columns: [
+            { key: "item", label: "項目", type: "text", readonly: true },
+            {
+              key: "score",
+              label: "評価",
+              type: "select",
+              options: [
+                { value: "", label: "選択してください" },
+                { value: "0", label: "0：ケア時容易に開口する（問題なし）" },
+                { value: "1", label: "1：口腔ケア時に軽く抵抗する（経過観察）" },
+                { value: "2", label: "2：口腔ケア時に強く抵抗する（専門介入が必要）" },
+              ],
+            },
+          ],
+          defaultRows: [
+            { item: "開口", score: "" },
+            { item: "口臭", score: "" },
+            { item: "よだれ", score: "" },
+            { item: "口腔乾燥度・唾液", score: "" },
+            { item: "歯・義歯", score: "" },
+            { item: "粘膜全体", score: "" },
+            { item: "舌", score: "" },
+            { item: "口腔", score: "" },
+            { item: "歯肉", score: "" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+export default page7;

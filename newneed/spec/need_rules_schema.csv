@@ -1,0 +1,1157 @@
+rule_id,need_id,logic_group,priority,if_column,operator,target_value,comparator_type,weight,threshold,aggregation,action,confidence_note,source_reference,implementation_note
+R0003,N01,display,3,public_medical_usage_2,==,1,boolean,1,2,sum,flag,公費医療の利用 ②感染症医療費,,column_display_text連動
+R0004,N01,display,4,public_system_usage_2,==,1,boolean,1,2,sum,flag,公費制度の利用 ②療育手帳,,column_display_text連動
+R0005,N01,display,5,economic_status_1_2,==,1,boolean,1,2,sum,flag, 1. この1年で家計に困ったことは？ 年２~３回,,column_display_text連動
+R0006,N01,display,6,economic_status_1_3,==,1,boolean,1,2,sum,flag, 1. この1年で家計に困ったことは？ 年４~５回,,column_display_text連動
+R0007,N01,display,7,economic_status_1_4,==,1,boolean,1,2,sum,flag, 1. この1年で家計に困ったことは？ 年６回以上,,column_display_text連動
+R0008,N01,display,8,economic_status_2_2,==,1,boolean,1,2,sum,flag, 2. 給与日前に困ったことは？ 年２~３回,,column_display_text連動
+R0009,N01,display,9,economic_status_2_3,==,1,boolean,1,2,sum,flag, 2. 給与日前に困ったことは？ 年４~５回,,column_display_text連動
+R0010,N01,display,10,economic_status_2_4,==,1,boolean,1,2,sum,flag,2. 給与日前に困ったことは？ 年６回以上,,column_display_text連動
+R0011,N02,display,1,room_cleanliness_1b,==,1,boolean,1,2,sum,flag,居室の清潔　掃除はされず、ごみが散らかっている,,column_display_text連動
+R0012,N02,display,2,room_cleanliness_2a,==,1,boolean,1,2,sum,flag,居室の清潔　室内は汚く、ごみや排泄物で不衛生な状態,,column_display_text連動
+R0013,N02,display,3,room_safety_level_1,==,1,boolean,1,2,sum,flag,住居環境の状況　住居が機能的・安全でない個所の改修を希望、家族人数には見合った広さである,,column_display_text連動
+R0014,N02,display,4,room_safety_level_2,==,1,boolean,1,2,sum,flag,住居環境の状況　住居が機能的でなく障害物状態だが改修-整理を希望しない、家族人数に見合った広さでない,,column_display_text連動
+R0015,N02,display,5,reform_need_1,==,1,boolean,1,2,sum,flag,住環境の改修 必要あり,,column_display_text連動
+R0015a,N02,display,6,reform_place_room,==,1,boolean,1,2,sum,flag,住環境改修　居室,,column_display_text連動
+R0015b,N02,display,7,reform_place_bathroom,==,1,boolean,1,2,sum,flag,住環境改修　浴室,,column_display_text連動
+R0015c,N02,display,8,reform_place_datsuishitsu,==,1,boolean,1,2,sum,flag,住環境改修　脱衣室,,column_display_text連動
+R0015d,N02,display,9,reform_place_bathtub,==,1,boolean,1,2,sum,flag,住環境改修　浴槽,,column_display_text連動
+R0015e,N02,display,10,reform_place_toilet,==,1,boolean,1,2,sum,flag,住環境改修　トイレ,,column_display_text連動
+R0015f,N02,display,11,reform_place_benki,==,1,boolean,1,2,sum,flag,住環境改修　便器,,column_display_text連動
+R0015g,N02,display,12,reform_place_hallway,==,1,boolean,1,2,sum,flag,住環境改修　廊下,,column_display_text連動
+R0015h,N02,display,13,reform_place_entrance,==,1,boolean,1,2,sum,flag,住環境改修　玄関,,column_display_text連動
+R0015i,N02,display,14,reform_place_garden,==,1,boolean,1,2,sum,flag,住環境改修　庭,,column_display_text連動
+R0015j,N02,display,15,reform_place_stairs,==,1,boolean,1,2,sum,flag,住環境改修　階段,,column_display_text連動
+R0015k,N02,display,16,reform_place_other,==,1,boolean,1,2,sum,flag,住環境改修　その他,,column_display_text連動
+R0016,N02,display,17,care_tool_need_1,==,1,boolean,1,2,sum,flag,介護用具の必要 必要あり,,column_display_text連動
+R0016a,N02,display,18,care_tool_type_move,==,1,boolean,1,2,sum,flag,介護用具　移動用具,,column_display_text連動
+R0016b,N02,display,19,care_tool_type_life,==,1,boolean,1,2,sum,flag,介護用具　生活用具,,column_display_text連動
+R0016c,N02,display,20,care_tool_type_assist,==,1,boolean,1,2,sum,flag,介護用具　介助用具,,column_display_text連動
+R0017,N02,display,21,equipment_need_1,==,1,boolean,1,2,sum,flag,生活設備の改修 必要あり,,column_display_text連動
+R0017a,N02,display,22,equipment_type_life_tool,==,1,boolean,1,2,sum,flag,生活設備　障害者用生活用具,,column_display_text連動
+R0017b,N02,display,23,equipment_type_electric,==,1,boolean,1,2,sum,flag,生活設備　電気,,column_display_text連動
+R0017c,N02,display,24,equipment_type_aircon,==,1,boolean,1,2,sum,flag,生活設備　冷暖房機,,column_display_text連動
+R0017d,N02,display,25,equipment_type_elevator,==,1,boolean,1,2,sum,flag,生活設備　エレベータ,,column_display_text連動
+R0017e,N02,display,26,equipment_type_other_flag,==,1,boolean,1,2,sum,flag,生活設備　その他,,column_display_text連動
+R0017f,N02,display,27,equipment_type_other,!=,"",text,1,2,sum,flag,生活設備　その他（詳細）,,column_display_text連動
+R0018,N02,display,28,social_service_usage_2,==,1,boolean,1,2,sum,flag,介護保険サービス利用の判断　介護・社会的サービスの制度や内容を知らない、導入の理解や判断には支援が必要,,column_display_text連動
+R0019,N02,display,29,social_service_usage_3,==,1,boolean,1,2,sum,flag,介護保険サービス利用の判断　介護・社会的サービスの制度や内容を知っていて使っていない、拒否している,,column_display_text連動
+R0020,N03,display,1,care_burden_feeling_2,==,1,boolean,1,2,sum,flag,介護をしていて不安やイライラ・疲れ・怒りの気持ちがありますか　軽く思う,,column_display_text連動
+R0021,N03,display,2,care_burden_feeling_3,==,1,boolean,1,2,sum,flag,介護をしていて不安やイライラ・疲れ・怒りの気持ちがありますか　かなり思う,,column_display_text連動
+R0022,N03,display,3,care_burden_feeling_4,==,1,boolean,1,2,sum,flag,介護をしていて不安やイライラ・疲れ・怒りの気持ちがありますか　非常に思う,,column_display_text連動
+R0023,N03,display,4,care_burden_health_2,==,1,boolean,1,2,sum,flag,介護が始まり、自分の体調や健康に影響がありますか　軽く思う,,column_display_text連動
+R0024,N03,display,5,care_burden_health_3,==,1,boolean,1,2,sum,flag,介護が始まり、自分の体調や健康に影響がありますか　かなり思う,,column_display_text連動
+R0025,N03,display,6,care_burden_health_4,==,1,boolean,1,2,sum,flag,介護が始まり、自分の体調や健康に影響がありますか　非常に思う,,column_display_text連動
+R0026,N03,display,7,care_burden_life_2,==,1,boolean,1,2,sum,flag,介護をしていて家族や友人との付き合いに支障をきたしていますか 軽く思う,,column_display_text連動
+R0027,N03,display,8,care_burden_life_3,==,1,boolean,1,2,sum,flag,介護をしていて自分の生活に影響がありますか　かなり思う,,column_display_text連動
+R0028,N03,display,9,care_burden_life_4,==,1,boolean,1,2,sum,flag,介護をしていて自分の生活に影響がありますか　非常に思う,,column_display_text連動
+R0029,N03,display,10,care_burden_life_4,==,1,boolean,1,2,sum,flag,介護をしていて自分の生活に影響がありますか　非常に思う,,column_display_text連動
+R0030,N03,display,11,care_intention_2,==,1,boolean,1,2,sum,flag,今後の介護について 様子を見ながらつづけるか判断したい,,column_display_text連動
+R0031,N03,display,12,care_intention_3,==,1,boolean,1,2,sum,flag,今後の介護について 兄弟・姉妹等介護の代役を予定している,,column_display_text連動
+R0032,N03,display,13,care_intention_4,==,1,boolean,1,2,sum,flag,今後の介護について 施設を考えているが手続きはしていない,,column_display_text連動
+R0033,N03,display,14,care_burden_impact_2,==,1,boolean,1,2,sum,flag,介護のために自分の仕事に影響がでていますか 軽く思う,,column_display_text連動
+R0034,N03,display,15,care_burden_impact_3,==,1,boolean,1,2,sum,flag,介護のために自分の仕事に影響がでていますか かなり思う,,column_display_text連動
+R0035,N03,display,16,care_burden_impact_4,==,1,boolean,1,2,sum,flag,介護のために自分の仕事に影響がでていますか 非常に思う,,column_display_text連動
+R0036,N03,display,17,care_intention_2,==,1,boolean,1,2,sum,flag,今後の介護について 様子を見ながらつづけるか判断したい,,column_display_text連動
+R0037,N03,display,18,care_intention_3,==,1,boolean,1,2,sum,flag,今後の介護について 兄弟・姉妹等介護の代役を予定している,,column_display_text連動
+R0038,N03,display,19,care_intention_4,==,1,boolean,1,2,sum,flag,今後の介護について 施設を考えているが手続きはしていない,,column_display_text連動
+R0039,N03,display,20,care_intention_5,==,1,boolean,1,2,sum,flag,今後の介護について 在宅の継続は考えていない、施設入所を申し込み順番を待っている,,column_display_text連動
+R0040,N03,display,21,abuse_injury_2,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　　既に治った創傷はあるが新たなものはない,,column_display_text連動
+R0041,N03,display,22,abuse_injury_3,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　　様々な治癒段階の傷や骨折がある,,column_display_text連動
+R0042,N03,display,23,abuse_injury_4,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　　多くの創傷や骨折がある,,column_display_text連動
+R0043,N03,display,24,neglect_hygiene_2,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　既に治った発疹・感染はあるが新たなものはない,,column_display_text連動
+R0044,N03,display,25,neglect_hygiene_3,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　不衛生による発疹や感染が様々にある,,column_display_text連動
+R0045,N03,display,26,neglect_hygiene_4,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　多くの不衛生による発疹や感染がある,,column_display_text連動
+R0046,N03,display,27,psychological_abuse_2,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　過去言葉の攻撃や否定的メッセージがあったが新たなものはない,,column_display_text連動
+R0047,N03,display,28,psychological_abuse_3,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　時に言葉の攻撃または否定的メッセージをおこなっている,,column_display_text連動
+R0048,N03,display,29,psychological_abuse_4,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　数多く言葉の攻撃または否定的メッセージをおこなっている,,column_display_text連動
+R0049,N03,display,30,neglect_care_2,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　過去介護放棄・拘束の状態があったが新たなものはない,,column_display_text連動
+R0050,N03,display,31,neglect_care_3,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　時に介護を放棄・拘束している,,column_display_text連動
+R0051,N03,display,32,neglect_care_4,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　殆ど介護されず放棄・拘束状態となっている,,column_display_text連動
+R0052,N03,display,33,sexual_abuse_2,==,1,boolean,1,2,sum,flag,性的暴力　過去性的暴力にあったが新たなものはない,,column_display_text連動
+R0053,N03,display,34,sexual_abuse_3,==,1,boolean,1,2,sum,flag,性的暴力　時に性的暴力をおこなっている,,column_display_text連動
+R0054,N03,display,35,sexual_abuse_4,==,1,boolean,1,2,sum,flag,性的暴力　頻繁に性的暴力をおこなっている,,column_display_text連動
+R0055,N03,display,36,financial_abuse_2,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加　過去に金銭的な受け渡しのトラブルにあったが新たなものはない,,column_display_text連動
+R0056,N03,display,37,financial_abuse_3,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加　時に金銭的な受け渡しのトラブル行為が周囲により行われている,,column_display_text連動
+R0057,N03,display,38,financial_abuse_4,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加  頻繁に金銭的な受け渡しのトラブル行為がおこなわれている,,column_display_text連動
+R0058,N03,display,39,care_burden_1_working,==,1,boolean,1,2,sum,flag,介護負担1　就労中,,column_display_text連動
+R0059,N03,display,40,care_burden_1_studying,==,1,boolean,1,2,sum,flag,介護負担1　就学中,,column_display_text連動
+R0060,N03,display,41,care_burden_1_elderly,==,1,boolean,1,2,sum,flag,介護負担1　高齢,,column_display_text連動
+R0061,N03,display,42,care_burden_1_disabled,==,1,boolean,1,2,sum,flag,介護負担1　要介護状態・病弱・認知症・身体障碍等,,column_display_text連動
+R0062,N03,display,43,care_burden_1_pregnant,==,1,boolean,1,2,sum,flag,介護負担1　妊娠,,column_display_text連動
+R0063,N03,display,44,care_burden_1_childcare,==,1,boolean,1,2,sum,flag,介護負担1  育児中,,column_display_text連動
+R0064,N03,display,45,care_burden_2_working,==,1,boolean,1,2,sum,flag,介護負担2　就労中,,column_display_text連動
+R0065,N03,display,46,care_burden_2_studying,==,1,boolean,1,2,sum,flag,介護負担2　就学中,,column_display_text連動
+R0066,N03,display,47,care_burden_2_elderly,==,1,boolean,1,2,sum,flag,介護負担2　高齢,,column_display_text連動
+R0067,N03,display,48,care_burden_2_disabled,==,1,boolean,1,2,sum,flag,介護負担2　要介護状態・病弱・認知症・身体障碍等,,column_display_text連動
+R0068,N03,display,49,care_burden_2_pregnant,==,1,boolean,1,2,sum,flag,介護負担2　妊娠,,column_display_text連動
+R0069,N03,display,50,care_burden_2_childcare,==,1,boolean,1,2,sum,flag,介護負担2　育児中,,column_display_text連動
+R0070,N03,display,51,care_burden_3_working,==,1,boolean,1,2,sum,flag,介護負担3　就労中,,column_display_text連動
+R0071,N03,display,52,care_burden_3_studying,==,1,boolean,1,2,sum,flag,介護負担3　就学中,,column_display_text連動
+R0072,N03,display,53,care_burden_3_elderly,==,1,boolean,1,2,sum,flag,介護負担3　高齢,,column_display_text連動
+R0073,N03,display,54,care_burden_3_disabled,==,1,boolean,1,2,sum,flag,介護負担3　要介護状態・病弱・認知症・身体障碍等,,column_display_text連動
+R0074,N03,display,55,care_burden_3_pregnant,==,1,boolean,1,2,sum,flag,介護負担3　妊娠,,column_display_text連動
+R0075,N03,display,56,care_burden_3_childcare,==,1,boolean,1,2,sum,flag,介護負担3　育児中,,column_display_text連動
+R0076,N03,display,57,care_burden_4_working,==,1,boolean,1,2,sum,flag,介護負担4　就労中,,column_display_text連動
+R0077,N03,display,58,care_burden_4_studying,==,1,boolean,1,2,sum,flag,介護負担4　就学中,,column_display_text連動
+R0078,N03,display,59,care_burden_4_elderly,==,1,boolean,1,2,sum,flag,介護負担4　高齢,,column_display_text連動
+R0079,N03,display,60,care_burden_4_disabled,==,1,boolean,1,2,sum,flag,介護負担4　要介護状態・病弱・認知症・身体障碍等,,column_display_text連動
+R0080,N03,display,61,care_burden_4_pregnant,==,1,boolean,1,2,sum,flag,介護負担4　妊娠,,column_display_text連動
+R0081,N03,display,62,care_burden_4_childcare,==,1,boolean,1,2,sum,flag,介護負担4　育児中,,column_display_text連動
+R0082,N04,display,1,alcohol_problem_1,==,1,boolean,1,2,sum,flag,飲酒の問題　過去にトラブルあり,,column_display_text連動
+R0083,N04,display,2,alcohol_problem_2,==,1,boolean,1,2,sum,flag,飲酒の問題　現在トラブルあり,,column_display_text連動
+R0084,N04,display,3,alcohol_problem_3,==,1,boolean,1,2,sum,flag,飲酒の問題　10年以上の多量飲酒,,column_display_text連動
+R0085,N04,display,4,who_alcohol_criteria_1,==,1,boolean,1,2,sum,flag,WHO飲酒基準　1.お酒を飲めない状況でも強い飲酒欲求を感じたことがある,,column_display_text連動
+R0086,N04,display,5,who_alcohol_criteria_2,==,1,boolean,1,2,sum,flag,WHO飲酒基準　2.自分の意思に反して、酒を飲み始め、予定より長時間飲み続けたことがある。また予定よりたくさん飲んだことがある,,column_display_text連動
+R0087,N04,display,6,who_alcohol_criteria_3,==,1,boolean,1,2,sum,flag,WHO飲酒基準　3.酒の量を減らしたり、やめたりの時、手が震える、汗をかく、眠れない、不安になるなどの症状が出たことがある,,column_display_text連動
+R0088,N04,display,7,who_alcohol_criteria_4,==,1,boolean,1,2,sum,flag,WHO飲酒基準　4.飲酒を続けることでお酒に強くなった、あるいは、高揚感を得るのに必要なお酒の量が増えた,,column_display_text連動
+R0089,N04,display,8,who_alcohol_criteria_5,==,1,boolean,1,2,sum,flag,WHO飲酒基準　5.飲酒のために仕事、付き合い、趣味、スポーツなどの大切なことをあきらめたり、大幅に減らした,,column_display_text連動
+R0090,N04,display,9,who_alcohol_criteria_6,==,1,boolean,1,2,sum,flag,WHO飲酒基準　6.お酒の飲みすぎによる身体や心の病気がありながら、またそれがお酒の飲みすぎのせいだと知りながら、それでもお酒を飲み続けた,,column_display_text連動
+R0090a,N04,display,10,who_alcohol_result_1,==,1,boolean,1,2,sum,flag,WHO飲酒判定　1～2項目あり（生活指導）,,column_display_text連動
+R0090b,N04,display,11,who_alcohol_result_2,==,1,boolean,1,2,sum,flag,WHO飲酒判定　3項目以上あり（治療等の勧め）,,column_display_text連動
+R0091,N04,display,12,smoking_habit_1,==,1,boolean,1,2,sum,flag,喫煙習慣　あり,,column_display_text連動
+R0091a,N04,display,13,brinkman_index,between,"400,599",numeric,1,2,sum,flag,ブリンクマン指数　400～599点：肺がんが発生しやすい,,column_display_text連動
+R0091b,N04,display,14,brinkman_index,between,"600,1199",numeric,1,2,sum,flag,ブリンクマン指数　600～1199点：肺がんの高度危険群,,column_display_text連動
+R0091c,N04,display,15,brinkman_index,>=,1200,numeric,1,2,sum,flag,ブリンクマン指数　1200点以上：咽頭がんの危険群,,column_display_text連動
+R0092,N04,display,16,sleep_quality_1,==,1,boolean,1,2,sum,flag,睡眠と休息　日中/夜間の睡眠をとっているが休息感がない,,column_display_text連動
+R0093,N04,display,17,sleep_quality_2,==,1,boolean,1,2,sum,flag,睡眠の質　日中/夜間の睡眠をとれず中休息感がない,,column_display_text連動
+R0094,N04,display,18,sleep_quality_3,==,1,boolean,1,2,sum,flag,睡眠の質　睡眠のパターンがない、日中眠すぎて夜眠れない、夜間眠れず休息感がない,,column_display_text連動
+R0095,N04,display,19,fatigue_1,==,1,boolean,1,2,sum,flag,疲労感　あり（身体や精神的に）,,column_display_text連動
+R0096,N04,display,20,fatigue_detail_だるい,==,1,boolean,1,2,sum,flag,疲労感　だるい,,column_display_text連動
+R0097,N04,display,21,fatigue_detail_疲れやすい,==,1,boolean,1,2,sum,flag,疲労感　疲れやすい,,column_display_text連動
+R0098,N04,display,22,fatigue_detail_疲れが残ってる,==,1,boolean,1,2,sum,flag,疲労感　疲れが残ってる,,column_display_text連動
+R0099,N04,display,23,fatigue_detail_慢性的に疲れている,==,1,boolean,1,2,sum,flag,疲労感　慢性的に疲れている,,column_display_text連動
+R0100,N04,display,24,allergy_1,==,1,boolean,1,2,sum,flag,アレルギー　あり,,column_display_text連動
+R0101,N04,display,25,allergy_detail_食物,==,1,boolean,1,2,sum,flag,アレルギー　食物,,column_display_text連動
+R0102,N04,display,26,allergy_detail_薬,==,1,boolean,1,2,sum,flag,アレルギー　薬,,column_display_text連動
+R0103,N04,display,27,allergy_detail_植物花粉,==,1,boolean,1,2,sum,flag,アレルギー　植物花粉,,column_display_text連動
+R0104,N04,display,28,allergy_detail_金属,==,1,boolean,1,2,sum,flag,アレルギー　金属,,column_display_text連動
+R0105,N04,display,29,allergy_detail_ハウスダスト,==,1,boolean,1,2,sum,flag,アレルギー　ハウスダスト,,column_display_text連動
+R0106,N04,display,30,allergy_detail_衣類,==,1,boolean,1,2,sum,flag,アレルギー　衣類,,column_display_text連動
+R0107,N04,display,31,allergy_detail_その他,==,1,boolean,1,2,sum,flag,アレルギー　その他,,column_display_text連動
+R0107a,N04,display,32,allergy_other,!=,"",text,1,2,sum,flag,アレルギー　その他（詳細）,,column_display_text連動
+R0108,N04,display,33,physical_activity_1,==,1,boolean,1,2,sum,flag,身体活動・運動　ねたきり・動きたくない・座るのもいや・運動習慣がない,,column_display_text連動
+R0109,N05,display,1,bmi_category_2,==,1,boolean,1,2,sum,flag,BMI区分 30.0～34.99：肥満1度,,column_display_text連動
+R0110,N05,display,2,bmi_category_3,==,1,boolean,1,2,sum,flag,BMI区分 35.0~39.99：肥満2度,,column_display_text連動
+R0111,N05,display,3,bmi_category_4,==,1,boolean,1,2,sum,flag,BMI区分 40.0以上：肥満3度,,column_display_text連動
+R1116,N05,display,4,bmi_category_5,==,1,boolean,1,2,sum,flag,BMI区分 17.0～18.49：痩せぎみ,,column_display_text連動
+R1116,N05,display,5,bmi_category_6,==,1,boolean,1,2,sum,flag,BMI区分 16.0～16.99：痩せ,,column_display_text連動
+R1116,N05,display,6,bmi_category_7,==,1,boolean,1,2,sum,flag,BMI区分 16.0未満：痩せすぎ,,column_display_text連動
+R109,N05,display,7,weight_change_1,==,1,boolean,1,2,sum,flag,ここ1ヶ月（30日）の体重変動　体重の3～5％の減（中リスク）,,column_display_text連動
+R110,N05,display,8,weight_change_2,==,1,boolean,1,2,sum,flag,ここ1ヶ月（30日）の体重変動　体重の5％以上の減（高リスク）,,column_display_text連動
+R111,N05,display,9,nutrition_self_management_2,==,1,boolean,1,2,sum,flag,栄養／食事の自己管理　誰かが準備した時のみ、食べやすくバランスの良い配食‣食材での食事となっている,,column_display_text連動
+R112,N05,display,10,nutrition_self_management_3,==,1,boolean,1,2,sum,flag,栄養／食事の自己管理　全て出前やお店食で済まし、食材のバランスや食べやすさは考えていない。量が多い又は少ない,,column_display_text連動
+R113,N05,display,11,nutrition_self_management_4,==,1,boolean,1,2,sum,flag,栄養／食事の自己管理　栄養は考えず好きなものを食べる、なれた食事パターンを変えることはしたくない,,column_display_text連動
+R114,N05,display,12,dietary_therapy_1,==,1,boolean,1,2,sum,flag,食事療法　あり,,column_display_text連動
+R115,N05,display,13,meal_frequency_1,==,1,boolean,1,2,sum,flag,食事回数　日2回食（朝・昼・夕）,,column_display_text連動
+R116,N05,display,14,meal_frequency_2,==,1,boolean,1,2,sum,flag,食事回数　日1回食（朝・昼・夕）,,column_display_text連動
+R117,N05,display,12,meal_frequency_3,==,1,boolean,1,2,sum,flag,食事回数　4回以上,,column_display_text連動
+R118,N05,display,16,water_intake_1,==,1,boolean,1,2,sum,flag,１日の水分量（飲水・食事・点滴を含む）　少ない（1000ml未満）,,column_display_text連動
+R119,N05,display,17,water_intake_2,==,1,boolean,1,2,sum,flag,１日の水分量（飲水・食事・点滴を含む）　非常に少ない（500ml未満）,,column_display_text連動
+R120,N05,display,18,water_intake_3,==,1,boolean,1,2,sum,flag,１日の水分量（飲水・食事・点滴を含む）　非常に多い（3000ml以上）,,column_display_text連動
+R121,N05,display,19,wound_depth_d1,==,1,boolean,1,2,sum,flag,褥瘡深さ　真皮までの損傷,,column_display_text連動
+R122,N05,display,20,wound_depth_d3,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織までの損傷,,column_display_text連動
+R123,N05,display,21,wound_depth_d4,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織を超える損傷,,column_display_text連動
+R124,N05,display,22,wound_depth_d5,==,1,boolean,1,2,sum,flag,褥瘡深さ　関節腔、体腔に至る損傷,,column_display_text連動
+R125,N05,display,23,wound_depth_dti,==,1,boolean,1,2,sum,flag,褥瘡深さ　深部損傷疑い(DTI),,column_display_text連動
+R126,N05,display,24,wound_depth_du,==,1,boolean,1,2,sum,flag,褥瘡深さ　壊死組織で覆われ深さの判定が不能,,column_display_text連動
+R127,N05,display,25,wound_exudate_e1,==,1,boolean,1,2,sum,flag,褥瘡滲出液　少量・毎日のドレッシング交換をしない,,column_display_text連動
+R128,N05,display,23,wound_exudate_e3,==,1,boolean,1,2,sum,flag,褥瘡滲出液　中等量・1日1回のドレッシング交換を必要とする,,column_display_text連動
+R129,N05,display,27,wound_exudate_e6,==,1,boolean,1,2,sum,flag,褥瘡滲出液　多量・1日2回以上のドレッシング交換を必要とする,,column_display_text連動
+R130,N05,display,28,wound_size_s3,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4未満（長径cm×短径（長径と直行する最長径）cm）,,column_display_text連動
+R131,N05,display,29,wound_size_s6,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4以上16未満,,column_display_text連動
+R132,N05,display,30,wound_size_s8,==,1,boolean,1,2,sum,flag,褥瘡大きさ　16以上36未満,,column_display_text連動
+R133,N05,display,31,wound_size_s9,==,1,boolean,1,2,sum,flag,褥瘡大きさ　36以上64未満,,column_display_text連動
+R134,N05,display,32,wound_size_s12,==,1,boolean,1,2,sum,flag,褥瘡大きさ　64以上100未満,,column_display_text連動
+R135,N05,display,33,wound_size_s15,==,1,boolean,1,2,sum,flag,褥瘡大きさ　100以上,,column_display_text連動
+R136,N05,display,31,wound_infection_i1,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の炎症兆候あり（創周囲の発赤・腫脹・熱感・疼痛）,,column_display_text連動
+R137,N05,display,35,wound_infection_i3,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　臨床的定着疑い（創面にぬめりがあり、浸出液が多い。肉芽があれば、浮腫性で脆弱など）※5,,column_display_text連動
+R138,N05,display,33,wound_infection_i3c,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の明らかな感染徴候あり（炎症兆候、膿、悪臭など）,,column_display_text連動
+R139,N05,display,37,wound_infection_i9,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　全身的影響あり,,column_display_text連動
+R140,N05,display,35,wound_granulation_g1,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の90%以上を占める,,column_display_text連動
+R141,N05,display,39,wound_granulation_g3,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の50%以上90%未満を占める,,column_display_text連動
+R142,N05,display,37,wound_granulation_g4,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%以上50%未満を占める,,column_display_text連動
+R143,N05,display,41,wound_granulation_g5,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%未満を占める,,column_display_text連動
+R144,N05,display,42,wound_granulation_g6,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が全く形成されていない,,column_display_text連動
+R145,N05,display,43,wound_necrosis_n3,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　柔らかい壊死組織あり,,column_display_text連動
+R146,N05,display,44,wound_necrosis_n6,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　硬く厚い密着した壊死組織あり,,column_display_text連動
+R147,N05,display,45,wound_pocket_p6,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4未満,,column_display_text連動
+R148,N05,display,46,wound_pocket_p6_4to16,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4以上16未満,,column_display_text連動
+R149,N05,display,47,wound_pocket_p12,==,1,boolean,1,2,sum,flag,褥瘡ポケット　16以上36未満,,column_display_text連動
+R150,N05,display,48,wound_pocket_p24,==,1,boolean,1,2,sum,flag,褥瘡ポケット　36以上,,column_display_text連動
+R151,N06,display,1,swallowing_1,==,1,boolean,1,2,sum,flag,嚥下　お茶や汁物を含ませてしまいむせ込みにくい,,column_display_text連動
+R152,N06,display,2,swallowing_2,==,1,boolean,1,2,sum,flag,嚥下　口腔移動がうまく、呑み込むにくい,,column_display_text連動
+R153,N06,display,3,swallowing_3,==,1,boolean,1,2,sum,flag,嚥下　おかゆ・ゼリー・とろみ食でも含ませてしまい呑み込みにくい,,column_display_text連動
+R154,N06,display,4,swallowing_4,==,1,boolean,1,2,sum,flag,嚥下　嚥下できない,,column_display_text連動
+R155,N06,display,5,oral_teeth_gum_1,==,1,boolean,1,2,sum,flag,開口　開口には応じないが徒手的に2横指程度開口可能（要注意）,,column_display_text連動
+R156,N06,display,6,oral_teeth_gum_2,==,1,boolean,1,2,sum,flag,開口	食いしばりや顎関節の拘縮のため開口量が1横指程度（問題あり）,,column_display_text連動
+R157,N06,display,7,oral_saliva_flow_1,==,1,boolean,1,2,sum,flag,口臭　口腔に近づくと口臭を感じる（要注意）,,column_display_text連動
+R158,N06,display,8,oral_saliva_flow_2,==,1,boolean,1,2,sum,flag,口臭　室内に口臭由来のにおいを感じる（問題あり）,,column_display_text連動
+R159,N06,display,9,oral_dryness_1,==,1,boolean,1,2,sum,flag,よだれ　なし　嚥下反射の低下を疑うが、よだれなし（要注意）,,column_display_text連動
+R160,N06,display,10,oral_dryness_2,==,1,boolean,1,2,sum,flag,よだれ　あり　嚥下反射の低下による（問題あり）,,column_display_text連動
+R161,N06,display,11,oral_saliva_1,==,1,boolean,1,2,sum,flag,口腔乾燥度・唾液　唾液あり・唾液が少なくネバネバ（要注意）,,column_display_text連動
+R162,N06,display,12,oral_saliva_2,==,1,boolean,1,2,sum,flag,口腔乾燥度・唾液　明らかに抵抗が増し、粘膜にくっつきそうになる・唾液が少なくカラカラ（問題あり）,,column_display_text連動
+R163,N06,display,13,oral_denture_condition_1,==,1,boolean,1,2,sum,flag,歯・義歯　部分的に歯垢や食物残渣がある・動揺する歯があるが、ケアの妨げにならない程度（要注意）,,column_display_text連動
+R164,N06,display,14,oral_denture_condition_2,==,1,boolean,1,2,sum,flag,歯・義歯　歯垢・歯石が多量に付着・抜けそうな歯がある（問題あり）,,column_display_text連動
+R165,N06,display,15,oral_tongue_1,==,1,boolean,1,2,sum,flag,粘膜全体　乾燥・発赤など色調のの変化（要注意）,,column_display_text連動
+R166,N06,display,16,oral_tongue_2,==,1,boolean,1,2,sum,flag,粘膜全体　自然出血、潰瘍、カンジダ、気道分泌物剥離上皮、凝血の塊などが目立ち、強固に付着（問題あり）,,column_display_text連動
+R167,N06,display,17,oral_tongue_surface_1,==,1,boolean,1,2,sum,flag,舌　乳頭が明確でなくテカリがある(舌苔ができ白い)、乳頭ない(平滑舌)（要注意）,,column_display_text連動
+R168,N06,display,18,oral_tongue_surface_2,==,1,boolean,1,2,sum,flag,舌　水疱/ひび割れている（問題あり）,,column_display_text連動
+R169,N06,display,19,oral_mucosa_1,==,1,boolean,1,2,sum,flag,口腔　亀裂あり　口角炎（要注意）,,column_display_text連動
+R170,N06,display,20,oral_gum_1,==,1,boolean,1,2,sum,flag,歯肉　浮腫、ブラッシングで出血、発赤（要注意）,,column_display_text連動
+R171,N06,display,21,oral_gum_2,==,1,boolean,1,2,sum,flag,歯肉　自然に出血、圧すと出血（問題あり）,,column_display_text連動
+R172,N07,display,1,room_cleanliness_1b,==,1,boolean,1,2,sum,flag,居室の清潔　掃除はされず、ごみが散らかっている,,column_display_text連動
+R173,N07,display,2,room_cleanliness_2a,==,1,boolean,1,2,sum,flag,居室の清潔　室内は汚く、ごみや排泄物で不衛生な状態,,column_display_text連動
+R174,N07,display,3,oral_saliva_flow_1,==,1,boolean,1,2,sum,flag,口臭　口腔に近づくと口臭を感じる（要注意）,,column_display_text連動
+R175,N07,display,4,oral_saliva_flow_2,==,1,boolean,1,2,sum,flag,口臭　室内に口臭由来のにおいを感じる（問題あり）,,column_display_text連動
+R176,N07,display,5,oral_dryness_1,==,1,boolean,1,2,sum,flag,よだれ　なし　嚥下反射の低下を疑うが、よだれなし（要注意）,,column_display_text連動
+R177,N07,display,6,oral_dryness_2,==,1,boolean,1,2,sum,flag,よだれ　あり　嚥下反射の低下による（問題あり）,,column_display_text連動
+R178,N07,display,7,oral_saliva_1,==,1,boolean,1,2,sum,flag,口腔乾燥度・唾液　唾液あり・唾液が少なくネバネバ（要注意）,,column_display_text連動
+R179,N07,display,8,oral_saliva_2,==,1,boolean,1,2,sum,flag,口腔乾燥度・唾液　明らかに抵抗が増し、粘膜にくっつきそうになる・唾液が少なくカラカラ（問題あり）,,column_display_text連動
+R180,N07,display,9,skin_nail_care_1,==,1,boolean,1,2,sum,flag,清潔・整容　時折、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣ができるが、肌に汚れが目立つ,,column_display_text連動
+R181,N07,display,10,skin_nail_care_2,==,1,boolean,1,2,sum,flag,清潔・整容　たまに、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣ができるが、汚れが目立つ,,column_display_text連動
+R182,N07,display,11,skin_nail_care_3,==,1,boolean,1,2,sum,flag,清潔・整容　めったに、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣をせず、汚れている,,column_display_text連動
+R183,N07,display,12,bedsore_wound_1,==,1,boolean,1,2,sum,flag, 皮膚・爪の状態　全身の皮膚や爪の汚れ、発赤、湿疹、水疱、かゆみ、発汗、悪臭、ドライスキンなくきれいである,,column_display_text連動
+R184,N07,display,13,bedsore_wound_2,==,1,boolean,1,2,sum,flag, 皮膚・爪の状態　足の色の変化、冷感、足背動脈や後脛骨動脈の拍知、痛みや知覚障がいがある,,column_display_text連動
+R185,N07,display,14,bedsore_wound_3,==,1,boolean,1,2,sum,flag, 皮膚・爪の状態　爪白癬、まき爪、肥厚爪（肥厚爪甲）、脚趾、壊疽、外反母趾、内反小趾、,,column_display_text連動
+R186,N08,display,1,urination_status_1,==,1,boolean,1,2,sum,flag,尿の状態　問題あり(血が混じっている・濁っている・フワフワ浮いているものがある・強い尿臭あり),,column_display_text連動
+R187,N08,display,2,urination_1,==,1,boolean,1,2,sum,flag,尿意　なし,,column_display_text連動
+R188,N08,display,3,urination_frequency_1,==,1,boolean,1,2,sum,flag,尿の回数　１日１～２回,,column_display_text連動
+R189,N08,display,4,urination_frequency_2,==,1,boolean,1,2,sum,flag,尿の回数　昼間８回以上・夜間３回以上,,column_display_text連動
+R190,N08,display,5,urination_control_1,==,1,boolean,1,2,sum,flag,排尿のコントロール　くしゃみ・咳で漏れる、トイレに間に合わない、下腹部に違和感がある,,column_display_text連動
+R191,N08,display,6,urination_control_2,==,1,boolean,1,2,sum,flag,排尿のコントロール　いつもお腹に力を入れいきんで出している、残尿感がある、陰部が痒い,,column_display_text連動
+R192,N08,display,7,urination_control_3,==,1,boolean,1,2,sum,flag,排尿のコントロール　昼夜問わず失禁する、排尿痛がある、下腹部が痛い,,column_display_text連動
+R193,N08,display,8,defecation_status_a,==,1,boolean,1,2,sum,flag,便の状態　問題あり　コロコロ便,,column_display_text連動
+R194,N08,display,9,defecation_status_b,==,1,boolean,1,2,sum,flag,便の状態　問題あり　凸凹した硬い便,,column_display_text連動
+R195,N08,display,10,defecation_status_c,==,1,boolean,1,2,sum,flag,便の状態　問題あり　軟らかすぎていない状態,,column_display_text連動
+R196,N08,display,11,defecation_status_d,==,1,boolean,1,2,sum,flag,便の状態　問題あり　水様便,,column_display_text連動
+R197,N08,display,12,defecation_status_e,==,1,boolean,1,2,sum,flag,便の状態　問題あり　色がついている便（あざやかな赤色、白色、黒色、鉛色、黄色、赤褐色）,,column_display_text連動
+R198,N08,display,13,defecation_frequency_1,==,1,boolean,1,2,sum,flag,排便の周期　排便の周期がなく　お腹が張って苦しい,,column_display_text連動
+R199,N08,display,14,defecation_frequency_2,==,1,boolean,1,2,sum,flag,排便の周期　決まった時間（食後）に排便訓練をしていないので便秘となっている,,column_display_text連動
+R200,N08,display,15,defecation_control_1,==,1,boolean,1,2,sum,flag,排便コントロール　通常は便失禁しない（まれにある）,,column_display_text連動
+R201,N08,display,16,defecation_control_2,==,1,boolean,1,2,sum,flag,排便コントロール　月に何回か失禁するが毎週ではない,,column_display_text連動
+R202,N08,display,17,defecation_control_3,==,1,boolean,1,2,sum,flag,排便コントロール　週に1回以上失禁するが、若干コントロールが保たれている,,column_display_text連動
+R203,N08,display,18,defecation_control_4,==,1,boolean,1,2,sum,flag,排便コントロール　完全な失禁状態（コントロールできない）で汚れてしまう,,column_display_text連動
+R204,N08,display,19,defecation_method_1,==,1,boolean,1,2,sum,flag,排便の調整方法　食事や水分・腸の刺激、排便訓練など、時々の下剤で調整できている,,column_display_text連動
+R205,N08,display,20,defecation_method_2,==,1,boolean,1,2,sum,flag,排便の調整方法　下剤、敵便、浣腸等で主に調整。食事、運動、排便訓練はたまに行う,,column_display_text連動
+R206,N08,display,21,defecation_method_3,==,1,boolean,1,2,sum,flag,排便の調整方法　一貫して下剤・敵便・浣腸で調整。食事、水分、運動、排便訓練はほとんど行う,,column_display_text連動
+R207,N08,display,22,defecation_method_4,==,1,boolean,1,2,sum,flag,排便の調整方法　多剤の下剤使用、食事、水分、運動等の刺激・調整が全くない,,column_display_text連動
+R209,N09,display,24,bedsore_wound_1,==,1,boolean,1,2,sum,flag,皮膚・爪の状態　全身の皮膚や爪の汚れ、発赤、湿疹、水疱、かゆみ、発汗、悪臭、ドライスキンなくきれいである,,column_display_text連動
+R210,N09,display,25,bedsore_wound_2,==,1,boolean,1,2,sum,flag,皮膚・爪の状態　足の色の変化、冷感、足背動脈や後脛骨動脈の拍知、痛みや知覚障がいがある,,column_display_text連動
+R211,N09,display,26,bedsore_wound_3,==,1,boolean,1,2,sum,flag,皮膚・爪の状態　爪白癬、まき爪、肥厚爪（肥厚爪甲）、脚趾、壊疽、外反母趾、内反小趾、,,column_display_text連動
+R212,N09,display,27,skin_condition_1,==,1,boolean,1,2,sum,flag,創傷　傷が治るために盛り上がった肉のかたまりができている,,column_display_text連動
+R213,N09,display,28,skin_condition_2,==,1,boolean,1,2,sum,flag,創傷　盛り上がった新しい肉のかたまりができはじめたばかり,,column_display_text連動
+R214,N09,display,29,skin_condition_3,==,1,boolean,1,2,sum,flag,創傷　治療はしていない、放置状態である,,column_display_text連動
+R215,N09,display,1,urination_control_1,==,1,boolean,1,2,sum,flag,排尿のコントロール　くしゃみ・咳で漏れる、トイレに間に合わない、下腹部に違和感がある,,column_display_text連動
+R216,N09,display,2,urination_control_2,==,1,boolean,1,2,sum,flag,排尿のコントロール　いつもお腹に力を入れいきんで出している、残尿感がある、陰部が痒い,,column_display_text連動
+R217,N09,display,3,urination_control_3,==,1,boolean,1,2,sum,flag,排尿のコントロール　昼夜問わず失禁する、排尿痛がある、下腹部が痛い,,column_display_text連動
+R218,N09,display,4,defecation_control_1,==,1,boolean,1,2,sum,flag,排便コントロール　通常は便失禁しない（まれにある）,,column_display_text連動
+R219,N09,display,5,defecation_control_2,==,1,boolean,1,2,sum,flag,排便コントロール　月に何回か失禁するが毎週ではない,,column_display_text連動
+R220,N09,display,30,defecation_control_3,==,1,boolean,1,2,sum,flag,排便コントロール　週に1回以上失禁するが、若干コントロールが保たれている,,column_display_text連動
+R221,N09,display,6,defecation_control_4,==,1,boolean,1,2,sum,flag,排便コントロール　完全な失禁状態（コントロールできない）で汚れてしまう,,column_display_text連動
+R226,N09,display,7,wound_depth_d1,==,1,boolean,1,2,sum,flag,褥瘡深さ　真皮までの損傷,,column_display_text連動
+R227,N09,display,12,wound_depth_d3,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織までの損傷,,column_display_text連動
+R228,N09,display,13,wound_depth_d4,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織を超える損傷,,column_display_text連動
+R229,N09,display,14,wound_depth_d5,==,1,boolean,1,2,sum,flag,褥瘡深さ　関節腔、体腔に至る損傷,,column_display_text連動
+R230,N09,display,15,wound_depth_dti,==,1,boolean,1,2,sum,flag,褥瘡深さ　深部損傷疑い(DTI),,column_display_text連動
+R231,N09,display,16,wound_depth_du,==,1,boolean,1,2,sum,flag,褥瘡深さ　壊死組織で覆われ深さの判定が不能,,column_display_text連動
+R232,N09,display,17,wound_exudate_e1,==,1,boolean,1,2,sum,flag,褥瘡滲出液　少量・毎日のドレッシング交換をしない,,column_display_text連動
+R233,N09,display,18,wound_exudate_e3,==,1,boolean,1,2,sum,flag,褥瘡滲出液　中等量・1日1回のドレッシング交換を必要とする,,column_display_text連動
+R234,N09,display,19,wound_exudate_e6,==,1,boolean,1,2,sum,flag,褥瘡滲出液　多量・1日2回以上のドレッシング交換を必要とする,,column_display_text連動
+R235,N09,display,20,wound_size_s3,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4未満（長径cm×短径（長径と直行する最長径）cm）,,column_display_text連動
+R236,N09,display,21,wound_size_s6,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4以上16未満,,column_display_text連動
+R237,N09,display,22,wound_size_s8,==,1,boolean,1,2,sum,flag,褥瘡大きさ　16以上36未満,,column_display_text連動
+R238,N09,display,23,wound_size_s9,==,1,boolean,1,2,sum,flag,褥瘡大きさ　36以上64未満,,column_display_text連動
+R239,N09,display,24,wound_size_s12,==,1,boolean,1,2,sum,flag,褥瘡大きさ　64以上100未満,,column_display_text連動
+R240,N09,display,25,wound_size_s15,==,1,boolean,1,2,sum,flag,褥瘡大きさ　100以上,,column_display_text連動
+R241,N09,display,26,wound_infection_i1,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の炎症兆候あり（創周囲の発赤・腫脹・熱感・疼痛）,,column_display_text連動
+R242,N09,display,27,wound_infection_i3,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　臨床的定着疑い（創面にぬめりがあり、浸出液が多い。肉芽があれば、浮腫性で脆弱など）※5,,column_display_text連動
+R243,N09,display,28,wound_infection_i3c,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の明らかな感染徴候あり（炎症兆候、膿、悪臭など）,,column_display_text連動
+R244,N09,display,29,wound_infection_i9,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　全身的影響あり,,column_display_text連動
+R245,N09,display,30,wound_granulation_g1,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の90%以上を占める,,column_display_text連動
+R246,N09,display,31,wound_granulation_g3,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の50%以上90%未満を占める,,column_display_text連動
+R247,N09,display,32,wound_granulation_g4,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%以上50%未満を占める,,column_display_text連動
+R248,N09,display,33,wound_granulation_g5,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%未満を占める,,column_display_text連動
+R249,N09,display,34,wound_granulation_g6,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が全く形成されていない,,column_display_text連動
+R250,N09,display,35,wound_necrosis_n3,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　柔らかい壊死組織あり,,column_display_text連動
+R251,N09,display,36,wound_necrosis_n6,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　硬く厚い密着した壊死組織あり,,column_display_text連動
+R252,N09,display,37,wound_pocket_p6,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4未満,,column_display_text連動
+R253,N09,display,38,wound_pocket_p6_4to16,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4以上16未満,,column_display_text連動
+R254,N09,display,39,wound_pocket_p12,==,1,boolean,1,2,sum,flag,褥瘡ポケット　16以上36未満,,column_display_text連動
+R255,N09,display,40,wound_pocket_p24,==,1,boolean,1,2,sum,flag,褥瘡ポケット　36以上,,column_display_text連動
+R1118,N09,display,42,has_bedsore_1,==,1,boolean,1,2,sum,flag,褥瘡の有無　あり,,column_display_text連動
+R1120,N09,display,44,has_pain_1,==,1,boolean,1,2,sum,flag,痛みの有無　あり,,column_display_text連動
+R1122,N09,display,46,has_paralysis_1,==,1,boolean,1,2,sum,flag,麻痺の有無　あり,,column_display_text連動
+R1124,N09,display,48,has_kannsetsu_1,==,1,boolean,1,2,sum,flag,関節拘縮の有無　あり,,column_display_text連動
+R1125,N09,display,49,pain_diagram_1,==,1,boolean,1,2,sum,flag,身体状態図（痛み）　レベル1,,column_display_text連動
+R1126,N09,display,50,pain_diagram_2,==,1,boolean,1,2,sum,flag,身体状態図（痛み）　レベル2,,column_display_text連動
+R1127,N09,display,51,pain_diagram_3,==,1,boolean,1,2,sum,flag,身体状態図（痛み）　レベル3,,column_display_text連動
+R1128,N09,display,52,pain_diagram_4,==,1,boolean,1,2,sum,flag,身体状態図（痛み）　レベル4,,column_display_text連動
+R1129,N09,display,53,mahi_diagram_1,==,1,boolean,1,2,sum,flag,身体状態図（麻痺）　レベル1,,column_display_text連動
+R1130,N09,display,54,mahi_diagram_2,==,1,boolean,1,2,sum,flag,身体状態図（麻痺）　レベル2,,column_display_text連動
+R1131,N09,display,55,mahi_diagram_3,==,1,boolean,1,2,sum,flag,身体状態図（麻痺）　レベル3,,column_display_text連動
+R1132,N09,display,56,kan_diagram_1,==,1,boolean,1,2,sum,flag,身体状態図（関節）　レベル1,,column_display_text連動
+R1133,N09,display,57,kan_diagram_2,==,1,boolean,1,2,sum,flag,身体状態図（関節）　レベル2,,column_display_text連動
+R1134,N09,display,58,kan_diagram_3,==,1,boolean,1,2,sum,flag,身体状態図（関節）　レベル3,,column_display_text連動
+R1135,N09,display,59,jokusou_diagram_1,==,1,boolean,1,2,sum,flag,褥瘡図　レベル1,,column_display_text連動
+R1136,N09,display,60,jokusou_diagram_2,==,1,boolean,1,2,sum,flag,褥瘡図　レベル2,,column_display_text連動
+R256,N10,display,1,swallowing_1,==,1,boolean,1,2,sum,flag,嚥下　お茶や汁物を含ませてしまいむせ込みにくい,,column_display_text連動
+R257,N10,display,2,swallowing_2,==,1,boolean,1,2,sum,flag,嚥下　口腔移動がうまく、呑み込むにくい,,column_display_text連動
+R258,N10,display,3,swallowing_3,==,1,boolean,1,2,sum,flag,嚥下　おかゆ・ゼリー・とろみ食でも含ませてしまい呑み込みにくい,,column_display_text連動
+R259,N10,display,4,swallowing_4,==,1,boolean,1,2,sum,flag,嚥下　嚥下できない,,column_display_text連動
+R260,N10,display,5,oral_teeth_gum_1,==,1,boolean,1,2,sum,flag,開口　開口には応じないが徒手的に2横指程度開口可能（要注意）,,column_display_text連動
+R261,N10,display,6,oral_teeth_gum_2,==,1,boolean,1,2,sum,flag,開口　食いしばりや顎関節の拘縮のため開口量が1横指程度（問題あり）,,column_display_text連動
+R262,N10,display,7,basic1_eating_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　見守や助言があればできる,,column_display_text連動
+R263,N10,display,8,basic1_eating_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　少しの助けでできる,,column_display_text連動
+R264,N10,display,9,basic1_eating_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　多くの助けでできる,,column_display_text連動
+R265,N10,display,10,basic1_eating_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　全面依存,,column_display_text連動
+R266,N10,display,11,basic1_eating_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　動作をしていない（能力に関わらず）,,column_display_text連動
+R267,N10,display,12,basic1_face_hair_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　見守や助言があればできる,,column_display_text連動
+R268,N10,display,13,basic1_face_hair_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　少しの助けでできる,,column_display_text連動
+R269,N10,display,14,basic1_face_hair_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　多くの助けでできる,,column_display_text連動
+R270,N10,display,15,basic1_face_hair_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　全面依存,,column_display_text連動
+R271,N10,display,16,basic1_face_hair_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　動作をしていない（能力に関わらず）,,column_display_text連動
+R272,N10,display,17,basic1_wipe_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　見守や助言があればできる,,column_display_text連動
+R273,N10,display,18,basic1_wipe_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　少しの助けでできる,,column_display_text連動
+R274,N10,display,19,basic1_wipe_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　多くの助けでできる,,column_display_text連動
+R275,N10,display,20,basic1_wipe_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　全面依存,,column_display_text連動
+R276,N10,display,21,basic1_wipe_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　動作をしていない（能力に関わらず）,,column_display_text連動
+R277,N10,display,22,basic1_upper_clothes_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　見守や助言があればできる,,column_display_text連動
+R278,N10,display,23,basic1_upper_clothes_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　少しの助けでできる,,column_display_text連動
+R279,N10,display,24,basic1_upper_clothes_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　多くの助けでできる,,column_display_text連動
+R280,N10,display,25,basic1_upper_clothes_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　全面依存,,column_display_text連動
+R281,N10,display,26,basic1_upper_clothes_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　動作をしていない（能力に関わらず）,,column_display_text連動
+R282,N10,display,27,basic1_lower_clothes_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　見守や助言があればできる,,column_display_text連動
+R283,N10,display,28,basic1_lower_clothes_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　少しの助けでできる,,column_display_text連動
+R284,N10,display,29,basic1_lower_clothes_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　多くの助けでできる,,column_display_text連動
+R285,N10,display,30,basic1_lower_clothes_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　全面依存,,column_display_text連動
+R286,N10,display,31,basic1_lower_clothes_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　動作をしていない（能力に関わらず）,,column_display_text連動
+R287,N10,display,32,basic1_toilet_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　見守や助言があればできる,,column_display_text連動
+R288,N10,display,33,basic1_toilet_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　少しの助けでできる,,column_display_text連動
+R289,N10,display,34,basic1_toilet_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　多くの助けでできる,,column_display_text連動
+R290,N10,display,35,basic1_toilet_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　全面依存,,column_display_text連動
+R291,N10,display,36,basic1_toilet_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　動作をしていない（能力に関わらず）,,column_display_text連動
+R292,N10,display,37,basic1_bath_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　見守や助言があればできる,,column_display_text連動
+R293,N10,display,38,basic1_bath_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　少しの助けでできる,,column_display_text連動
+R294,N10,display,39,basic1_bath_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　多くの助けでできる,,column_display_text連動
+R295,N10,display,40,basic1_bath_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　全面依存,,column_display_text連動
+R296,N10,display,41,basic1_bath_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　動作をしていない（能力に関わらず）,,column_display_text連動
+R297,N10,display,42,basic2_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　見守や助言があればできる,,column_display_text連動
+R298,N10,display,43,basic2_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　少しの助けでできる,,column_display_text連動
+R299,N10,display,44,basic2_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　多くの助けでできる,,column_display_text連動
+R300,N10,display,45,basic2_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　全面依存,,column_display_text連動
+R301,N10,display,46,basic2_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　動作をしていない（能力に関わらず）,,column_display_text連動
+R302,N10,display,47,basic2_getup_1,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　見守や助言があればできる,,column_display_text連動
+R303,N10,display,48,basic2_getup_2,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　少しの助けでできる,,column_display_text連動
+R304,N10,display,49,basic2_getup_3,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　多くの助けでできる,,column_display_text連動
+R305,N10,display,50,basic2_getup_4,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　全面依存,,column_display_text連動
+R306,N10,display,51,basic2_getup_5,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　動作をしていない（能力に関わらず）,,column_display_text連動
+R307,N10,display,52,basic2_sit_1,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　見守や助言があればできる,,column_display_text連動
+R308,N10,display,53,basic2_sit_2,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　少しの助けでできる,,column_display_text連動
+R309,N10,display,54,basic2_sit_3,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　多くの助けでできる,,column_display_text連動
+R310,N10,display,55,basic2_sit_4,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　全面依存,,column_display_text連動
+R311,N10,display,56,basic2_sit_5,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　動作をしていない（能力に関わらず）,,column_display_text連動
+R312,N10,display,57,basic2_bed_chair_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　見守や助言があればできる,,column_display_text連動
+R313,N10,display,58,basic2_bed_chair_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　少しの助けでできる,,column_display_text連動
+R314,N10,display,59,basic2_bed_chair_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　多くの助けでできる,,column_display_text連動
+R315,N10,display,60,basic2_bed_chair_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　全面依存,,column_display_text連動
+R316,N10,display,61,basic2_bed_chair_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　動作をしていない（能力に関わらず）,,column_display_text連動
+R317,N10,display,62,basic2_both_leg_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　見守や助言があればできる,,column_display_text連動
+R318,N10,display,63,basic2_both_leg_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　少しの助けでできる,,column_display_text連動
+R319,N10,display,64,basic2_both_leg_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　多くの助けでできる,,column_display_text連動
+R320,N10,display,65,basic2_both_leg_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　全面依存,,column_display_text連動
+R321,N10,display,66,basic2_both_leg_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　動作をしていない（能力に関わらず）,,column_display_text連動
+R322,N10,display,67,basic3_transfer_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　見守や助言があればできる,,column_display_text連動
+R323,N10,display,68,basic3_transfer_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　少しの助けでできる,,column_display_text連動
+R324,N10,display,69,basic3_transfer_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　多くの助けでできる,,column_display_text連動
+R325,N10,display,70,basic3_transfer_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　全面依存,,column_display_text連動
+R326,N10,display,71,basic3_transfer_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　動作をしていない（能力に関わらず）,,column_display_text連動
+R327,N10,display,72,basic3_bath_inout_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　見守や助言があればできる,,column_display_text連動
+R328,N10,display,73,basic3_bath_inout_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　少しの助けでできる,,column_display_text連動
+R329,N10,display,74,basic3_bath_inout_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　多くの助けでできる,,column_display_text連動
+R330,N10,display,75,basic3_bath_inout_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　全面依存,,column_display_text連動
+R331,N10,display,76,basic3_bath_inout_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　動作をしていない（能力に関わらず）,,column_display_text連動
+R332,N10,display,77,basic3_walk_home_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　見守や助言があればできる,,column_display_text連動
+R333,N10,display,78,basic3_walk_home_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　少しの助けでできる,,column_display_text連動
+R334,N10,display,79,basic3_walk_home_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　多くの助けでできる,,column_display_text連動
+R335,N10,display,80,basic3_walk_home_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　全面依存,,column_display_text連動
+R336,N10,display,81,basic3_walk_home_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　動作をしていない（能力に関わらず）,,column_display_text連動
+R337,N10,display,82,basic3_walk_out_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　見守や助言があればできる,,column_display_text連動
+R338,N10,display,83,basic3_walk_out_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　少しの助けでできる,,column_display_text連動
+R339,N10,display,84,basic3_walk_out_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　多くの助けでできる,,column_display_text連動
+R340,N10,display,85,basic3_walk_out_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　全面依存,,column_display_text連動
+R341,N10,display,86,basic3_walk_out_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　動作をしていない（能力に関わらず）,,column_display_text連動
+R342,N10,display,87,iadl_phone_1,==,1,boolean,1,2,sum,flag,1.電話の利用　いくつかのよく知っている番号であればかけることができる,,column_display_text連動
+R343,N10,display,88,iadl_phone_2,==,1,boolean,1,2,sum,flag,1.電話の利用　電話にての対応はできるが、かけることはできない,,column_display_text連動
+R344,N10,display,89,iadl_phone_3,==,1,boolean,1,2,sum,flag,1.電話の利用　まったく電話を使うことができない,,column_display_text連動
+R345,N10,display,90,iadl_shopping_1,==,1,boolean,1,2,sum,flag,2.日用品の買い物　少額の買い物は自分で行うことができる,,column_display_text連動
+R346,N10,display,91,iadl_shopping_2,==,1,boolean,1,2,sum,flag,2.日用品の買い物　誰かが付き添ってくれれば買い物ができる,,column_display_text連動
+R347,N10,display,92,iadl_shopping_3,==,1,boolean,1,2,sum,flag,2.日用品の買い物　まったく買い物はできない,,column_display_text連動
+R348,N10,display,93,iadl_housework_1,==,1,boolean,1,2,sum,flag,3.食事の支度　材料が用意してあれば、献立を考え、自分が食べる調理ができる,,column_display_text連動
+R349,N10,display,94,iadl_housework_2,==,1,boolean,1,2,sum,flag,3.食事の支度　材料を用意してあっても、献立を考えて調理することはできない,,column_display_text連動
+R350,N10,display,95,iadl_housework_3,==,1,boolean,1,2,sum,flag,3.食事の支度　他者に献立や支度、調理をすべてしてもらう,,column_display_text連動
+R351,N10,display,96,iadl_toilet_1,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　食事のあとの食器を洗ったり簡単なことはできる,,column_display_text連動
+R352,N10,display,97,iadl_toilet_2,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　他者の助けがなければ家事をすることができない,,column_display_text連動
+R353,N10,display,98,iadl_toilet_3,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　まったく家事をすることができない,,column_display_text連動
+R354,N10,display,99,iadl_clean_1,==,1,boolean,1,2,sum,flag,5.洗濯　洗濯機に入れられるが洗剤入れはだめ、取り出してもらえれば干せる,,column_display_text連動
+R355,N10,display,100,iadl_clean_2,==,1,boolean,1,2,sum,flag,5.洗濯　一連の作業は他者の助けがなければ洗濯をすることができない,,column_display_text連動
+R356,N10,display,101,iadl_clean_3,==,1,boolean,1,2,sum,flag,5.洗濯　他者に洗濯してもらう、まったく洗濯をすることができない,,column_display_text連動
+R358,N10,display,103,iadl_move_1,==,1,boolean,1,2,sum,flag,6.移動・外出　タクシーや家族の車を頼んで出かけられるが、電車やバスは利用できない,,column_display_text連動
+R359,N10,display,104,iadl_move_2,==,1,boolean,1,2,sum,flag,6.移動・外出　付き添いがあれば車や電車・バスを利用することができる,,column_display_text連動
+R360,N10,display,105,iadl_move_3,==,1,boolean,1,2,sum,flag,6.移動・外出　介助で付き添われてタクシーや自動車で出かけられる,,column_display_text連動
+R361,N10,display,106,iadl_move_4,==,1,boolean,1,2,sum,flag,6.移動・外出　まったく乗り物で出かけることができない,,column_display_text連動
+R362,N10,display,107,iadl_money_1,==,1,boolean,1,2,sum,flag,7.金銭の管理　日常の買い物の金銭管理ができる,,column_display_text連動
+R363,N10,display,108,iadl_money_2,==,1,boolean,1,2,sum,flag,7.金銭の管理　小遣い以外、買い物・銀行の預貯金の処理には付き添いが必要,,column_display_text連動
+R364,N10,display,109,iadl_money_3,==,1,boolean,1,2,sum,flag,7.金銭の管理　金銭を扱えない、管理もできない,,column_display_text連動
+R365,N10,display,110,iadl_medicine_1,==,1,boolean,1,2,sum,flag,8.薬の管理　前もって薬カレンダーや服薬ボックスに用意されれば服薬できる,,column_display_text連動
+R366,N10,display,111,iadl_medicine_2,==,1,boolean,1,2,sum,flag,8.薬の管理　毎回だれかに確認してもらえばできる,,column_display_text連動
+R367,N10,display,112,iadl_medicine_3,==,1,boolean,1,2,sum,flag,8.薬の管理　自分では服薬、管理ができない,,column_display_text連動
+R368,N10,display,113,iadl_decision_1,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の助言・見守りがあれば自分で操作ができる,,column_display_text連動
+R369,N10,display,114,iadl_decision_2,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の判断や介助が必要である,,column_display_text連動
+R370,N10,display,115,iadl_decision_3,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　判断も操作も全面依存である,,column_display_text連動
+R371,N10,display,116,communication_level_1,==,1,boolean,1,2,sum,flag,2. コミュニケーション（意思疎通）の程度　ゆっくりと安心した状態であれば自分の意思を伝えられる、相手の意思を理解できる,,column_display_text連動
+R372,N10,display,117,communication_level_2,==,1,boolean,1,2,sum,flag,2. コミュニケーション（意思疎通）の程度　自分の意思を伝えづらい、相手の意思をあまり理解できない,,column_display_text連動
+R373,N10,display,118,communication_level_3,==,1,boolean,1,2,sum,flag,2. コミュニケーション（意思疎通）の程度　言葉や非言語･感情の読み取り等全て伝えられない、相手の意思も全く理解できない,,column_display_text連動
+R374,N10,display,119,conversation_level_2,==,1,boolean,1,2,sum,flag,3. 会話の程度　会話がつながらず途切れる、会話内容が伝わりにくい/言語障害がある,,column_display_text連動
+R375,N10,display,120,conversation_level_3,==,1,boolean,1,2,sum,flag,3. 会話の程度　会話が全くできない/発語・発音ができない,,column_display_text連動
+R376,N10,display,121,daily_communication_2,==,1,boolean,1,2,sum,flag,4. 日常意思を伝えられるか　時々伝えられるが、基本的には食事やトイレなど具体的な欲求や事態のみ伝えられる,,column_display_text連動
+R377,N10,display,122,daily_communication_3,==,1,boolean,1,2,sum,flag,4. 日常意思を伝えられるか　全く意思の伝達はできない、限られた者にのみ理解できるサインがある,,column_display_text連動
+R378,N10,display,123,daily_judgement_1,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　新しい事態や周囲の環境変化に直面した時に混乱する、耳を傾けられない,,column_display_text連動
+R379,N10,display,124,daily_judgement_2,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　落ち着かず、人に助けてもらわないと判断や相手を受け止められず、混乱する,,column_display_text連動
+R380,N10,display,125,daily_judgement_3,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　支離滅裂な状態で全く判断できない・全く話を受け止められない,,column_display_text連動
+R381,N10,display,126,pain_image_front,==,1,boolean,1,2,sum,flag,痛み 前面あり,,column_display_text連動
+R382,N10,display,127,pain_image_back,==,1,boolean,1,2,sum,flag,痛み 背面あり,,column_display_text連動
+R383,N10,display,128,mahi_image_front,==,1,boolean,1,2,sum,flag,麻痺 前面あり,,column_display_text連動
+R384,N10,display,129,mahi_image_back,==,1,boolean,1,2,sum,flag,麻痺 背面あり,,column_display_text連動
+R385,N10,display,130,kan_image_front,==,1,boolean,1,2,sum,flag,関節拘縮 前面あり,,column_display_text連動
+R386,N10,display,131,kan_image_back,==,1,boolean,1,2,sum,flag,関節拘縮 背面あり,,column_display_text連動
+R401,N11,display,15,basic1_eating_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　見守や助言があればできる ,,column_display_text連動
+R402,N11,display,16,basic1_eating_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　少しの助けでできる,,column_display_text連動
+R403,N11,display,17,basic1_eating_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　多くの助けでできる,,column_display_text連動
+R404,N11,display,18,basic1_eating_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　全面依存,,column_display_text連動
+R405,N11,display,19,basic1_eating_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　① 食事摂取　動作をしていない（能力に関わらず）,,column_display_text連動
+R406,N11,display,20,basic1_face_hair_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　見守や助言があればできる,,column_display_text連動
+R407,N11,display,21,basic1_face_hair_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　少しの助けでできる,,column_display_text連動
+R408,N11,display,22,basic1_face_hair_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　多くの助けでできる,,column_display_text連動
+R409,N11,display,23,basic1_face_hair_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　全面依存,,column_display_text連動
+R410,N11,display,24,basic1_face_hair_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　② 洗顔・整髪・洗髪　動作をしていない（能力に関わらず）,,column_display_text連動
+R411,N11,display,25,basic1_wipe_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　見守や助言があればできる,,column_display_text連動
+R412,N11,display,26,basic1_wipe_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　少しの助けでできる,,column_display_text連動
+R413,N11,display,27,basic1_wipe_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　多くの助けでできる,,column_display_text連動
+R414,N11,display,28,basic1_wipe_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　全面依存,,column_display_text連動
+R415,N11,display,29,basic1_wipe_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　③ 手足・体の清拭　動作をしていない（能力に関わらず）,,column_display_text連動
+R416,N11,display,30,basic1_upper_clothes_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　見守や助言があればできる,,column_display_text連動
+R417,N11,display,31,basic1_upper_clothes_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　少しの助けでできる,,column_display_text連動
+R418,N11,display,32,basic1_upper_clothes_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　多くの助けでできる,,column_display_text連動
+R419,N11,display,33,basic1_upper_clothes_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　全面依存,,column_display_text連動
+R420,N11,display,34,basic1_upper_clothes_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　④ 上着の着脱（更衣）　動作をしていない（能力に関わらず）,,column_display_text連動
+R421,N11,display,35,basic1_lower_clothes_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　見守や助言があればできる,,column_display_text連動
+R422,N11,display,36,basic1_lower_clothes_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　少しの助けでできる,,column_display_text連動
+R423,N11,display,37,basic1_lower_clothes_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　多くの助けでできる,,column_display_text連動
+R424,N11,display,38,basic1_lower_clothes_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　全面依存,,column_display_text連動
+R425,N11,display,39,basic1_lower_clothes_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑤ パンツ・ズボン・スカート・くつ下の着脱　動作をしていない（能力に関わらず）,,column_display_text連動
+R426,N11,display,40,basic1_toilet_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　見守や助言があればできる,,column_display_text連動
+R427,N11,display,41,basic1_toilet_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　少しの助けでできる,,column_display_text連動
+R428,N11,display,42,basic1_toilet_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　多くの助けでできる,,column_display_text連動
+R429,N11,display,43,basic1_toilet_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　全面依存,,column_display_text連動
+R430,N11,display,44,basic1_toilet_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑥ トイレ後の始末　動作をしていない（能力に関わらず）,,column_display_text連動
+R431,N11,display,45,basic1_bath_1,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　見守や助言があればできる,,column_display_text連動
+R432,N11,display,46,basic1_bath_2,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　少しの助けでできる,,column_display_text連動
+R433,N11,display,47,basic1_bath_3,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　多くの助けでできる,,column_display_text連動
+R434,N11,display,48,basic1_bath_4,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　全面依存,,column_display_text連動
+R435,N11,display,49,basic1_bath_5,==,1,boolean,1,2,sum,flag,基本動作（身辺動作）　⑦ 入浴（体を洗う・シャワーで体を洗う）　動作をしていない（能力に関わらず）,,column_display_text連動
+R436,N11,display,50,basic2_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　見守や助言があればできる,,column_display_text連動
+R437,N11,display,51,basic2_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　少しの助けでできる,,column_display_text連動
+R438,N11,display,52,basic2_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　多くの助けでできる,,column_display_text連動
+R439,N11,display,53,basic2_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　全面依存,,column_display_text連動
+R440,N11,display,54,basic2_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑧ 寝返り　動作をしていない（能力に関わらず）,,column_display_text連動
+R441,N11,display,55,basic2_getup_1,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　見守や助言があればできる,,column_display_text連動
+R442,N11,display,56,basic2_getup_2,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　少しの助けでできる,,column_display_text連動
+R443,N11,display,57,basic2_getup_3,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　多くの助けでできる,,column_display_text連動
+R444,N11,display,58,basic2_getup_4,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　全面依存,,column_display_text連動
+R445,N11,display,59,basic2_getup_5,==,1,boolean,1,2,sum,flag,起居動作　⑨ 起き上がり　動作をしていない（能力に関わらず）,,column_display_text連動
+R446,N11,display,60,basic2_sit_1,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　見守や助言があればできる,,column_display_text連動
+R447,N11,display,61,basic2_sit_2,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　少しの助けでできる,,column_display_text連動
+R448,N11,display,62,basic2_sit_3,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　多くの助けでできる,,column_display_text連動
+R449,N11,display,63,basic2_sit_4,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　全面依存,,column_display_text連動
+R450,N11,display,64,basic2_sit_5,==,1,boolean,1,2,sum,flag,起居動作　⑩ 座位保持　動作をしていない（能力に関わらず）,,column_display_text連動
+R451,N11,display,65,basic2_bed_chair_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　見守や助言があればできる,,column_display_text連動
+R452,N11,display,66,basic2_bed_chair_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　少しの助けでできる,,column_display_text連動
+R453,N11,display,67,basic2_bed_chair_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　多くの助けでできる,,column_display_text連動
+R454,N11,display,68,basic2_bed_chair_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　全面依存,,column_display_text連動
+R455,N11,display,69,basic2_bed_chair_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑪ ベッド・椅子からの立ち上がり　動作をしていない（能力に関わらず）,,column_display_text連動
+R456,N11,display,70,basic2_both_leg_stand_1,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　見守や助言があればできる,,column_display_text連動
+R457,N11,display,71,basic2_both_leg_stand_2,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　少しの助けでできる,,column_display_text連動
+R458,N11,display,72,basic2_both_leg_stand_3,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　多くの助けでできる,,column_display_text連動
+R459,N11,display,73,basic2_both_leg_stand_4,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　全面依存,,column_display_text連動
+R460,N11,display,74,basic2_both_leg_stand_5,==,1,boolean,1,2,sum,flag,起居動作　⑫ 両足での立位保持　動作をしていない（能力に関わらず）,,column_display_text連動
+R461,N11,display,75,basic3_transfer_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　見守や助言があればできる,,column_display_text連動
+R462,N11,display,76,basic3_transfer_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　少しの助けでできる,,column_display_text連動
+R463,N11,display,77,basic3_transfer_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　多くの助けでできる,,column_display_text連動
+R464,N11,display,78,basic3_transfer_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　全面依存,,column_display_text連動
+R465,N11,display,79,basic3_transfer_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑬ ベッドから車椅子・椅子、車いすからトイレに移乗　動作をしていない（能力に関わらず）,,column_display_text連動
+R466,N11,display,80,basic3_bath_inout_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　見守や助言があればできる,,column_display_text連動
+R467,N11,display,81,basic3_bath_inout_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　少しの助けでできる,,column_display_text連動
+R468,N11,display,82,basic3_bath_inout_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　多くの助けでできる,,column_display_text連動
+R469,N11,display,83,basic3_bath_inout_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　全面依存,,column_display_text連動
+R470,N11,display,84,basic3_bath_inout_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑭ 浴槽またいでの出入り　動作をしていない（能力に関わらず）,,column_display_text連動
+R471,N11,display,85,basic3_walk_home_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　見守や助言があればできる,,column_display_text連動
+R472,N11,display,86,basic3_walk_home_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　少しの助けでできる,,column_display_text連動
+R473,N11,display,87,basic3_walk_home_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　多くの助けでできる,,column_display_text連動
+R474,N11,display,88,basic3_walk_home_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　全面依存,,column_display_text連動
+R475,N11,display,89,basic3_walk_home_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑮ 家の中の歩行（自力で杖・歩行器・車いす）　動作をしていない（能力に関わらず）,,column_display_text連動
+R476,N11,display,90,basic3_walk_out_1,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　見守や助言があればできる,,column_display_text連動
+R477,N11,display,91,basic3_walk_out_2,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　少しの助けでできる,,column_display_text連動
+R478,N11,display,92,basic3_walk_out_3,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　多くの助けでできる,,column_display_text連動
+R479,N11,display,93,basic3_walk_out_4,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　全面依存,,column_display_text連動
+R480,N11,display,94,basic3_walk_out_5,==,1,boolean,1,2,sum,flag,移乗・移動　⑯ 外での歩行（自力で杖・歩行器・車いす）　動作をしていない（能力に関わらず）,,column_display_text連動
+R481,N11,display,95,iadl_phone_1,==,1,boolean,1,2,sum,flag,1.電話の利用　いくつかのよく知っている番号であればかけることができる,,column_display_text連動
+R482,N11,display,96,iadl_phone_2,==,1,boolean,1,2,sum,flag,1.電話の利用　電話にての対応はできるが、かけることはできない,,column_display_text連動
+R483,N11,display,97,iadl_phone_3,==,1,boolean,1,2,sum,flag,1.電話の利用　まったく電話を使うことができない,,column_display_text連動
+R484,N11,display,98,iadl_shopping_1,==,1,boolean,1,2,sum,flag,2.日用品の買い物　少額の買い物は自分で行うことができる,,column_display_text連動
+R485,N11,display,99,iadl_shopping_2,==,1,boolean,1,2,sum,flag,2.日用品の買い物　誰かが付き添ってくれれば買い物ができる,,column_display_text連動
+R486,N11,display,100,iadl_shopping_3,==,1,boolean,1,2,sum,flag,2.日用品の買い物　まったく買い物はできない,,column_display_text連動
+R487,N11,display,101,iadl_housework_1,==,1,boolean,1,2,sum,flag,3.食事の支度　材料が用意してあれば、献立を考え、自分が食べる調理ができる,,column_display_text連動
+R488,N11,display,102,iadl_housework_2,==,1,boolean,1,2,sum,flag,3.食事の支度　材料を用意してあっても、献立を考えて調理することはできない,,column_display_text連動
+R489,N11,display,103,iadl_housework_3,==,1,boolean,1,2,sum,flag,3.食事の支度　他者に献立や支度、調理をすべてしてもらう,,column_display_text連動
+R490,N11,display,104,iadl_toilet_1,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　食事のあとの食器を洗ったり簡単なことはできる,,column_display_text連動
+R491,N11,display,105,iadl_toilet_2,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　他者の助けがなければ家事をすることができない,,column_display_text連動
+R492,N11,display,106,iadl_toilet_3,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　まったく家事をすることができない,,column_display_text連動
+R493,N11,display,107,iadl_clean_1,==,1,boolean,1,2,sum,flag,5.洗濯　洗濯機に入れられるが洗剤入れはだめ、取り出してもらえれば干せる,,column_display_text連動
+R494,N11,display,108,iadl_clean_2,==,1,boolean,1,2,sum,flag,5.洗濯　一連の作業は他者の助けがなければ洗濯をすることができない,,column_display_text連動
+R495,N11,display,109,iadl_clean_3,==,1,boolean,1,2,sum,flag,5.洗濯　他者に洗濯してもらう、まったく洗濯をすることができない,,column_display_text連動
+R497,N11,display,111,iadl_move_1,==,1,boolean,1,2,sum,flag,6.移動・外出　タクシーや家族の車を頼んで出かけられるが、電車やバスは利用できない,,column_display_text連動
+R498,N11,display,112,iadl_move_2,==,1,boolean,1,2,sum,flag,6.移動・外出　付き添いがあれば車や電車・バスを利用することができる,,column_display_text連動
+R499,N11,display,113,iadl_move_3,==,1,boolean,1,2,sum,flag,6.移動・外出　介助で付き添われてタクシーや自動車で出かけられる,,column_display_text連動
+R500,N11,display,114,iadl_move_4,==,1,boolean,1,2,sum,flag,6.移動・外出　まったく乗り物で出かけることができない,,column_display_text連動
+R501,N11,display,115,iadl_money_1,==,1,boolean,1,2,sum,flag,7.金銭の管理　日常の家賃、請求書の支払い、銀行などでの処理・確認ができる,,column_display_text連動
+R502,N11,display,116,iadl_money_2,==,1,boolean,1,2,sum,flag,7.金銭の管理　小遣い以外、買い物・銀行の預貯金の処理には付き添いが必要,,column_display_text連動
+R503,N11,display,117,iadl_money_3,==,1,boolean,1,2,sum,flag,7.金銭の管理　金銭を扱えない、管理もできない,,column_display_text連動
+R504,N11,display,118,iadl_medicine_1,==,1,boolean,1,2,sum,flag,8.薬の管理　前もって薬カレンダーや服薬ボックスに用意されれば服薬できる,,column_display_text連動
+R505,N11,display,119,iadl_medicine_2,==,1,boolean,1,2,sum,flag,8.薬の管理　毎回だれかに確認してもらえばできる,,column_display_text連動
+R506,N11,display,120,iadl_medicine_3,==,1,boolean,1,2,sum,flag,8.薬の管理　自分では服薬、管理ができない,,column_display_text連動
+R507,N11,display,121,iadl_decision_1,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の助言・見守りがあれば自分で操作ができる,,column_display_text連動
+R508,N11,display,122,iadl_decision_2,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の判断や介助が必要である,,column_display_text連動
+R509,N11,display,123,iadl_decision_3,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　判断も操作も全面依存である,,column_display_text連動
+R510,N11,display,124,daily_communication_2,==,1,boolean,1,2,sum,flag,4. 日常意思を伝えられるか　時々伝えられるが、基本的には食事やトイレなど具体的な欲求や事態のみ伝えられる,,column_display_text連動
+R511,N11,display,125,daily_communication_3,==,1,boolean,1,2,sum,flag,4. 日常意思を伝えられるか　全く意思の伝達はできない、限られた者にのみ理解できるサインがある,,column_display_text連動
+R512,N11,display,126,daily_judgement_1,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　新しい事態や周囲の環境変化に直面した時に混乱する、耳を傾けられない,,column_display_text連動
+R513,N11,display,127,daily_judgement_2,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　落ち着かず、人に助けてもらわないと判断や相手を受け止められず、混乱する,,column_display_text連動
+R514,N11,display,128,daily_judgement_3,==,1,boolean,1,2,sum,flag,5. 日常の判断力・対人調和力　支離滅裂な状態で全く判断できない・全く話を受け止められない,,column_display_text連動
+R515,N11,display,129,mahi_image_front,==,1,boolean,1,2,sum,flag,麻痺 前面あり,,column_display_text連動
+R516,N11,display,130,mahi_image_back,==,1,boolean,1,2,sum,flag,麻痺 背面あり,,column_display_text連動
+R517,N11,display,131,kan_image_front,==,1,boolean,1,2,sum,flag,関節拘縮 前面あり,,column_display_text連動
+R518,N11,display,132,kan_image_back,==,1,boolean,1,2,sum,flag,関節拘縮 背面あり,,column_display_text連動
+R521,N12,display,1,communication_level_1,==,1,boolean,1,2,sum,flag,2.コミュニケーション（意思疎通）の程度　ゆっくりと安心した状態であれば自分の意思を伝えられる、相手の意思を理解できる,,column_display_text連動
+R522,N12,display,2,communication_level_2,==,1,boolean,1,2,sum,flag,2.コミュニケーション（意思疎通）の程度　自分の意思を伝えづらい、相手の意思をあまり理解できない,,column_display_text連動
+R523,N12,display,3,communication_level_3,==,1,boolean,1,2,sum,flag,2.コミュニケーション（意思疎通）の程度　言葉や非言語･感情の読み取り等全て伝えられない、相手の意思も全く理解できない,,column_display_text連動
+R524,N12,display,4,conversation_level_2,==,1,boolean,1,2,sum,flag,3.会話の程度　ほぼ会話はでき、相手に伝わっているが、時々言葉を忘れる,,column_display_text連動
+R525,N12,display,5,conversation_level_3,==,1,boolean,1,2,sum,flag,3.会話の程度　会話がつながらず途切れる、会話内容が伝わりにくい/言語障害がある,,column_display_text連動
+R526,N12,display,6,hearing_level_1,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　会話で聞き間違えがある。少し疲れたり、小声の会話に、聞き取り難さを感じる,,column_display_text連動
+R527,N12,display,7,hearing_level_2,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　テレビの音がかなりうるさい。耳元で大声で聞こえる。補聴器を使わない,,column_display_text連動
+R528,N12,display,8,hearing_level_3,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　耳元でかなり大声が何とか聞こえるが、聞き分けられない。ほとんど聞こえない,,column_display_text連動
+R529,N12,display,9,hearing_level_4,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　全く聞こえない,,column_display_text連動
+R530,N12,display,10,daily_communication_2,==,1,boolean,1,2,sum,flag,4.日常意思を伝えられるか　時々伝えられるが、基本的には食事やトイレなど具体的な欲求や事態のみ伝えられる,,column_display_text連動
+R531,N12,display,11,daily_communication_3,==,1,boolean,1,2,sum,flag,4.日常意思を伝えられるか　全く意思の伝達はできない、限られた者にのみ理解できるサインがある,,column_display_text連動
+R532,N12,display,12,daily_judgement_1,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　新しい事態や周囲の環境変化に直面した時に混乱する、耳を傾けられない,,column_display_text連動
+R533,N12,display,13,daily_judgement_2,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　落ち着かず、人に助けてもらわないと判断や相手を受け止められず、混乱する,,column_display_text連動
+R534,N12,display,14,daily_judgement_3,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　支離滅裂な状態で全く判断できない・全く話を受け止められない,,column_display_text連動
+R535,N12,display,15,delirium_signs_a,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　a. 集中力が持ちている、注意力散漫,,column_display_text連動
+R536,N12,display,16,delirium_signs_b,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　b. 周囲の環境に対する認識が変化しやすい,,column_display_text連動
+R537,N12,display,17,delirium_signs_c,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　c. 支離滅裂な会話がある,,column_display_text連動
+R538,N12,display,18,delirium_signs_d,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　d. 運動性の落ち着きのなさや無気力がある,,column_display_text連動
+R539,N12,display,19,delirium_signs_e,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　e. 認知能力が1日の中で変化する,,column_display_text連動
+R540,N13,display,1,visual_ability_1,==,1,boolean,1,2,sum,flag,1.視力の程度（コンタクトレンズ・メガネ使用可） 大きな文字のみ読める,,column_display_text連動
+R541,N13,display,2,visual_ability_2,==,1,boolean,1,2,sum,flag,1.視力の程度（コンタクトレンズ・メガネ使用可） 視力に限界があり文字が読めないが、周辺の映像はわかる,,column_display_text連動
+R542,N13,display,3,visual_ability_3,==,1,boolean,1,2,sum,flag,1.視力の程度（コンタクトレンズ・メガネ使用可） ほとんど見えない,,column_display_text連動
+R543,N13,display,4,visual_condition_a,==,1,boolean,1,2,sum,flag,2.視覚の状態（ありの場合、複数選択可）　a.見える範囲が限定されている（うっすら見える～全く見えない）,,column_display_text連動
+R544,N13,display,5,visual_condition_b,==,1,boolean,1,2,sum,flag,2.視覚の状態（ありの場合、複数選択可）　b.形の識別がつかない・視界の一部が欠ける・ゆがんでいる・中心だけが見える,,column_display_text連動
+R545,N13,display,6,visual_condition_c,==,1,boolean,1,2,sum,flag,2.視覚の状態（ありの場合、複数選択可）　c.光がまぶしく目を閉じてしまう,,column_display_text連動
+R546,N13,display,7,visual_condition_d,==,1,boolean,1,2,sum,flag,2.視覚の状態（ありの場合、複数選択可）　d.薄い色の識別ができない、特定の色が見えない,,column_display_text連動
+R547,N13,display,8,visual_condition_e,==,1,boolean,1,2,sum,flag,2.視覚の状態（ありの場合、複数選択可）　e.暗いと物が見えづらい、通常より暗く見える,,column_display_text連動
+R548,N14,display,1,social_participation_1_c,==,1,boolean,1,2,sum,flag,社会参加意欲　月に数回外出するがそれ以外の時は1人でいる、家族や知人に会うのは月に何回かである。月に1〜2回,,column_display_text連動
+R549,N14,display,2,social_participation_1_d,==,1,boolean,1,2,sum,flag,社会参加意欲　親戚や近隣・社会交流・社会的接触を全くしていない、デイケア等にも行っていない、昨年より外出が減った,,column_display_text連動
+R550,N14,display,3,enjoyment_1_なし,==,1,boolean,1,2,sum,flag,楽しみ/社会活動　となり近所・知り合い・同窓会・訓練会などに出かけ楽しみたい　なし,,column_display_text連動
+R551,N14,display,4,enjoyment_2_なし,==,1,boolean,1,2,sum,flag,楽しみ/社会活動　個人で楽しみたい　なし,,column_display_text連動
+R552,N14,display,5,enjoyment_3_なし,==,1,boolean,1,2,sum,flag,楽しみ/社会活動　家族で楽しみたい　なし,,column_display_text連動
+R553,N14,display,6,relationship_status_2,==,1,boolean,1,2,sum,flag,対人関係　家族や友人、介護サービス関係者、近隣等との関係　家族や他人との関係を築くことを望んでいるができない,,column_display_text連動
+R554,N14,display,7,relationship_status_3,==,1,boolean,1,2,sum,flag,対人関係　家族や友人、介護サービス関係者、近隣等との関係　家族や他人との関係を築くことを望んでいない,,column_display_text連動
+R555,N14,display,8,consultation_status_1,==,1,boolean,1,2,sum,flag,相談の有無　相手・支援者がいないので日常生活に支障があり、支援者がいると助かる,,column_display_text連動
+R556,N14,display,9,supporter_family,==,1,boolean,1,2,sum,flag,支援者　家族,,column_display_text連動
+R557,N14,display,10,supporter_friend,==,1,boolean,1,2,sum,flag,支援者　友人,,column_display_text連動
+R558,N14,display,11,supporter_minsei,==,1,boolean,1,2,sum,flag,支援者　民生委員,,column_display_text連動
+R559,N14,display,12,supporter_center,==,1,boolean,1,2,sum,flag,支援者　センター,,column_display_text連動
+R560,N14,display,13,supporter_service_staff,==,1,boolean,1,2,sum,flag,支援者　サービス職員,,column_display_text連動
+R561,N14,display,14,supporter_neighbor,==,1,boolean,1,2,sum,flag,支援者　近隣,,column_display_text連動
+R562,N14,display,15,supporter_volunteer,==,1,boolean,1,2,sum,flag,支援者　ボランティア,,column_display_text連動
+R563,N14,display,16,supporter_guardian,==,1,boolean,1,2,sum,flag,支援者　後見人,,column_display_text連動
+R564,N14,display,17,supporter_delivery,==,1,boolean,1,2,sum,flag,支援者　配食等,,column_display_text連動
+R565,N14,display,18,supporter_public,==,1,boolean,1,2,sum,flag,支援者　公的,,column_display_text連動
+R566,N14,display,19,supporter_religious,==,1,boolean,1,2,sum,flag,支援者　宗教,,column_display_text連動
+R567,N14,display,20,supporter_other_flag,==,1,boolean,1,2,sum,flag,支援者　その他,,column_display_text連動
+R568,N14,display,21,iadl_phone_1,==,1,boolean,1,2,sum,flag,1.電話の利用　いくつかのよく知っている番号であればかけることができる,,column_display_text連動
+R569,N14,display,22,iadl_phone_2,==,1,boolean,1,2,sum,flag,1.電話の利用　電話にての対応はできるが、かけることはできない,,column_display_text連動
+R570,N14,display,23,iadl_phone_3,==,1,boolean,1,2,sum,flag,1.電話の利用　まったく電話を使うことができない,,column_display_text連動
+R571,N14,display,24,iadl_shopping_1,==,1,boolean,1,2,sum,flag,2.日用品の買い物　少額の買い物は自分で行うことができる,,column_display_text連動
+R572,N14,display,25,iadl_shopping_2,==,1,boolean,1,2,sum,flag,2.日用品の買い物　誰かが付き添ってくれれば買い物ができる,,column_display_text連動
+R573,N14,display,26,iadl_shopping_3,==,1,boolean,1,2,sum,flag,2.日用品の買い物　まったく買い物はできない,,column_display_text連動
+R574,N14,display,27,iadl_housework_1,==,1,boolean,1,2,sum,flag,3.食事の支度　材料が用意してあれば、献立を考え、自分が食べる調理ができる,,column_display_text連動
+R575,N14,display,28,iadl_housework_2,==,1,boolean,1,2,sum,flag,3.食事の支度　材料を用意してあっても、献立を考えて調理することはできない,,column_display_text連動
+R576,N14,display,29,iadl_housework_3,==,1,boolean,1,2,sum,flag,3.食事の支度　他者に献立や支度、調理をすべてしてもらう,,column_display_text連動
+R577,N14,display,30,iadl_toilet_1,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　食事のあとの食器を洗ったり簡単なことはできる,,column_display_text連動
+R578,N14,display,31,iadl_toilet_2,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　他者の助けがなければ家事をすることができない,,column_display_text連動
+R579,N14,display,32,iadl_toilet_3,==,1,boolean,1,2,sum,flag,4.掃除・食器洗いゴミ出し等の家事　まったく家事をすることができない,,column_display_text連動
+R580,N14,display,33,iadl_clean_1,==,1,boolean,1,2,sum,flag,5.洗濯　洗濯機に入れられるが洗剤入れはだめ、取り出してもらえれば干せる,,column_display_text連動
+R581,N14,display,34,iadl_clean_2,==,1,boolean,1,2,sum,flag,5.洗濯　一連の作業は他者の助けがなければ洗濯をすることができない,,column_display_text連動
+R582,N14,display,35,iadl_clean_3,==,1,boolean,1,2,sum,flag,5.洗濯　他者に洗濯してもらう、まったく洗濯をすることができない,,column_display_text連動
+R584,N14,display,37,iadl_move_1,==,1,boolean,1,2,sum,flag,6.移動・外出　タクシーや家族の車を頼んで出かけられるが、電車やバスは利用できない,,column_display_text連動
+R585,N14,display,38,iadl_move_2,==,1,boolean,1,2,sum,flag,6.移動・外出　付き添いがあれば車や電車・バスを利用することができる,,column_display_text連動
+R586,N14,display,39,iadl_move_3,==,1,boolean,1,2,sum,flag,6.移動・外出　介助で付き添われてタクシーや自動車で出かけられる,,column_display_text連動
+R587,N14,display,40,iadl_move_4,==,1,boolean,1,2,sum,flag,6.移動・外出　まったく乗り物で出かけることができない,,column_display_text連動
+R588,N14,display,41,iadl_money_1,==,1,boolean,1,2,sum,flag,7.金銭の管理　日常の家賃、請求書の支払い、銀行などでの処理・確認ができる,,column_display_text連動
+R589,N14,display,42,iadl_money_2,==,1,boolean,1,2,sum,flag,7.金銭の管理　小遣い以外、買い物・銀行の預貯金の処理には付き添いが必要,,column_display_text連動
+R590,N14,display,43,iadl_money_3,==,1,boolean,1,2,sum,flag,7.金銭の管理　金銭を扱えない、管理もできない,,column_display_text連動
+R591,N14,display,44,iadl_medicine_1,==,1,boolean,1,2,sum,flag,8.薬の管理　前もって薬カレンダーや服薬ボックスに用意されれば服薬できる,,column_display_text連動
+R592,N14,display,45,iadl_medicine_2,==,1,boolean,1,2,sum,flag,8.薬の管理　毎回だれかに確認してもらえばできる,,column_display_text連動
+R593,N14,display,46,iadl_medicine_3,==,1,boolean,1,2,sum,flag,8.薬の管理　自分では服薬、管理ができない,,column_display_text連動
+R594,N14,display,47,iadl_decision_1,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の助言・見守りがあれば自分で操作ができる,,column_display_text連動
+R595,N14,display,48,iadl_decision_2,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　他者の判断や介助が必要である,,column_display_text連動
+R596,N14,display,49,iadl_decision_3,==,1,boolean,1,2,sum,flag,9.冷暖房の管理　判断も操作も全面依存である,,column_display_text連動
+R597,N14,display,50,conversation_level_2,==,1,boolean,1,2,sum,flag,3.会話の程度　ほぼ会話はでき、相手に伝わっているが、時々言葉を忘れる,,column_display_text連動
+R598,N14,display,51,conversation_level_3,==,1,boolean,1,2,sum,flag,3.会話の程度　会話がつながらず途切れる、会話内容が伝わりにくい/言語障害がある,,column_display_text連動
+R599,N14,display,52,hearing_level_1,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　会話で聞き間違えがある。少し疲れたり、小声の会話に、聞き取り難さを感じる,,column_display_text連動
+R600,N14,display,53,hearing_level_2,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　テレビの音がかなりうるさい。耳元で大声で聞こえる。補聴器を使わない,,column_display_text連動
+R601,N14,display,54,hearing_level_3,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　耳元でかなり大声が何とか聞こえるが、聞き分けられない。ほとんど聞こえない,,column_display_text連動
+R602,N14,display,55,hearing_level_4,==,1,boolean,1,2,sum,flag,4.聴覚の程度・耳からの聞こえ　全く聞こえない,,column_display_text連動
+R603,N15,display,1,daily_communication_2,==,1,boolean,1,2,sum,flag,4.日常意思を伝えられるか　時々伝えられるが、基本的には食事やトイレなど具体的な欲求や事態のみ伝えられる,,column_display_text連動
+R604,N15,display,2,daily_communication_3,==,1,boolean,1,2,sum,flag,4.日常意思を伝えられるか　全く意思の伝達はできない、限られた者にのみ理解できるサインがある,,column_display_text連動
+R605,N15,display,3,daily_judgement_1,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　新しい事態や周囲の環境変化に直面した時に混乱する、耳を傾けられない,,column_display_text連動
+R606,N15,display,4,daily_judgement_2,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　落ち着かず、人に助けてもらわないと判断や相手を受け止められず、混乱する,,column_display_text連動
+R607,N15,display,5,daily_judgement_3,==,1,boolean,1,2,sum,flag,5.日常の判断力・対人調和力　支離滅裂な状態で全く判断できない・全く話を受け止められない,,column_display_text連動
+R608,N15,display,6,delirium_signs_a,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　a. 集中力が持ちている、注意力散漫,,column_display_text連動
+R609,N15,display,7,delirium_signs_b,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　b. 周囲の環境に対する認識が変化しやすい,,column_display_text連動
+R610,N15,display,8,delirium_signs_c,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　c. 支離滅裂な会話がある,,column_display_text連動
+R611,N15,display,9,delirium_signs_d,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　d. 運動性の落ち着きのなさや無気力がある,,column_display_text連動
+R612,N15,display,10,delirium_signs_e,==,1,boolean,1,2,sum,flag,3.せん妄の兆候　e. 認知能力が1日の中で変化する,,column_display_text連動
+R613,N15,display,11,nutrition_self_management_b,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　I.何らかの認知症を有するが、日常生活は家庭内及び社会的にほぼ自立している,,column_display_text連動
+R614,N15,display,12,nutrition_self_management_c,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　IIa.家庭外で、日常生活に支障を来たすような症状・行動や意思疎通の困難さが多少みられても、誰かが注意していれば自立できる,,column_display_text連動
+R615,N15,display,13,nutrition_self_management_d,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　IIb.家庭内で、日常生活に支障を来たすような症状・行動や意思疎通の困難さが多少みられても、誰かが注意していれば自立できる,,column_display_text連動
+R616,N15,display,14,nutrition_self_management_e,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅲa.日中を中心として、日常生活に支障をきたすような症状・行動や意思疎通の困難さがみられ、介護を必要とする,,column_display_text連動
+R617,N15,display,15,nutrition_self_management_f,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅲb.夜間を中心として、日常生活に支障をきたすような症状・行動や意思疎通の困難さがみられ、介護を必要とする,,column_display_text連動
+R618,N15,display,16,nutrition_self_management_g,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅳ.日常生活に支障を来たすような症状・行動が意思疎通の困難さが頻繁にみられ、常に介護を必要とする,,column_display_text連動
+R619,N15,display,17,nutrition_self_management_h,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　M.著しい精神症状や問題行動あるいは重篤な身体疾患がみられ、専門医療を必要とする,,column_display_text連動
+R1116,N15,display,65,dementia_level_Ⅰ,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅰ.何らかの認知症を有するが、日常生活は家庭内及び社会的にほぼ自立している,,column_display_text連動
+R1116,N15,display,66,dementia_level_Ⅱa,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅱa.家庭外で、日常生活に支障を来たすような症状・行動や意思疎通の困難さが多少みられても、誰かが注意していれば自立できる,,column_display_text連動
+R1116,N15,display,67,dementia_level_Ⅱb,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅱb.家庭内で、日常生活に支障を来たすような症状・行動や意思疎通の困難さが多少みられても、誰かが注意していれば自立できる,,column_display_text連動
+R1116,N15,display,68,dementia_level_Ⅲa,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅲa.日中を中心として、日常生活に支障をきたすような症状・行動や意思疎通の困難さがみられ、介護を必要とする,,column_display_text連動
+R1116,N15,display,69,dementia_level_Ⅲb,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅲb.夜間を中心として、日常生活に支障をきたすような症状・行動や意思疎通の困難さがみられ、介護を必要とする,,column_display_text連動
+R1117,N15,display,70,dementia_level_Ⅳ,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　Ⅳ.日常生活に支障を来たすような症状・行動が意思疎通の困難さが頻繁にみられ、常に介護を必要とする,,column_display_text連動
+R1118,N15,display,71,dementia_level_M,==,1,boolean,1,2,sum,flag,認知症高齢者の日常生活自立度　M.著しい精神症状や問題行動あるいは重篤な身体疾患がみられ、専門医療を必要とする,,column_display_text連動
+R620,N15,display,18,emotion_level_2,==,1,boolean,1,2,sum,flag,病気のとらえ方について　疑問を感じても質問せず治療中,,column_display_text連動
+R621,N15,display,19,emotion_level_3,==,1,boolean,1,2,sum,flag,病気のとらえ方について　理解乏しく治療を中断している,,column_display_text連動
+R622,N15,display,20,emotion_level_4,==,1,boolean,1,2,sum,flag,病気のとらえ方について　治療を拒否/不満を表す,,column_display_text連動
+R623,N15,display,21,a_positive_count,==,1,boolean,1,2,sum,flag,うつ的状態についてA陽性数（2以上）,,column_display_text連動
+R624,N15,display,22,npiq_delusion_1,==,1,boolean,1,2,sum,flag,妄想　	明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある　軽度,,column_display_text連動
+R625,N15,display,23,npiq_delusion_2,==,1,boolean,1,2,sum,flag,妄想　	明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある　中等度,,column_display_text連動
+R626,N15,display,24,npiq_delusion_3,==,1,boolean,1,2,sum,flag,妄想　	明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある　重度,,column_display_text連動
+R627,N15,display,25,npiq_hallucination_1,==,1,boolean,1,2,sum,flag,幻覚　実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い　軽度　,,column_display_text連動
+R628,N15,display,26,npiq_hallucination_2,==,1,boolean,1,2,sum,flag,幻覚　実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い　中等度,,column_display_text連動
+R629,N15,display,27,npiq_hallucination_3,==,1,boolean,1,2,sum,flag,幻覚　実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い　重度,,column_display_text連動
+R630,N15,display,28,npiq_agitation_1,==,1,boolean,1,2,sum,flag,興奮　介助を拒んだり、扱いにくい時がある（ケアの抵抗）　軽度,,column_display_text連動
+R631,N15,display,29,npiq_agitation_2,==,1,boolean,1,2,sum,flag,興奮　介助を拒んだり、扱いにくい時がある（ケアの抵抗）　中等度,,column_display_text連動
+R632,N15,display,30,npiq_agitation_3,==,1,boolean,1,2,sum,flag,興奮　介助を拒んだり、扱いにくい時がある（ケアの抵抗）　重度,,column_display_text連動
+R633,N15,display,31,npiq_depression_1,==,1,boolean,1,2,sum,flag,うつ　悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする　軽度,,column_display_text連動
+R634,N15,display,32,npiq_depression_2,==,1,boolean,1,2,sum,flag,うつ　悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする　中等度,,column_display_text連動
+R635,N15,display,33,npiq_depression_3,==,1,boolean,1,2,sum,flag,うつ　悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする　重度,,column_display_text連動
+R636,N15,display,34,npiq_anxiety_1,==,1,boolean,1,2,sum,flag,不安　落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す　軽度,,column_display_text連動
+R637,N15,display,35,npiq_anxiety_2,==,1,boolean,1,2,sum,flag,不安　落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す　中等度,,column_display_text連動
+R638,N15,display,36,npiq_anxiety_3,==,1,boolean,1,2,sum,flag,不安　落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す　重度,,column_display_text連動
+R639,N15,display,37,npiq_euphoria_1,==,1,boolean,1,2,sum,flag,多幸　過度に機嫌がよかったり、幸せそうであることがある　軽度,,column_display_text連動
+R640,N15,display,38,npiq_euphoria_2,==,1,boolean,1,2,sum,flag,多幸　過度に機嫌がよかったり、幸せそうであることがある　中等度,,column_display_text連動
+R641,N15,display,39,npiq_euphoria_3,==,1,boolean,1,2,sum,flag,多幸　過度に機嫌がよかったり、幸せそうであることがある　重度,,column_display_text連動
+R642,N15,display,40,npiq_apathy_1,==,1,boolean,1,2,sum,flag,無関心　	自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる　軽度,,column_display_text連動
+R643,N15,display,41,npiq_apathy_2,==,1,boolean,1,2,sum,flag,無関心　	自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる　中等度,,column_display_text連動
+R644,N15,display,42,npiq_apathy_3,==,1,boolean,1,2,sum,flag,無関心　	自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる　重度,,column_display_text連動
+R645,N15,display,43,npiq_disinhibition_1,==,1,boolean,1,2,sum,flag,脱抑制　知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）　軽度,,column_display_text連動
+R646,N15,display,44,npiq_disinhibition_2,==,1,boolean,1,2,sum,flag,脱抑制　知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）　中等度,,column_display_text連動
+R647,N15,display,45,npiq_disinhibition_3,==,1,boolean,1,2,sum,flag,脱抑制　知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）　重度,,column_display_text連動
+R648,N15,display,46,npiq_irritability_1,==,1,boolean,1,2,sum,flag,易刺激性(暴行)　気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）　軽度,,column_display_text連動
+R649,N15,display,47,npiq_irritability_2,==,1,boolean,1,2,sum,flag,易刺激性(暴行)　気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）　中等度,,column_display_text連動
+R650,N15,display,48,npiq_irritability_3,==,1,boolean,1,2,sum,flag,易刺激性(暴行)　気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）　重度,,column_display_text連動
+R651,N15,display,49,npiq_abnormal_behavior_1,==,1,boolean,1,2,sum,flag,異常行動　部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為　軽度,,column_display_text連動
+R652,N15,display,50,npiq_abnormal_behavior_2,==,1,boolean,1,2,sum,flag,異常行動　部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為　中等度,,column_display_text連動
+R653,N15,display,51,npiq_abnormal_behavior_3,==,1,boolean,1,2,sum,flag,異常行動　部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為　重度,,column_display_text連動
+R654,N15,display,52,npiq_night_behavior_1,==,1,boolean,1,2,sum,flag,夜間行動　夜になると出歩く　軽度,,column_display_text連動
+R655,N15,display,53,npiq_night_behavior_2,==,1,boolean,1,2,sum,flag,夜間行動　夜になると出歩く　中等度,,column_display_text連動
+R656,N15,display,54,npiq_night_behavior_3,==,1,boolean,1,2,sum,flag,夜間行動　夜になると出歩く　重度,,column_display_text連動
+R657,N15,display,55,npiq_eating_behavior_1,==,1,boolean,1,2,sum,flag,食の行動　過食･拒食･異食行動　軽度,,column_display_text連動
+R658,N15,display,56,npiq_eating_behavior_2,==,1,boolean,1,2,sum,flag,食の行動　過食･拒食･異食行動　中等度,,column_display_text連動
+R659,N15,display,57,npiq_eating_behavior_3,==,1,boolean,1,2,sum,flag,食の行動　過食･拒食･異食行動　重度,,column_display_text連動
+R660,N15,display,58,gaf_score,between,"1,70",boolean,1,2,sum,flag,GAFスコア　1～70,,column_display_text連動
+R1126,N15,display,59,yes_no_select_1,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ,,column_display_text連動
+R1127,N15,display,60,no_reason_a,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（通院が必要だが、定期に受診しないことがある、予約できない）,,column_display_text連動
+R1128,N15,display,61,no_reason_b,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（通院中だが1人で通院できない、付き添えば受診できる）,,column_display_text連動
+R1129,N15,display,62,no_reason_c,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（治療の必要があるが、症状が強く付き添っても通院できる状況にない）,,column_display_text連動
+R1130,N15,display,63,no_reason_d,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（治療や通院は不必要と思い受診を拒否する）,,column_display_text連動
+R1131,N15,display,64,no_reason_e,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（同じ疾患で複数の医療機関に受診している、受診先が一貫しない）,,column_display_text連動
+R1132,N15,display,65,no_reason_f,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（在宅医療・訪問看護資源が不十分・治療計画が不十分）,,column_display_text連動
+R1119,N15,display,66,m_health_1_2,==,1,boolean,1,2,sum,flag,毎日の生活に充実感がありますか　いいえ,,column_display_text連動
+R1120,N15,display,67,m_health_2_2,==,1,boolean,1,2,sum,flag,これまで楽しんでやれていたことが、今も楽しんでできていますか　いいえ,,column_display_text連動
+R1121,N15,display,68,m_health_3_1,==,1,boolean,1,2,sum,flag,以前は楽にできていたことが、今はおっくうに感じられますか　はい,,column_display_text連動
+R1122,N15,display,69,m_health_4_2,==,1,boolean,1,2,sum,flag,自分が役に立つと考えられますか　いいえ,,column_display_text連動
+R1123,N15,display,70,m_health_5_1,==,1,boolean,1,2,sum,flag,わけもなく疲れたような感じがしますか　はい,,column_display_text連動
+R1124,N15,display,71,m_health_6_1,==,1,boolean,1,2,sum,flag,死について何度も考えることがありますか　はい,,column_display_text連動
+R1125,N15,display,72,m_health_7_1,==,1,boolean,1,2,sum,flag,自殺について考えることがありますか　はい,,column_display_text連動
+R667,N16,display,1,abuse_injury_2,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　既に治った創傷はあるが新たなものはない,,column_display_text連動
+R668,N16,display,2,abuse_injury_3,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　様々な治癒段階の傷や骨折がある,,column_display_text連動
+R669,N16,display,3,abuse_injury_4,==,1,boolean,1,2,sum,flag,創傷の発生（身体的虐待）　多くの創傷や骨折がある,,column_display_text連動
+R670,N16,display,4,neglect_hygiene_2,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　既に治った発疹・感染はあるが新たなものはない,,column_display_text連動
+R671,N16,display,5,neglect_hygiene_3,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　不衛生による発疹や感染が様々にある,,column_display_text連動
+R672,N16,display,6,neglect_hygiene_4,==,1,boolean,1,2,sum,flag,身体の不衛生（ケアの放置）　多くの不衛生による発疹や感染がある,,column_display_text連動
+R673,N16,display,7,psychological_abuse_2,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　過去言葉の攻撃や否定的メッセージがあったが新たなものはない,,column_display_text連動
+R674,N16,display,8,psychological_abuse_3,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　時に言葉の攻撃または否定的メッセージをおこなっている,,column_display_text連動
+R675,N16,display,9,psychological_abuse_4,==,1,boolean,1,2,sum,flag,言葉による攻撃や否定的メッセージの持続（心理的虐待）　数多く言葉の攻撃または否定的メッセージをおこなっている,,column_display_text連動
+R676,N16,display,10,neglect_care_2,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　過去介護放棄・拘束の状態があったが新たなものはない,,column_display_text連動
+R677,N16,display,11,neglect_care_3,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　時に介護を放棄・拘束している,,column_display_text連動
+R678,N16,display,12,neglect_care_4,==,1,boolean,1,2,sum,flag,介護等世話の放棄（ネグレクト）/ 拘束　殆ど介護されず放棄・拘束状態となっている,,column_display_text連動
+R679,N16,display,13,sexual_abuse_2,==,1,boolean,1,2,sum,flag,性的暴力　過去性的暴力にあったが新たなものはない,,column_display_text連動
+R680,N16,display,14,sexual_abuse_3,==,1,boolean,1,2,sum,flag,性的暴力　時に性的暴力をおこなっている,,column_display_text連動
+R681,N16,display,15,sexual_abuse_4,==,1,boolean,1,2,sum,flag,性的暴力　頻繁に性的暴力をおこなっている,,column_display_text連動
+R682,N16,display,16,financial_abuse_2,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加　過去に金銭的な受け渡しのトラブルにあったが新たなものはない,,column_display_text連動
+R683,N16,display,17,financial_abuse_3,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加　時に金銭的な受け渡しのトラブル行為が周囲により行われている,,column_display_text連動
+R684,N16,display,18,financial_abuse_4,==,1,boolean,1,2,sum,flag,金銭的な受け渡しの参加  頻繁に金銭的な受け渡しのトラブル行為がおこなわれている,,column_display_text連動
+R685,N16,display,19,m_health_1_2,==,1,boolean,1,2,sum,flag,毎日の生活に充実感がありますか　いいえ,,column_display_text連動
+R686,N16,display,20,m_health_2_2,==,1,boolean,1,2,sum,flag,これまで楽しんでやれていたことが、今も楽しんでできていますか　いいえ,,column_display_text連動
+R687,N16,display,21,m_health_3_1,==,1,boolean,1,2,sum,flag,以前は楽にできていたことが、今はおっくうに感じられますか　はい,,column_display_text連動
+R688,N16,display,22,m_health_4_2,==,1,boolean,1,2,sum,flag,自分が役に立つと考えられますか　いいえ,,column_display_text連動
+R689,N16,display,23,m_health_5_1,==,1,boolean,1,2,sum,flag,わけもなく疲れたような感じがしますか　はい,,column_display_text連動
+R690,N16,display,24,m_health_6_1,==,1,boolean,1,2,sum,flag,死について何度も考えることがありますか　はい,,column_display_text連動
+R691,N16,display,25,m_health_7_1,==,1,boolean,1,2,sum,flag,自殺について考えることがありますか　はい,,column_display_text連動
+R692,N16,display,26,pain_image_front,==,1,boolean,1,2,sum,flag,痛み 前面 あり,,column_display_text連動
+R693,N16,display,27,pain_image_back,==,1,boolean,1,2,sum,flag,痛み 背面 あり,,column_display_text連動
+R694,N16,display,28,a_positive_count,==,1,boolean,1,2,sum,flag,うつ的状態についてのA陽性数（2以上）,,column_display_text連動
+R696,N16,display,30,pain_1,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R697,N16,display,31,pain_2,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R698,N16,display,32,pain_3,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R699,N16,display,33,pain_4,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R700,N16,display,34,pain_5,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R701,N16,display,35,pain_6,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R702,N16,display,36,pain_7,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R703,N16,display,37,pain_8,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R704,N16,display,38,pain_9,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R705,N16,display,39,pain_10,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R707,N16,display,41,numbness_1,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R708,N16,display,42,numbness_2,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R709,N16,display,43,numbness_3,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R710,N16,display,44,numbness_4,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R711,N16,display,45,numbness_5,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R712,N16,display,46,numbness_6,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R713,N16,display,47,numbness_7,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R714,N16,display,48,numbness_8,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R715,N16,display,49,numbness_9,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R716,N16,display,50,numbness_10,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R718,N16,display,52,drowsiness_1,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R719,N16,display,53,drowsiness_2,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R720,N16,display,54,drowsiness_3,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R721,N16,display,55,drowsiness_4,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R722,N16,display,56,drowsiness_5,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R723,N16,display,57,drowsiness_6,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R724,N16,display,58,drowsiness_7,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R725,N16,display,59,drowsiness_8,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R726,N16,display,60,drowsiness_9,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R727,N16,display,61,drowsiness_10,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R729,N16,display,63,fatigue_score_1,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R730,N16,display,64,fatigue_score_2,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R731,N16,display,65,fatigue_score_3,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R732,N16,display,66,fatigue_score_4,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R733,N16,display,67,fatigue_score_5,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R734,N16,display,68,fatigue_score_6,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R735,N16,display,69,fatigue_score_7,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R736,N16,display,70,fatigue_score_8,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R737,N16,display,71,fatigue_score_9,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R738,N16,display,72,fatigue_score_10,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R740,N16,display,74,shortness_of_breath_1,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R741,N16,display,75,shortness_of_breath_2,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R742,N16,display,76,shortness_of_breath_3,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R743,N16,display,77,shortness_of_breath_4,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R744,N16,display,78,shortness_of_breath_5,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R745,N16,display,79,shortness_of_breath_6,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R746,N16,display,80,shortness_of_breath_7,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R747,N16,display,81,shortness_of_breath_8,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R748,N16,display,82,shortness_of_breath_9,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R749,N16,display,83,shortness_of_breath_10,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R751,N16,display,85,loss_of_appetite_1,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R752,N16,display,86,loss_of_appetite_2,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R753,N16,display,87,loss_of_appetite_3,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R754,N16,display,88,loss_of_appetite_4,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R755,N16,display,89,loss_of_appetite_5,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R756,N16,display,90,loss_of_appetite_6,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R757,N16,display,91,loss_of_appetite_7,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R758,N16,display,92,loss_of_appetite_8,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R759,N16,display,93,loss_of_appetite_9,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R760,N16,display,94,loss_of_appetite_10,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R762,N16,display,96,nausea_1,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R763,N16,display,97,nausea_2,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R764,N16,display,98,nausea_3,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R765,N16,display,99,nausea_4,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R766,N16,display,100,nausea_5,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R767,N16,display,101,nausea_6,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R768,N16,display,102,nausea_7,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R769,N16,display,103,nausea_8,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R770,N16,display,104,nausea_9,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R771,N16,display,105,nausea_10,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R773,N16,display,107,sleep_1,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R774,N16,display,108,sleep_2,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R775,N16,display,109,sleep_3,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R776,N16,display,110,sleep_4,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R777,N16,display,111,sleep_5,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R778,N16,display,112,sleep_6,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R779,N16,display,113,sleep_7,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R780,N16,display,114,sleep_8,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R781,N16,display,115,sleep_9,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R782,N16,display,116,sleep_10,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R784,N16,display,118,emotional_distress_1,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R785,N16,display,119,emotional_distress_2,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R786,N16,display,120,emotional_distress_3,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R787,N16,display,121,emotional_distress_4,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R788,N16,display,122,emotional_distress_5,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R789,N16,display,123,emotional_distress_6,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R790,N16,display,124,emotional_distress_7,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R791,N16,display,125,emotional_distress_8,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R792,N16,display,126,emotional_distress_9,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R793,N16,display,127,emotional_distress_10,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R794,N17,display,1,alcohol_problem_1,==,1,boolean,1,2,sum,flag,飲酒の問題　過去にトラブルあり,,column_display_text連動
+R795,N17,display,2,alcohol_problem_2,==,1,boolean,1,2,sum,flag,飲酒の問題　現在トラブルあり,,column_display_text連動
+R796,N17,display,3,alcohol_problem_3,==,1,boolean,1,2,sum,flag,飲酒の問題　10年以上の多量飲酒,,column_display_text連動
+R797,N17,display,4,m_health_6_1,==,1,boolean,1,2,sum,flag,死について何度も考えることがありますか　はい,,column_display_text連動
+R798,N17,display,5,m_health_7_1,==,1,boolean,1,2,sum,flag,自殺について考えることがありますか　はい,,column_display_text連動
+R799,N17,display,6,npiq_delusion_1,==,1,boolean,1,2,sum,flag,妄想(明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある)　軽度,,column_display_text連動
+R800,N17,display,7,npiq_delusion_2,==,1,boolean,1,2,sum,flag,妄想(明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある)　中等度,,column_display_text連動
+R801,N17,display,8,npiq_delusion_3,==,1,boolean,1,2,sum,flag,妄想(明らかに誤った内容を信じ、周りが訂正しても受け入れられない考えのこと。誰かにいやがらせをされている(被害妄想)、周囲のことが何でも自分に関係していると思う(関係妄想)等がある)　重度,,column_display_text連動
+R802,N17,display,9,npiq_hallucination_1,==,1,boolean,1,2,sum,flag,幻覚(実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い)　軽度,,column_display_text連動
+R803,N17,display,10,npiq_hallucination_2,==,1,boolean,1,2,sum,flag,幻覚(実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い)　中等度,,column_display_text連動
+R804,N17,display,11,npiq_hallucination_3,==,1,boolean,1,2,sum,flag,幻覚(実態がなく他人には認識できないが、本人には感じ取れる感覚のこと。自分の悪口やうわさ、指図する声等が聞こえる幻聴が多い)　重度,,column_display_text連動
+R805,N17,display,12,npiq_agitation_1,==,1,boolean,1,2,sum,flag,興奮(介助を拒んだり、扱いにくい時がある（ケアの抵抗）)　軽度,,column_display_text連動
+R806,N17,display,13,npiq_agitation_2,==,1,boolean,1,2,sum,flag,興奮(介助を拒んだり、扱いにくい時がある（ケアの抵抗）)　中等度,,column_display_text連動
+R807,N17,display,14,npiq_agitation_3,==,1,boolean,1,2,sum,flag,興奮(介助を拒んだり、扱いにくい時がある（ケアの抵抗）)　重度,,column_display_text連動
+R808,N17,display,15,npiq_depression_1,==,1,boolean,1,2,sum,flag,うつ(悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする)　軽度,,column_display_text連動
+R809,N17,display,16,npiq_depression_2,==,1,boolean,1,2,sum,flag,うつ(悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする)　中等度,,column_display_text連動
+R810,N17,display,17,npiq_depression_3,==,1,boolean,1,2,sum,flag,うつ(悲しそうであったり、落ち込んでいるように見えたり、そのように言ったりする)　重度,,column_display_text連動
+R811,N17,display,18,npiq_anxiety_1,==,1,boolean,1,2,sum,flag,不安(落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す)　軽度,,column_display_text連動
+R812,N17,display,19,npiq_anxiety_2,==,1,boolean,1,2,sum,flag,不安(落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す)　中等度,,column_display_text連動
+R813,N17,display,20,npiq_anxiety_3,==,1,boolean,1,2,sum,flag,不安(落ち着かない、息苦しさ、ため息、リラックスできない、過度に緊張している等の神経質さを示す)　重度,,column_display_text連動
+R814,N17,display,21,npiq_euphoria_1,==,1,boolean,1,2,sum,flag,多幸(過度に機嫌がよかったり、幸せそうであることがある)　軽度,,column_display_text連動
+R815,N17,display,22,npiq_euphoria_2,==,1,boolean,1,2,sum,flag,多幸(過度に機嫌がよかったり、幸せそうであることがある)　中等度,,column_display_text連動
+R816,N17,display,23,npiq_euphoria_3,==,1,boolean,1,2,sum,flag,多幸(過度に機嫌がよかったり、幸せそうであることがある)　重度,,column_display_text連動
+R817,N17,display,24,npiq_apathy_1,==,1,boolean,1,2,sum,flag,無関心(自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる)　軽度,,column_display_text連動
+R818,N17,display,25,npiq_apathy_2,==,1,boolean,1,2,sum,flag,無関心(自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる)　中等度,,column_display_text連動
+R819,N17,display,26,npiq_apathy_3,==,1,boolean,1,2,sum,flag,無関心(自身の日常生活や、他人の活動や計画に関心がなくなってきているように見受けられる)　重度,,column_display_text連動
+R820,N17,display,27,npiq_disinhibition_1,==,1,boolean,1,2,sum,flag,脱抑制(知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）)　軽度,,column_display_text連動
+R821,N17,display,28,npiq_disinhibition_2,==,1,boolean,1,2,sum,flag,脱抑制(知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）)　中等度,,column_display_text連動
+R822,N17,display,29,npiq_disinhibition_3,==,1,boolean,1,2,sum,flag,脱抑制(知らない人にあたかも知人のように話しかけたり、他人の感情を傷つけることを言ったりする（暴言）)　重度,,column_display_text連動
+R823,N17,display,30,npiq_irritability_1,==,1,boolean,1,2,sum,flag,易刺激性(気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）)　軽度,,column_display_text連動
+R824,N17,display,31,npiq_irritability_2,==,1,boolean,1,2,sum,flag,易刺激性(気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）)　中等度,,column_display_text連動
+R825,N17,display,32,npiq_irritability_3,==,1,boolean,1,2,sum,flag,易刺激性(気難しく怒りっぽい、計画が遅れたり待たされたりすることが、我慢できなくなったりする（暴行）)　重度,,column_display_text連動
+R826,N17,display,33,npiq_abnormal_behavior_1,==,1,boolean,1,2,sum,flag,異常行動(部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為)　軽度,,column_display_text連動
+R827,N17,display,34,npiq_abnormal_behavior_2,==,1,boolean,1,2,sum,flag,異常行動(部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為)　中等度,,column_display_text連動
+R828,N17,display,35,npiq_abnormal_behavior_3,==,1,boolean,1,2,sum,flag,異常行動(部屋の中を行ったり来たり(徘徊)、ボタンやヒモをいじるなど、同じ行為をくり返す、不潔行為)　重度,,column_display_text連動
+R829,N17,display,36,npiq_night_behavior_1,==,1,boolean,1,2,sum,flag,夜間行動(夜になると出歩く)　軽度,,column_display_text連動
+R830,N17,display,37,npiq_night_behavior_2,==,1,boolean,1,2,sum,flag,夜間行動(夜になると出歩く)　中等度,,column_display_text連動
+R831,N17,display,38,npiq_night_behavior_3,==,1,boolean,1,2,sum,flag,夜間行動(夜になると出歩く)　重度,,column_display_text連動
+R832,N17,display,39,npiq_eating_behavior_1,==,1,boolean,1,2,sum,flag,食の行動(過食･拒食･異食行動)　軽度,,column_display_text連動
+R833,N17,display,40,npiq_eating_behavior_2,==,1,boolean,1,2,sum,flag,食の行動(過食･拒食･異食行動)　中等度,,column_display_text連動
+R834,N17,display,41,npiq_eating_behavior_3,==,1,boolean,1,2,sum,flag,食の行動(過食･拒食･異食行動)　重度,,column_display_text連動
+R1133,N17,display,42,yes_no_select_1,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ,,column_display_text連動
+R1134,N17,display,43,no_reason_a,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（通院が必要だが、定期に受診しないことがある、予約できない）,,column_display_text連動
+R1135,N17,display,44,no_reason_b,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（通院中だが1人で通院できない、付き添えば受診できる）,,column_display_text連動
+R1136,N17,display,45,no_reason_c,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（治療の必要があるが、症状が強く付き添っても通院できる状況にない）,,column_display_text連動
+R1137,N17,display,46,no_reason_d,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（治療や通院は不必要と思い受診を拒否する）,,column_display_text連動
+R1138,N17,display,47,no_reason_e,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（同じ疾患で複数の医療機関に受診している、受診先が一貫しない）,,column_display_text連動
+R1139,N17,display,48,no_reason_f,==,1,boolean,1,2,sum,flag,定期に通院中又は往診(訪問診療)を利用し、セルフコントロールができていますか？　いいえ（在宅医療・訪問看護資源が不十分・治療計画が不十分）,,column_display_text連動
+R841,N18,display,1,urination_status_1,==,1,boolean,1,2,sum,flag,尿の状態　問題あり(血が混じっている・濁っている・フワフワ浮いているものがある・強い尿臭あり),,column_display_text連動
+R842,N18,display,2,defecation_status_a,==,1,boolean,1,2,sum,flag,便の状態　問題あり　コロコロ便,,column_display_text連動
+R843,N18,display,3,defecation_status_b,==,1,boolean,1,2,sum,flag,便の状態　問題あり　凸凹した硬い便,,column_display_text連動
+R844,N18,display,4,defecation_status_c,==,1,boolean,1,2,sum,flag,便の状態　問題あり　軟らかすぎていない状態,,column_display_text連動
+R845,N18,display,5,defecation_status_d,==,1,boolean,1,2,sum,flag,便の状態　問題あり　水様便,,column_display_text連動
+R846,N18,display,6,defecation_status_e,==,1,boolean,1,2,sum,flag,便の状態　問題あり　色がついている便（あざやかな赤色、白色、黒色、鉛色、黄色、赤褐色）,,column_display_text連動
+R847,N18,display,7,frailty_exist_1,==,1,boolean,1,2,sum,flag,高齢による衰弱　あり,,column_display_text連動
+R848,N18,display,8,dementia_exist_1,==,1,boolean,1,2,sum,flag,認知症　あり,,column_display_text連動
+R848a,N18,display,9,dementia_detail_1,==,1,boolean,1,2,sum,flag,認知症　①アルツハイマー,,column_display_text連動
+R848b,N18,display,10,dementia_detail_2,==,1,boolean,1,2,sum,flag,認知症　②血管型,,column_display_text連動
+R848c,N18,display,11,dementia_detail_3,==,1,boolean,1,2,sum,flag,認知症　③レビー小体型,,column_display_text連動
+R848d,N18,display,12,dementia_detail_4,==,1,boolean,1,2,sum,flag,認知症　④軽度認知障害,,column_display_text連動
+R848e,N18,display,13,dementia_other,!=,"",text,1,2,sum,flag,認知症　その他（記述）,,column_display_text連動
+R849,N18,display,14,cancer_exist_1,==,1,boolean,1,2,sum,flag,悪性新生物（がん）　あり,,column_display_text連動
+R849a,N18,display,15,cancer_detail_1,==,1,boolean,1,2,sum,flag,悪性新生物　①大腸,,column_display_text連動
+R849b,N18,display,16,cancer_detail_2,==,1,boolean,1,2,sum,flag,悪性新生物　②胃,,column_display_text連動
+R849c,N18,display,17,cancer_detail_3,==,1,boolean,1,2,sum,flag,悪性新生物　③気管・気管支・肺,,column_display_text連動
+R849d,N18,display,18,cancer_detail_4,==,1,boolean,1,2,sum,flag,悪性新生物　④乳房,,column_display_text連動
+R849e,N18,display,19,cancer_detail_5,==,1,boolean,1,2,sum,flag,悪性新生物　⑤前立腺,,column_display_text連動
+R849f,N18,display,20,cancer_detail_6,==,1,boolean,1,2,sum,flag,悪性新生物　⑥子宮,,column_display_text連動
+R849g,N18,display,21,cancer_detail_7,==,1,boolean,1,2,sum,flag,悪性新生物　⑦肝,,column_display_text連動
+R849h,N18,display,22,cancer_other,!=,"",text,1,2,sum,flag,悪性新生物　その他（記述）,,column_display_text連動
+R850,N18,display,23,circulatory_exist_1,==,1,boolean,1,2,sum,flag,脳血管・循環器疾患　あり,,column_display_text連動
+R850a,N18,display,24,circulatory_freewrite_input,!=,"",text,1,2,sum,flag,脳血管・循環器疾患　詳細（記述）,,column_display_text連動
+R851,N18,display,25,bone_exist_1,==,1,boolean,1,2,sum,flag,骨折・転倒・関節疾患、足・足趾・爪・下肢の循環等の状態　あり,,column_display_text連動
+R851a,N18,display,26,bone_detail_1,==,1,boolean,1,2,sum,flag,骨折・関節等　①脊椎障害,,column_display_text連動
+R851b,N18,display,27,bone_detail_2,==,1,boolean,1,2,sum,flag,骨折・関節等　②関節リュウマチ,,column_display_text連動
+R851c,N18,display,28,bone_detail_3,==,1,boolean,1,2,sum,flag,骨折・関節等　③関節症・関節炎,,column_display_text連動
+R851d,N18,display,29,bone_detail_4,==,1,boolean,1,2,sum,flag,骨折・関節等　④腰痛・坐骨神経痛,,column_display_text連動
+R851e,N18,display,30,bone_detail_5,==,1,boolean,1,2,sum,flag,骨折・関節等　⑤骨折・転倒,,column_display_text連動
+R851f,N18,display,31,bone_detail_6,==,1,boolean,1,2,sum,flag,骨折・関節等　⑥足の巻き爪・爪肥厚・爪白癬等,,column_display_text連動
+R851g,N18,display,32,bone_detail_7,==,1,boolean,1,2,sum,flag,骨折・関節等　⑦その他病名,,column_display_text連動
+R851h,N18,display,33,bone_other,!=,"",text,1,2,sum,flag,骨折・関節等　その他（記述）,,column_display_text連動
+R852,N18,display,34,leg_circulation_exist_1,==,1,boolean,1,2,sum,flag,その他の疾患　あり,,column_display_text連動
+R852a,N18,display,35,leg_circulation_freewrite_input,!=,"",text,1,2,sum,flag,その他の疾患　詳細（記述） ,,column_display_text連動
+R852b,N18,display,36,doctor_diagnosis_note,!=,"",text,1,2,sum,flag,主治医の診断名・治療方針・生活指導の状況（記述） ,,column_display_text連動
+R853,N18,display,37,strange_feeling_1,==,1,boolean,1,2,sum,flag,何かが変だ　いつもと表情が違う・視線が違う・声の調子が違う・体の動き、動作が普段と違う等,,column_display_text連動
+R854,N18,display,14,vital_respiration_1,==,1,boolean,1,2,sum,flag,呼吸数　平均値より頻回・少ない回数,,column_display_text連動
+R855,N18,display,15,vital_spo2_1,==,1,boolean,1,2,sum,flag,SpO2　平均値より高値・低値,,column_display_text連動
+R0856,N18,display,16,vital_temp_1,==,1,boolean,1,2,sum,flag,体温　高値・低値（悪寒・戦慄）,,column_display_text連動
+R0857,N18,display,17,vital_bp_1,==,1,boolean,1,2,sum,flag,血圧　平均値より高値・低値,,column_display_text連動
+R0858,N18,display,18,vital_pulse_1,==,1,boolean,1,2,sum,flag,脈拍　50以下・91以上,,column_display_text連動
+R0859,N18,display,19,consciousness_level_1,==,1,boolean,1,2,sum,flag,意識レベル　覚醒だが（多弁、不要な言動、表情の変化）,,column_display_text連動
+R0860,N18,display,20,consciousness_level_2,==,1,boolean,1,2,sum,flag,意識レベル　意識なし,,column_display_text連動
+R0861,N18,display,21,skin_changes_1,==,1,boolean,1,2,sum,flag,皮膚の変化　冷汗・湿潤・末梢冷汗・チアノーゼ,,column_display_text連動
+R0862,N18,display,22,dyspnea_grade_1,==,1,boolean,1,2,sum,flag,呼吸（グレード分類）　平坦な道を早足で歩く、あるいは穏やかな上り坂を歩く時に息切れがある,,column_display_text連動
+R0863,N18,display,23,dyspnea_grade_2,==,1,boolean,1,2,sum,flag,呼吸（グレード分類）　息切れがあるので、同年代の人よりも平坦な道を歩くのがおそい、あるいは平坦な道を自分のペースで歩いているとき、息切れのために立ち止まることがある,,column_display_text連動
+R0864,N18,display,24,dyspnea_grade_3,==,1,boolean,1,2,sum,flag,呼吸（グレード分類）　平坦な道を約90ｍ、あるいは数分歩くと息切れのために立ち止まる,,column_display_text連動
+R0865,N18,display,25,dyspnea_grade_4,==,1,boolean,1,2,sum,flag,呼吸（グレード分類）　息切れがひどく家から出られない、あるいは衣服の着替えをするときにも息切れがある、寝ている時にある,,column_display_text連動
+R0866,N18,display,26,nyha_class_II,==,1,boolean,1,2,sum,flag,NYHA心機能分類　心疾患を有し、そのために身体活動が軽度から中等度制限がある。安静時には無症状。日常的な身体活動で疲労・動悸・呼吸困難・狭心症状を生じる,,column_display_text連動
+R0867,N18,display,27,nyha_class_III,==,1,boolean,1,2,sum,flag,NYHA心機能分類　心疾患を有し、身体活動が高度に制限される。安静時には無症状。日常的な身体活動以下の労作で疲労・動悸・呼吸困難・狭心症状を生じる,,column_display_text連動
+R0868,N18,display,28,nyha_class_IV,==,1,boolean,1,2,sum,flag,NYHA心機能分類　心疾患を有し、いかなる身体活動も制限される。心不全症状狭心痛が安静時にも存在する。わずかな労作でこれらの症状は増悪する,,column_display_text連動
+R0869,N18,display,29,pain_image_front,==,1,boolean,1,2,sum,flag,痛み 前面あり,,column_display_text連動
+R0870,N18,display,30,pain_image_back,==,1,boolean,1,2,sum,flag,痛み 背面あり,,column_display_text連動
+R0871,N19,display,1,skin_condition_1,==,1,boolean,1,2,sum,flag,創傷　傷が治るために盛り上がった肉のかたまりができている,,column_display_text連動
+R0872,N19,display,2,skin_condition_2,==,1,boolean,1,2,sum,flag,創傷　盛り上がった新しい肉のかたまりができはじめたばかり,,column_display_text連動
+R0873,N19,display,3,skin_condition_3,==,1,boolean,1,2,sum,flag,創傷　治療はしていない、放置状態である,,column_display_text連動
+R0874,N19,display,4,nutrition_exist_1,==,1,boolean,1,2,sum,flag,栄養　あり,,column_display_text連動
+R0875,N19,display,5,injection_exist_1,==,1,boolean,1,2,sum,flag,注射　あり,,column_display_text連動
+R0876,N19,display,6,catheter_exist_1,==,1,boolean,1,2,sum,flag,カテーテル　あり,,column_display_text連動
+R0877,N19,display,7,tracheotomy_exist_1,==,1,boolean,1,2,sum,flag,気管切開　あり,,column_display_text連動
+R0878,N19,display,8,respiration_exist_1,==,1,boolean,1,2,sum,flag,呼吸　あり,,column_display_text連動
+R0879,N19,display,9,dialysis_exist_1,==,1,boolean,1,2,sum,flag,透析　あり,,column_display_text連動
+R0880,N19,display,10,stoma_exist_1,==,1,boolean,1,2,sum,flag,ストーマ　あり,,column_display_text連動
+R0881,N19,display,11,wound_exist_1,==,1,boolean,1,2,sum,flag,創傷処置　あり,,column_display_text連動
+R0882,N19,display,12,pain_management_exist_1,==,1,boolean,1,2,sum,flag,疼痛管理　あり,,column_display_text連動
+R0883,N19,display,13,self_measurement_exist_1,==,1,boolean,1,2,sum,flag,自己測定　あり,,column_display_text連動
+R0884,N19,display,14,oral_care_exist_1,==,1,boolean,1,2,sum,flag, 	口腔･う歯･歯肉　あり,,column_display_text連動
+R0885,N19,display,15,drug_management_exist_1,==,1,boolean,1,2,sum,flag,薬剤管理　あり,,column_display_text連動
+R0886,N19,display,16,rehab_equipment_exist_1,==,1,boolean,1,2,sum,flag,リハビリ機器使用　あり,,column_display_text連動
+R0887,N19,display,17,rehab_aids_exist_1,==,1,boolean,1,2,sum,flag,リハビリ補助具　あり,,column_display_text連動
+R0888,N19,display,18,wound_depth_d1,==,1,boolean,1,2,sum,flag,褥瘡深さ　損傷する危険,,column_display_text連動
+R0886A,N19,display,18.1,wound_depth_d2,==,1,boolean,1,2,sum,flag,褥瘡深さ　真皮までの損傷,,column_display_text連動
+R0889,N19,display,19,wound_depth_d3,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織までの損傷,,column_display_text連動
+R0890,N19,display,20,wound_depth_d4,==,1,boolean,1,2,sum,flag,褥瘡深さ　皮下組織を超える損傷,,column_display_text連動
+R0891,N19,display,21,wound_depth_d5,==,1,boolean,1,2,sum,flag,褥瘡深さ　関節腔、体腔に至る損傷,,column_display_text連動
+R0892,N19,display,22,wound_depth_dti,==,1,boolean,1,2,sum,flag,褥瘡深さ　深部損傷疑い(DTI),,column_display_text連動
+R0893,N19,display,23,wound_depth_du,==,1,boolean,1,2,sum,flag,褥瘡深さ　壊死組織で覆われ深さの判定が不能,,column_display_text連動
+R0893,N19,display,24,wound_exudate_e1,==,1,boolean,1,2,sum,flag,褥瘡滲出液　少量・毎日のドレッシング交換をしない,,column_display_text連動
+R0894,N19,display,25,wound_exudate_e3,==,1,boolean,1,2,sum,flag,褥瘡滲出液　中等量・1日1回のドレッシング交換を必要とする,,column_display_text連動
+R0895,N19,display,26,wound_exudate_e6,==,1,boolean,1,2,sum,flag,褥瘡滲出液　多量・1日2回以上のドレッシング交換を必要とする,,column_display_text連動
+R0896,N19,display,27,wound_size_s3,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4未満（長径cm×短径（長径と直行する最長径）cm）,,column_display_text連動
+R0897,N19,display,28,wound_size_s6,==,1,boolean,1,2,sum,flag,褥瘡大きさ　4以上16未満,,column_display_text連動
+R0898,N19,display,29,wound_size_s8,==,1,boolean,1,2,sum,flag,褥瘡大きさ　16以上36未満,,column_display_text連動
+R0899,N19,display,30,wound_size_s9,==,1,boolean,1,2,sum,flag,褥瘡大きさ　36以上64未満,,column_display_text連動
+R0900,N19,display,31,wound_size_s12,==,1,boolean,1,2,sum,flag,褥瘡大きさ　64以上100未満,,column_display_text連動
+R0901,N19,display,32,wound_size_s15,==,1,boolean,1,2,sum,flag,褥瘡大きさ　100以上,,column_display_text連動
+R0902,N19,display,33,wound_infection_i1,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の炎症兆候あり（創周囲の発赤・腫脹・熱感・疼痛）,,column_display_text連動
+R0903,N19,display,34,wound_infection_i3,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　臨床的定着疑い（創面にぬめりがあり、浸出液が多い。肉芽があれば、浮腫性で脆弱など）※5,,column_display_text連動
+R0904,N19,display,35,wound_infection_i3c,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　局所の明らかな感染徴候あり（炎症兆候、膿、悪臭など）,,column_display_text連動
+R0905,N19,display,36,wound_infection_i9,==,1,boolean,1,2,sum,flag,褥瘡炎症・感染　全身的影響あり,,column_display_text連動
+R0906,N19,display,37,wound_granulation_g1,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の90%以上を占める,,column_display_text連動
+R0907,N19,display,38,wound_granulation_g3,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の50%以上90%未満を占める,,column_display_text連動
+R0908,N19,display,39,wound_granulation_g4,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%以上50%未満を占める,,column_display_text連動
+R0909,N19,display,40,wound_granulation_g5,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が創面の10%未満を占める,,column_display_text連動
+R0910,N19,display,41,wound_granulation_g6,==,1,boolean,1,2,sum,flag,褥瘡肉芽組織　良性肉芽が全く形成されていない,,column_display_text連動
+R0911,N19,display,42,wound_necrosis_n3,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　柔らかい壊死組織あり,,column_display_text連動
+R0912,N19,display,43,wound_necrosis_n6,==,1,boolean,1,2,sum,flag,褥瘡壊死組織　硬く厚い密着した壊死組織あり,,column_display_text連動
+R0913,N19,display,44,wound_pocket_p6,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4未満,,column_display_text連動
+R0914,N19,display,45,wound_pocket_p6_4to16,==,1,boolean,1,2,sum,flag,褥瘡ポケット　4以上16未満,,column_display_text連動
+R0915,N19,display,46,wound_pocket_p12,==,1,boolean,1,2,sum,flag,褥瘡ポケット　16以上36未満,,column_display_text連動
+R0916,N19,display,47,wound_pocket_p24,==,1,boolean,1,2,sum,flag,褥瘡ポケット　36以上,,column_display_text連動
+R0917,N20,display,1,induction_consultation_1,==,1,boolean,1,2,sum,flag,1.医師が余命６ケ月以内またはエンドオブライフ期と判断されましたか はい,,column_display_text連動
+R0919,N20,display,3,body_activity_1,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0920,N20,display,4,body_activity_2,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0921,N20,display,5,body_activity_3,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0922,N20,display,6,body_activity_4,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0923,N20,display,7,body_activity_5,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0924,N20,display,8,body_activity_6,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0925,N20,display,9,body_activity_7,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0926,N20,display,10,body_activity_8,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0927,N20,display,11,body_activity_9,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0928,N20,display,12,body_activity_10,==,1,boolean,1,2,sum,flag,①身体活動（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0930,N20,display,14,pain_1,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0931,N20,display,15,pain_2,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0932,N20,display,16,pain_3,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0933,N20,display,17,pain_4,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0934,N20,display,18,pain_5,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0935,N20,display,19,pain_6,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0936,N20,display,20,pain_7,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0937,N20,display,21,pain_8,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0938,N20,display,22,pain_9,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0939,N20,display,23,pain_10,==,1,boolean,1,2,sum,flag,②痛み（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0941,N20,display,25,numbness_1,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0942,N20,display,26,numbness_2,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0943,N20,display,27,numbness_3,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0944,N20,display,28,numbness_4,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0945,N20,display,29,numbness_5,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0946,N20,display,30,numbness_6,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0947,N20,display,31,numbness_7,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0948,N20,display,32,numbness_8,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0949,N20,display,33,numbness_9,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0950,N20,display,34,numbness_10,==,1,boolean,1,2,sum,flag,③しびれ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0952,N20,display,36,drowsiness_1,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0953,N20,display,37,drowsiness_2,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0954,N20,display,38,drowsiness_3,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0955,N20,display,39,drowsiness_4,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0956,N20,display,40,drowsiness_5,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0957,N20,display,41,drowsiness_6,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0958,N20,display,42,drowsiness_7,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0959,N20,display,43,drowsiness_8,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0960,N20,display,44,drowsiness_9,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0961,N20,display,45,drowsiness_10,==,1,boolean,1,2,sum,flag,④眠け（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0963,N20,display,47,fatigue_score_1,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0964,N20,display,48,fatigue_score_2,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0965,N20,display,49,fatigue_score_3,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0966,N20,display,50,fatigue_score_4,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0967,N20,display,51,fatigue_score_5,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0968,N20,display,52,fatigue_score_6,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0969,N20,display,53,fatigue_score_7,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0970,N20,display,54,fatigue_score_8,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0971,N20,display,55,fatigue_score_9,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0972,N20,display,56,fatigue_score_10,==,1,boolean,1,2,sum,flag,⑤だるさ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0974,N20,display,58,shortness_of_breath_1,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0975,N20,display,59,shortness_of_breath_2,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0976,N20,display,60,shortness_of_breath_3,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0977,N20,display,61,shortness_of_breath_4,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0978,N20,display,62,shortness_of_breath_5,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0979,N20,display,63,shortness_of_breath_6,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0980,N20,display,64,shortness_of_breath_7,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0981,N20,display,65,shortness_of_breath_8,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0982,N20,display,66,shortness_of_breath_9,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0983,N20,display,67,shortness_of_breath_10,==,1,boolean,1,2,sum,flag,⑥息切れ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0985,N20,display,69,loss_of_appetite_1,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0986,N20,display,70,loss_of_appetite_2,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0987,N20,display,71,loss_of_appetite_3,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0988,N20,display,72,loss_of_appetite_4,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R0989,N20,display,73,loss_of_appetite_5,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R0990,N20,display,74,loss_of_appetite_6,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R0991,N20,display,75,loss_of_appetite_7,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R0992,N20,display,76,loss_of_appetite_8,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R0993,N20,display,77,loss_of_appetite_9,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R0994,N20,display,78,loss_of_appetite_10,==,1,boolean,1,2,sum,flag,⑦食欲不振（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R0996,N20,display,80,nausea_1,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R0997,N20,display,81,nausea_2,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R0998,N20,display,82,nausea_3,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R0999,N20,display,83,nausea_4,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R1002,N20,display,84,nausea_5,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R1007,N20,display,85,nausea_6,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R1008,N20,display,86,nausea_7,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R1009,N20,display,87,nausea_8,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R1010,N20,display,88,nausea_9,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R1011,N20,display,89,nausea_10,==,1,boolean,1,2,sum,flag,⑧吐き気（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R1013,N20,display,91,sleep_1,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R1014,N20,display,92,sleep_2,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R1015,N20,display,93,sleep_3,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R1016,N20,display,94,sleep_4,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R1017,N20,display,95,sleep_5,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R1018,N20,display,96,sleep_6,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R1019,N20,display,97,sleep_7,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R1020,N20,display,98,sleep_8,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R1021,N20,display,99,sleep_9,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R1022,N20,display,100,sleep_10,==,1,boolean,1,2,sum,flag,⑨睡眠（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R1024,N20,display,102,emotional_distress_1,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　1,,column_display_text連動
+R1025,N20,display,103,emotional_distress_2,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　2,,column_display_text連動
+R1026,N20,display,104,emotional_distress_3,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　3,,column_display_text連動
+R1027,N20,display,105,emotional_distress_4,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　4,,column_display_text連動
+R1028,N20,display,106,emotional_distress_5,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　5,,column_display_text連動
+R1029,N20,display,107,emotional_distress_6,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　6,,column_display_text連動
+R1030,N20,display,108,emotional_distress_7,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　7,,column_display_text連動
+R1031,N20,display,109,emotional_distress_8,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　8,,column_display_text連動
+R1032,N20,display,110,emotional_distress_9,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　9,,column_display_text連動
+R1033,N20,display,111,emotional_distress_10,==,1,boolean,1,2,sum,flag,⑩気持ちのつらさ（0:問題なく活動～10:これ以上耐えられない）　10,,column_display_text連動
+R1034,N20,display,112,emergency_transport_wish_b,==,1,boolean,1,2,sum,flag,最期を迎えるときに救急搬送を希望しますか？　施設で充分頑張ったので、最後は自宅で過ごしたい（救急搬送なし）,,column_display_text連動
+R1035,N20,display,113,emergency_transport_wish_c,==,1,boolean,1,2,sum,flag,最期を迎えるときに救急搬送を希望しますか？　ホスピス・緩和ケア病棟に搬送してほしい,,column_display_text連動
+R1036,N20,display,114,emergency_transport_wish_d,==,1,boolean,1,2,sum,flag,最期を迎えるときに救急搬送を希望しますか？　老人ホーム（有料）・看護小規模多機能型居宅介護に搬送,,column_display_text連動
+R1037,N20,display,115,emergency_transport_wish_e,==,1,boolean,1,2,sum,flag,最期を迎えるときに救急搬送を希望しますか？　病院に搬送して欲しい,,column_display_text連動
+R1038,N20,display,116,emergency_transport_wish_f,==,1,boolean,1,2,sum,flag,最期を迎えるときに救急搬送を希望しますか？　まだ決まっていない,,column_display_text連動
+R1039,N20,display,117,acceptance_individual_1,==,1,boolean,1,2,sum,flag,①本人:終末期の受入れ あり,,column_display_text連動
+R1040,N21,display,1,room_cleanliness_1b,==,1,boolean,1,2,sum,flag,居室の清潔　掃除はされず、ごみが散らかっている,,column_display_text連動
+R1041,N21,display,2,room_cleanliness_2a,==,1,boolean,1,2,sum,flag,居室の清潔　室内は汚く、ごみや排泄物で不衛生な状態,,column_display_text連動
+R1042,N21,display,3,physical_activity_1,==,1,boolean,1,2,sum,flag,1年以内のり患　あり,,column_display_text連動
+R1043,N21,display,4,disease_type_a,==,1,boolean,1,2,sum,flag,1年以内のり患　肺炎,,column_display_text連動
+R1044,N21,display,5,disease_type_b,==,1,boolean,1,2,sum,flag,1年以内のり患　鼻咽炎（水痘・たむし・カンジダ・毛包炎・毛嚢炎など）,,column_display_text連動
+R1045,N21,display,6,disease_type_c,==,1,boolean,1,2,sum,flag,1年以内のり患　インフルエンザ,,column_display_text連動
+R1046,N21,display,7,disease_type_d,==,1,boolean,1,2,sum,flag,1年以内のり患　新型コロナ        ,,column_display_text連動
+R1047,N21,display,8,disease_type_e,==,1,boolean,1,2,sum,flag,1年以内のり患　エイズ,,column_display_text連動
+R1048,N21,display,9,disease_type_f,==,1,boolean,1,2,sum,flag,1年以内のり患　ウイルス性肝炎,,column_display_text連動
+R1049,N21,display,10,disease_type_g,==,1,boolean,1,2,sum,flag,1年以内のり患　動物（ヒトやペンダー）に咬まれた,,column_display_text連動
+R1050,N21,display,11,disease_type_h,==,1,boolean,1,2,sum,flag,1年以内のり患　虫刺咬,,column_display_text連動
+R1051,N21,display,12,disease_type_i,==,1,boolean,1,2,sum,flag,1年以内のり患　蜂毒,,column_display_text連動
+R1052,N21,display,13,disease_type_j,==,1,boolean,1,2,sum,flag,1年以内のり患　その他,,column_display_text連動
+R1053,N21,display,14,infection_control_2,==,1,boolean,1,2,sum,flag,感染対策　自身の感染症に理解はあるが、他人への感染には心がけない,,column_display_text連動
+R1054,N21,display,15,infection_control_3,==,1,boolean,1,2,sum,flag,感染対策　ケア提供者からの治療や感染管理を受け取るが、自分から治療や予防管理はしない,,column_display_text連動
+R1055,N21,display,16,infection_control_4,==,1,boolean,1,2,sum,flag,感染対策　治療計画や感染ガイドラインに従うことを拒否している、できない状態,,column_display_text連動
+R1056,N21,display,17,vital_respiration_1,==,1,boolean,1,2,sum,flag,呼吸数　平均値より頻回・少ない回数,,column_display_text連動
+R1057,N21,display,18,vital_bp_1,==,1,boolean,1,2,sum,flag,血圧　平均値より高値・低値,,column_display_text連動
+R1058,N21,display,19,vital_pulse_1,==,1,boolean,1,2,sum,flag,脈拍　50以下・91以上,,column_display_text連動
+R1059,N22,display,1,life_prolongation_palliative_care,==,1,boolean,1,2,sum,flag,緩和ケアを希望,,column_display_text連動
+R1060,N22,display,2,life_prolongation_no_prolongation,==,1,boolean,1,2,sum,flag,延命処置を望まない,,column_display_text連動
+R1061,N22,display,3,med_have_1,==,1,boolean,1,2,sum,flag,薬　あり（風邪・ｲﾝﾌﾙｴﾝｻﾞ･ｺﾛﾅ）　,,column_display_text連動
+R1062,N22,display,4,med_have_2,==,1,boolean,1,2,sum,flag,薬　あり（熱と痛みの薬）　,,column_display_text連動
+R1063,N22,display,5,med_have_3,==,1,boolean,1,2,sum,flag,薬　あり（花粉症/呼吸器の薬）　,,column_display_text連動
+R1064,N22,display,6,med_have_4,==,1,boolean,1,2,sum,flag,薬　あり（皮膚の薬）　,,column_display_text連動
+R1065,N22,display,7,med_have_5,==,1,boolean,1,2,sum,flag,薬　あり（胃腸の薬）　,,column_display_text連動
+R1066,N22,display,8,med_have_6,==,1,boolean,1,2,sum,flag,薬　あり（肝・胆・膵の薬）　,,column_display_text連動
+R1067,N22,display,9,med_have_7,==,1,boolean,1,2,sum,flag,薬　あり（血圧と脳卒中）　,,column_display_text連動
+R1068,N22,display,10,med_have_8,==,1,boolean,1,2,sum,flag,薬　あり（心臓の薬）　,,column_display_text連動
+R1069,N22,display,11,med_have_9,==,1,boolean,1,2,sum,flag,薬　あり（腎臓・泌尿・痔）　,,column_display_text連動
+R1070,N22,display,12,med_have_10,==,1,boolean,1,2,sum,flag,薬　あり（脳に働く薬）　,,column_display_text連動
+R1071,N22,display,13,med_have_11,==,1,boolean,1,2,sum,flag,薬　あり（心の薬）　,,column_display_text連動
+R1072,N22,display,14,med_have_12,==,1,boolean,1,2,sum,flag,薬　あり（脂質異常の薬）　,,column_display_text連動
+R1073,N22,display,15,med_have_13,==,1,boolean,1,2,sum,flag,薬　あり（糖尿病の薬）　,,column_display_text連動
+R1074,N22,display,16,med_have_14,==,1,boolean,1,2,sum,flag,薬　あり（痛風と甲状腺）　,,column_display_text連動
+R1075,N22,display,17,med_have_15,==,1,boolean,1,2,sum,flag,薬　あり（骨の薬）　,,column_display_text連動
+R1076,N22,display,18,med_have_16,==,1,boolean,1,2,sum,flag,薬　あり（血液と血管）　,,column_display_text連動
+R1077,N22,display,19,med_have_17,==,1,boolean,1,2,sum,flag,薬　あり（膠原病とリュウマチ）　,,column_display_text連動
+R1078,N22,display,20,med_have_18,==,1,boolean,1,2,sum,flag,薬　あり（眼の薬）　,,column_display_text連動
+R1079,N22,display,21,med_have_19,==,1,boolean,1,2,sum,flag,薬　あり（耳と鼻の薬）　,,column_display_text連動
+R1080,N22,display,22,med_have_20,==,1,boolean,1,2,sum,flag,薬　あり（細菌感染症薬）　,,column_display_text連動
+R1081,N22,display,23,med_have_21,==,1,boolean,1,2,sum,flag,薬　あり（女性の薬）　,,column_display_text連動
+R1082,N22,display,24,med_have_22,==,1,boolean,1,2,sum,flag,薬　あり（ﾋﾞﾀﾐﾝ･ﾐﾈﾗﾙ･栄養）　,,column_display_text連動
+R1083,N22,display,25,med_have_23,==,1,boolean,1,2,sum,flag,薬　あり（漢方薬）　,,column_display_text連動
+R1084,N22,display,26,med_have_24,==,1,boolean,1,2,sum,flag,薬　あり（その他(売薬・塗布薬含む)）　,,column_display_text連動
+R1085,N22,display,27,side_effect_1,==,1,boolean,1,2,sum,flag,副作用 あり,,column_display_text連動
+R1086,N22,display,28,medicine_usage_1,==,1,boolean,1,2,sum,flag,薬の飲み方　自分で管理し使用できない,,column_display_text連動
+R1087,N22,display,29,medicine_detail_a,==,1,boolean,1,2,sum,flag,薬の飲み方　薬の飲み方を自己判断でやめたり、薬をためている、複数受診や売薬が多数ある,,column_display_text連動
+R1088,N22,display,30,medicine_detail_b,==,1,boolean,1,2,sum,flag,薬の飲み方　薬剤数が5剤以上に調整されるよう医師・薬剤師に提案されていない（ポリファーマシー）,,column_display_text連動
+R1089,N22,display,31,medicine_detail_c,==,1,boolean,1,2,sum,flag,薬の飲み方　服用や使用に不安や抵抗感・疑問などあるが、医師・薬剤師に相談していない,,column_display_text連動
+R1090,N22,display,32,medicine_detail_d,==,1,boolean,1,2,sum,flag,薬の飲み方　拘縮・変形・嚥下困難で、1人では使用ができない,,column_display_text連動
+R1091,N22,display,33,medicine_detail_e,==,1,boolean,1,2,sum,flag,薬の飲み方　一包化したり、飲みにくい薬や塗布薬を、負担にならない様に調整されていない,,column_display_text連動
+R1092,N22,display,34,medicine_detail_f,==,1,boolean,1,2,sum,flag,薬の飲み方　症状により飲み分ける緩下剤・睡眠剤・鎮痛剤などが別分包されていない,,column_display_text連動
+R1093,N22,display,35,medicine_detail_g,==,1,boolean,1,2,sum,flag,薬の飲み方　服用することを忘れる、薬カレンダーやケースを使用しているが正確に使用できていない・誤薬がある,,column_display_text連動
+R1094,N22,display,36,medicine_detail_h,==,1,boolean,1,2,sum,flag,薬の飲み方　売薬を飲んだり、つけたりし症状が改善しなくても受診していない、長期連用･過剰摂取が心配される,,column_display_text連動
+R1095,N22,display,37,drug_abuse_1,==,1,boolean,1,2,sum,flag,薬物乱用/向精神薬過剰服用 あり,,column_display_text連動
+R1096,N23,display,1,fall_count,==,1,boolean,1,2,sum,flag,①転倒・転落  あり,,column_display_text連動
+R1097,N23,display,2,fall_anxiety_1,==,1,boolean,1,2,sum,flag,②転倒の不安　あり,,column_display_text連動
+R1098,N23,display,3,fall_anxiety_2,==,1,boolean,1,2,sum,flag,②転倒の不安　不安ありで閉じこもっている,,column_display_text連動
+R1099,N23,display,4,fracture_1,==,1,boolean,1,2,sum,flag,骨折の有無　あり,,column_display_text連動
+R1100,N23,display,5,fracture_cause_fall	0,==,1,boolean,1,2,sum,flag, ①転倒による,,column_display_text連動
+R1101,N23,display,6,fracture_cause_other,==,1,boolean,1,2,sum,flag,②非転倒性,,column_display_text連動
+R1102,N23,display,7,fracture_count,==,1,boolean,1,2,sum,flag,a. 40歳以降の過去の骨折,,column_display_text連動
+R1103,N23,display,8,height_decrease,==,1,boolean,1,2,sum,flag,b. 25歳以降の身長に比べ低くなった,,column_display_text連動
+R1104,N23,display,9,back_curved,==,1,boolean,1,2,sum,flag,c. 背中や腰が曲がってきた,,column_display_text連動
+R1105,N23,display,10,back_pain,==,1,boolean,1,2,sum,flag,d. 背中や腰に痛みを感じる,,column_display_text連動
+R1106,N23,display,11,drug_abuse_1,==,1,boolean,1,2,sum,flag,薬物乱用/向精神薬過剰服用 あり,,column_display_text連動
+R1107,N23,display,12,choking_risk_1,==,1,boolean,1,2,sum,flag,	体温調節機能（温度）･皮膚感覚の低下　あり,,column_display_text連動
+R1108,N23,display,13,abuse_evaluation_1,==,1,boolean,1,2,sum,flag,虐待総合評価　あり,,column_display_text連動
+R1109,N23,display,14,kodokushi_feeling_2,==,1,boolean,1,2,sum,flag,孤立死　感じる,,column_display_text連動
+R1110,N23,display,15,kodokushi_feeling_3,==,1,boolean,1,2,sum,flag,孤立死　とても感じる,,column_display_text連動
+R1111,N23,display,16,fire_water_negligence_1,==,1,boolean,1,2,sum,flag,火や水道の不始末　あり,,column_display_text連動
+R1112,N23,display,17,news_risk_1,==,1,boolean,1,2,sum,flag,NEWS評価（バイタル評価）　中リスク（合計5～6点・もしくはredscoreが一つでもある場合）,,column_display_text連動
+R1113,N23,display,18,news_risk_2,==,1,boolean,1,2,sum,flag,NEWS評価（バイタル評価）　高リスク（合計7点以上・もしくはredscoreが一つでもある場合）,,column_display_text連動
+R1114,N23,display,19,dehydration_prevention_1,==,1,boolean,1,2,sum,flag,熱中症・脱水予防　食事をきちんととらない・こまめな補水不足・運動・入浴前後の水分不足・発熱・過度の発汗・おう吐・下痢状態が複数状態認められる,,column_display_text連動
+R1115,N23,display,20,abnormal_behavior_severity_1,==,1,boolean,1,2,sum,flag,特異行動の重症度評価　軽度（1~5点）,,column_display_text連動
+R1116,N23,display,21,abnormal_behavior_severity_2,==,1,boolean,1,2,sum,flag,特異行動の重症度評価　中等度（6~14点）,,column_display_text連動
+R1116,N23,display,22,abnormal_behavior_severity_3,==,1,boolean,1,2,sum,flag,特異行動の重症度評価　重度（15点以上）,,column_display_text連動

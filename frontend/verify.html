@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!--
+    APOS-HC 検証専用画面。
+    保存結果の可視化・回数確認・one-hot整合性チェックを行う。
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APOS-HC 検証ビュー</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 16px;
+      background: #f7f9fc;
+      color: #1f2937;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    input, button {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+    button {
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    pre {
+      background: #111827;
+      color: #f9fafb;
+      padding: 10px;
+      border-radius: 6px;
+      overflow: auto;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+    .error {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>APOS-HC データ検証</h1>
+
+  <div class="card">
+    <div class="row">
+      <button id="btnLatest">最新50件を表示</button>
+      <input id="limitInput" type="number" min="1" max="500" value="50">
+      <button id="btnLatestCustom">件数指定で表示</button>
+    </div>
+    <div class="row">
+      <input id="userIdInput" type="text" placeholder="user_id 例: 001_1001">
+      <button id="btnUserRows">このユーザーの全行</button>
+      <button id="btnRoundStatus">このユーザーの回数状況</button>
+      <button id="btnConsistency">one-hot整合性チェック</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>表形式</h2>
+    <div id="tableRoot">データ未取得</div>
+  </div>
+
+  <div class="card">
+    <h2>JSON</h2>
+    <pre id="jsonRoot">データ未取得</pre>
+  </div>
+
+  <script>
+    const apiBase = "http://localhost:8000";
+    const statusEl = document.getElementById("status");
+    const tableRoot = document.getElementById("tableRoot");
+    const jsonRoot = document.getElementById("jsonRoot");
+    const userIdInput = document.getElementById("userIdInput");
+    const limitInput = document.getElementById("limitInput");
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.className = isError ? "error" : "";
+    }
+
+    function renderTable(rows) {
+      if (!Array.isArray(rows) || rows.length === 0) {
+        tableRoot.innerHTML = "データがありません。";
+        return;
+      }
+      const columns = Object.keys(rows[0]);
+      let html = "<table><thead><tr>";
+      columns.forEach((col) => {
+        html += `<th>${col}</th>`;
+      });
+      html += "</tr></thead><tbody>";
+      rows.forEach((row) => {
+        html += "<tr>";
+        columns.forEach((col) => {
+          const val = row[col] == null ? "" : String(row[col]);
+          html += `<td>${val}</td>`;
+        });
+        html += "</tr>";
+      });
+      html += "</tbody></table>";
+      tableRoot.innerHTML = html;
+    }
+
+    async function fetchAndRender(path) {
+      setStatus("取得中...");
+      try {
+        const res = await fetch(`${apiBase}${path}`);
+        const data = await res.json();
+        if (!res.ok) {
+          setStatus(`取得失敗: HTTP ${res.status}`, true);
+          jsonRoot.textContent = JSON.stringify(data, null, 2);
+          tableRoot.innerHTML = "エラー";
+          return;
+        }
+        setStatus("取得成功");
+        jsonRoot.textContent = JSON.stringify(data, null, 2);
+        const rows = Array.isArray(data.rows)
+          ? data.rows
+          : (Array.isArray(data) ? data : [data]);
+        renderTable(rows);
+      } catch (error) {
+        setStatus(`通信失敗: ${error}`, true);
+      }
+    }
+
+    document.getElementById("btnLatest").addEventListener("click", () => {
+      fetchAndRender("/verify/latest?limit=50");
+    });
+
+    document.getElementById("btnLatestCustom").addEventListener("click", () => {
+      const limit = Math.max(1, Math.min(500, Number(limitInput.value) || 50));
+      fetchAndRender(`/verify/latest?limit=${limit}`);
+    });
+
+    document.getElementById("btnUserRows").addEventListener("click", () => {
+      const userId = userIdInput.value.trim();
+      if (!userId) {
+        setStatus("user_id を入力してください", true);
+        return;
+      }
+      fetchAndRender(`/verify/user/${encodeURIComponent(userId)}`);
+    });
+
+    document.getElementById("btnRoundStatus").addEventListener("click", () => {
+      const userId = userIdInput.value.trim();
+      if (!userId) {
+        setStatus("user_id を入力してください", true);
+        return;
+      }
+      fetchAndRender(`/verify/round-status/${encodeURIComponent(userId)}`);
+    });
+
+    document.getElementById("btnConsistency").addEventListener("click", () => {
+      const userId = userIdInput.value.trim();
+      if (!userId) {
+        setStatus("user_id を入力してください", true);
+        return;
+      }
+      fetchAndRender(`/verify/consistency/${encodeURIComponent(userId)}`);
+    });
+  </script>
+</body>
+</html>

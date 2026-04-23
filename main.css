@@ -1,0 +1,499 @@
+/* ========================================================================
+ * main.css — 全ページ共通のベース＋JS生成フッターナビ
+ * （フォーム画面のカード型レイアウトの一部は forms-layout.css と重複あり）
+ * ======================================================================== */
+
+/* --- ページ全体: 基本フォント・余白（スマホ〜全幅） --- */
+body { font-family: "Noto Sans JP", sans-serif; padding: 20px; }
+
+/* --- フォーム内ブロック: タブ/ステップ用 .section（JS で .active 切替） --- */
+.section { display: none; }
+.section.active { display: block; }
+
+/* --- 動的フォーム: フッター（戻る/ページ番号/一時保存/次へ） --- */
+.form-footer-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.form-footer-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-footer-group {
+  display: flex;
+  gap: 10px;
+}
+
+.form-footer-btn {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #c6d4df;
+  background: #f7fbff;
+  color: #1f3f5b;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.form-page-jump {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.form-page-jump-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.form-page-btn {
+  min-width: 36px;
+  min-height: 34px;
+  border: 1px solid #c6d4df;
+  background: #fff;
+  color: #1f3f5b;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-page-btn.is-active {
+  background: #0f4b7a;
+  border-color: #0f4b7a;
+  color: #fff;
+}
+
+/* --- iPad など中画面: ボタン群を上下に整理して押しやすくする --- */
+@media (max-width: 1024px) {
+  .form-footer-group {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .form-footer-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-footer-btn {
+    min-height: 42px;
+    font-size: 0.95rem;
+  }
+
+  .form-page-btn {
+    min-width: 40px;
+    min-height: 36px;
+  }
+}
+
+/* --- 中見出し h2、フィールドラベル、必須アスタリスク --- */
+h2 { font-size: 1.3em; margin-bottom: 10px; }
+label { display: block; margin-top: 10px; }
+.required::after { content:" *"; color:red; }
+
+/* --- ON/OFF スイッチ風 checkbox（.toggle クラス） --- */
+.toggle {
+  appearance: none; width: 50px; height: 25px;
+  background: #ccc; border-radius: 15px; position: relative;
+  cursor: pointer;
+}
+.toggle:checked { background: #4CAF50; }
+.toggle:before {
+  content:""; position:absolute; top:2px; left:2px;
+  width:20px; height:20px; background:white;
+  border-radius:50%; transition:0.2s;
+}
+.toggle:checked:before { transform: translateX(25px); }
+
+/* --- フォーム下部: 戻る/次へなど .nav-buttons 内のボタン行 --- */
+.nav-buttons { margin-top: 20px; display: flex; justify-content: space-between; }
+button { padding: 10px 20px; font-size: 1em; }
+
+/* --- 表: 家族情報など table.family-table --- */
+table.family-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+}
+table.family-table th, table.family-table td {
+  border: 1px solid #aaa;
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 0.95em;
+}
+table.family-table th {
+  background: #e0e0e0;
+}
+
+/* --- 補足説明の小さめテキスト .note --- */
+.note {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* --- 入力欄の幅ユーティリティ（郵便番号・電話など） --- */
+.input-small { width: 60px; }
+.input-medium { width: 100px; }
+.input-large { width: 180px; }
+
+
+/* --- セクション: 上記の非表示を上書きし、常にブロック表示 --- */
+.section { 
+  display: block !important; 
+}
+
+/* --- 画面幅 768px 以上: 画面中央のカード、見出し、入力、日課表、ナビボタン --- */
+@media screen and (min-width: 768px) {
+  /* ページ地の背景上に載る全幅制限＋余白 */
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  /* 白いカード: メインのフォーム枠 .container */
+  .container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 20px 0;
+    position: relative; /* 右上No.バッジをカード内で固定 */
+  }
+  
+  /* ページ最上部: タイトル行 h1 */
+  h1 {
+    font-size: 2.2em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 20px;
+  }
+  
+  /* 各セクションの見出し h2 */
+  h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin: 40px 0 25px 0;
+    padding: 15px 0;
+    border-left: 5px solid #3498db;
+    padding-left: 20px;
+    background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+  }
+  
+  /* 設問のまとまり: fieldset / legend */
+  fieldset {
+    border: 2px solid #e0e6ed;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    background: #fafbfc;
+    transition: all 0.3s ease;
+  }
+  
+  fieldset:hover {
+    border-color: #3498db;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+  }
+  
+  legend {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 0 15px;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #3498db;
+  }
+  
+  /* 各項目名 label（768px 以上は強調） */
+  label {
+    display: block;
+    margin: 15px 0 8px 0;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1.1em;
+  }
+  
+  /* 1行テキスト・select・textarea の入力枠 */
+  input[type="text"], input[type="tel"], input[type="email"], 
+  input[type="number"], select, textarea {
+    width: 100%;
+    padding: 15px 18px;
+    font-size: 1.1em;
+    border: 2px solid #e0e6ed;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-top: 8px;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none !important;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  select {
+    outline: none !important;
+  }
+  
+  select:focus-visible,
+  select:active {
+    outline: none !important;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  
+  /* 複数行入力 textarea */
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+  
+  /* 1日のリズム等: 日課入力テーブル .daily-rhythm-table */
+  .daily-rhythm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+  }
+  
+  .daily-rhythm-table th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 20px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .daily-rhythm-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e8f4f8;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .daily-rhythm-table td:first-child {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1em;
+    width: 200px;
+  }
+  
+  .daily-rhythm-table input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.05em;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+  
+  .daily-rhythm-table input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  
+  .daily-rhythm-table tr:hover {
+    background: #f8f9fa;
+  }
+  
+  /* 注釈ブロック .note（768px 以上は帯状） */
+  .note {
+    font-size: 1em;
+    color: #7f8c8d;
+    margin-top: 15px;
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 8px;
+    border-left: 4px solid #95a5a6;
+  }
+  
+  /* フォーム末尾: 戻る(灰)/次へ(青)の並び .nav-buttons */
+  .nav-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .nav-buttons button {
+    padding: 18px 35px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+  }
+  
+  .nav-buttons button:first-child {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+  }
+  
+  .nav-buttons button:last-child {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+  }
+  
+  .nav-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+  
+  .nav-buttons button:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* --- 768〜1024px: 日課表の1列目幅とセル内入力のサイズだけ微調整 --- */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .daily-rhythm-table td:first-child {
+    width: 180px;
+  }
+  
+  .daily-rhythm-table input {
+    font-size: 1em;
+    padding: 10px 12px;
+  }
+}
+
+/* --- バリデーション: 項目下エラー文・全体エラー・入力枠の error クラス --- */
+.error-message {
+  color: #c0392b;
+  font-size: 0.95em;
+  margin-top: 6px;
+}
+
+.error-message-global {
+  color: #c0392b;
+  background: #fdecea;
+  border-left: 4px solid #e74c3c;
+  padding: 10px 12px;
+  margin: 10px 0 16px 0;
+  border-radius: 6px;
+}
+
+input.error, select.error, textarea.error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12) !important;
+}
+
+/* --------------------------------------------------
+ * 画面下固定: フッターナビ（戻る／ページ番号／次へ）
+ * survey-common.js が付与する #pageNavBottom および
+ * ページ番号 #pageNavPages* の見た目
+ * -------------------------------------------------- */
+/* 下固定バー全体（背後ぼかし・影） */
+#pageNavBottom {
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 6px 8px !important; /* JSのinline paddingを上書きして横幅を詰める */
+  gap: 6px !important;          /* JSのinline gap(8px)を少し詰める */
+}
+
+/* フッターバー内リンクのタップ・下線なし */
+#pageNavBottom a {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+#pageNavBottom .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  min-width: 80px;
+  border-radius: 10px;
+  border: 1px solid #d9e3f2;
+  background: linear-gradient(180deg, #f6f9ff 0%, #eef4ff 100%);
+  color: #003366;
+  font-weight: 600;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+#pageNavBottom .nav-btn:hover {
+  background: linear-gradient(180deg, #eef4ff 0%, #e6efff 100%);
+  box-shadow: 0 4px 14px rgba(0, 51, 102, 0.12);
+  transform: translateY(-1px);
+}
+#pageNavBottom .nav-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 51, 102, 0.12);
+}
+
+/* ページ番号（1〜20 などの数字リンク） */
+#pageNavPages a,
+#pageNavPagesTop a,
+#pageNavPagesBottom a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 36px;
+  padding: 4px 0 !important; /* 文字数に左右されないよう左右余白を固定 */
+  flex: 0 0 48px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+#pageNavPages a:hover,
+#pageNavPagesTop a:hover,
+#pageNavPagesBottom a:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+#pageNavPages a:active,
+#pageNavPagesTop a:active,
+#pageNavPagesBottom a:active {
+  transform: translateY(0);
+}
+
+/* 幅 768px 以下: フッターナビの余白と番号・ボタンを少し小さく */
+@media (max-width: 768px) {
+  #pageNavBottom {
+    padding: 10px 8px !important;
+  }
+  #pageNavBottom .nav-btn {
+    min-width: 66px;
+    padding: 8px 10px;
+    font-weight: 700;
+  }
+  #pageNavPages a,
+  #pageNavPagesTop a,
+  #pageNavPagesBottom a {
+    width: 44px;
+    height: 34px;
+    flex: 0 0 44px;
+    border-radius: 7px;
+  }
+}

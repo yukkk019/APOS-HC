@@ -1,0 +1,177 @@
+const yesNo = [
+  { value: "", label: "選択してください" },
+  { value: "0", label: "なし" },
+  { value: "1", label: "あり" },
+];
+
+// page16: 褥瘡など写真付き評価を含むJSON定義。
+const page16 = {
+  id: 16,
+  formTitle: "APOS-HC 調査票",
+  badge: "No.16",
+  fields: [
+    {
+      type: "group",
+      key: "bedsore",
+      label: "Ⅰ　褥瘡",
+      fields: [
+        { type: "select", key: "has_bedsore", label: "褥瘡はありますか。", options: yesNo },
+        {
+          type: "group",
+          key: "designR",
+          label: "DESIGN-R評価",
+          visibleIf: { field: "has_bedsore", equals: "1" },
+          fields: [
+            {
+              type: "select",
+              key: "wound_depth",
+              label: "① 深さ",
+              options: [
+                { value: "", label: "選択" },
+                { value: "d0", label: "d0：皮膚損傷・発赤なし" },
+                { value: "d1", label: "d1：持続する発赤" },
+                { value: "d2", label: "d2：真皮までの損傷" },
+                { value: "d3", label: "d3：皮下組織までの損傷" },
+                { value: "d4", label: "d4：皮下組織を超える損傷" },
+                { value: "d5", label: "d5：関節腔、体腔に至る損傷" },
+                { value: "dti", label: "DTI：深部損傷褥瘡(DTI)疑い" },
+                { value: "du", label: "DU：壊死組織で覆われ深さの判定が不能" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_exudate",
+              label: "② 滲出液",
+              options: [
+                { value: "", label: "選択" },
+                { value: "e0", label: "e0" },
+                { value: "e1", label: "e1" },
+                { value: "e3", label: "e3" },
+                { value: "e6", label: "e6" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_size",
+              label: "③ 大きさ",
+              options: [
+                { value: "", label: "選択" },
+                { value: "s0", label: "s0" },
+                { value: "s3", label: "s3" },
+                { value: "s6", label: "s6" },
+                { value: "s8", label: "s8" },
+                { value: "s9", label: "s9" },
+                { value: "s12", label: "s12" },
+                { value: "s15", label: "S15：100以上" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_infection",
+              label: "④ 炎症・感染",
+              options: [
+                { value: "", label: "選択" },
+                { value: "i0", label: "i0" },
+                { value: "i1", label: "i1" },
+                { value: "i3c", label: "I3C" },
+                { value: "i3", label: "I3" },
+                { value: "i9", label: "I9" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_redness_area",
+              label: "⑤ 肉芽組織",
+              options: [
+                { value: "", label: "選択" },
+                { value: "g0", label: "g0" },
+                { value: "g1", label: "g1" },
+                { value: "g3", label: "g3" },
+                { value: "g4", label: "G4：良性肉芽が創面の10％以上50％未満を占める" },
+                { value: "g5", label: "G5：良性肉芽が創面の10％未満を占める" },
+                { value: "g6", label: "G6：良性肉芽が全く形成されていない" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_necrosis",
+              label: "⑥ 壊死組織",
+              options: [
+                { value: "", label: "選択" },
+                { value: "n0", label: "n0" },
+                { value: "n3", label: "n3" },
+                { value: "n6", label: "n6" },
+              ],
+            },
+            {
+              type: "select",
+              key: "wound_pocket",
+              label: "⑦ ポケット",
+              options: [
+                { value: "", label: "選択" },
+                { value: "p0", label: "p0" },
+                { value: "p6", label: "p6" },
+                { value: "p6_4to16", label: "p9（4以上16未満）" },
+                { value: "p12", label: "p12" },
+                { value: "p24", label: "p24" },
+              ],
+            },
+            {
+              type: "text",
+              key: "wound_total_score",
+              label: "合計点",
+              inputType: "number",
+            },
+            {
+              type: "photo_slots",
+              key: "jokusou_images",
+              label: "褥瘡マーキング画像",
+              slotCount: 2,
+            },
+            { type: "text", key: "jokusou_image_front", label: "褥瘡画像（正面ファイル名）" },
+            { type: "text", key: "jokusou_image_back", label: "褥瘡画像（背面ファイル名）" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "group",
+      key: "painParalysisContracture",
+      label: "Ⅱ　痛み・麻痺・関節拘縮",
+      fields: [
+        { type: "select", key: "has_pain", label: "1. 痛みの有無", options: yesNo },
+        {
+          type: "photo_slots",
+          key: "pain_images",
+          label: "痛み部位画像",
+          slotCount: 2,
+          visibleIf: { field: "has_pain", equals: "1" },
+        },
+        { type: "text", key: "pain_image_front", label: "痛み画像（正面ファイル名）", visibleIf: { field: "has_pain", equals: "1" } },
+        { type: "text", key: "pain_image_back", label: "痛み画像（背面ファイル名）", visibleIf: { field: "has_pain", equals: "1" } },
+        { type: "select", key: "has_paralysis", label: "2. 麻痺の有無", options: yesNo },
+        {
+          type: "photo_slots",
+          key: "mahi_images",
+          label: "麻痺部位画像",
+          slotCount: 2,
+          visibleIf: { field: "has_paralysis", equals: "1" },
+        },
+        { type: "text", key: "mahi_image_front", label: "麻痺画像（正面ファイル名）", visibleIf: { field: "has_paralysis", equals: "1" } },
+        { type: "text", key: "mahi_image_back", label: "麻痺画像（背面ファイル名）", visibleIf: { field: "has_paralysis", equals: "1" } },
+        { type: "select", key: "has_kannsetsu", label: "3. 関節拘縮の有無", options: yesNo },
+        {
+          type: "photo_slots",
+          key: "kan_images",
+          label: "関節拘縮部位画像",
+          slotCount: 2,
+          visibleIf: { field: "has_kannsetsu", equals: "1" },
+        },
+        { type: "text", key: "kan_image_front", label: "関節拘縮画像（正面ファイル名）", visibleIf: { field: "has_kannsetsu", equals: "1" } },
+        { type: "text", key: "kan_image_back", label: "関節拘縮画像（背面ファイル名）", visibleIf: { field: "has_kannsetsu", equals: "1" } },
+      ],
+    },
+  ],
+};
+
+export default page16;

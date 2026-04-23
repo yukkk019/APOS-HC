@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!--
+    APOS-HC 本番入力画面。
+    実際の設問DOMは main.js + renderer.js が JSON 定義から動的生成する。
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>APOS-HC 入力フォーム</title>
+  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="../forms-layout.css">
+  <style>
+    .dynamic-form-root .form-section {
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      border: 1px solid #b0d6e6;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .dynamic-form-root .form-section > h2 {
+      margin: 0 0 0.8rem;
+      font-size: 1rem;
+      color: #003366;
+    }
+
+    .dynamic-form-root .field-row {
+      margin-bottom: 0.7rem;
+    }
+
+    .dynamic-form-root .field-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .dynamic-form-root .field-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #003366;
+    }
+
+    .dynamic-form-root input[type="text"],
+    .dynamic-form-root input[type="number"],
+    .dynamic-form-root input[type="email"],
+    .dynamic-form-root select,
+    .dynamic-form-root textarea {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .dynamic-form-root .date-triplet {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .dynamic-form-root .date-triplet input {
+      width: 6em;
+    }
+
+    .dynamic-form-root .option-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+    }
+
+    .dynamic-form-root .table-component {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .dynamic-form-root .table-component th,
+    .dynamic-form-root .table-component td {
+      border: 1px solid #888;
+      padding: 6px;
+      vertical-align: top;
+    }
+
+    .dynamic-form-root .table-component th {
+      background: #f5fafd;
+      color: #003366;
+      text-align: left;
+    }
+
+    .dynamic-form-root .table-static-text {
+      padding: 0.55rem 0.7rem;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #2b3e50;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .page-nav {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- ここに後からJavaScriptでフォームが表示されます（フォームを埋め込む場所です） -->
+  <div id="app"></div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
