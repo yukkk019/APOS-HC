@@ -298,9 +298,9 @@ const page1 = {
             {
               key: "livingStatus",
               label: "3 同居/別居 ※3",
-              type: "radio",
+              type: "select",
               options: [
-                { value: "", label: "0.未選択（クリア）" },
+                { value: "", label: "選択" },
                 { value: "同居", label: "1.同居" },
                 { value: "同居日中不在", label: "2.同居日中不在" },
                 { value: "別居", label: "3.別居" },
