@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------
-   newneed 23項目表示画面 - スタイル
+   newneed 23項目表示画面 - スタイルだよ
    ------------------------------------------------------------ */
 
 :root {
   --newneed-bg: #f5f7fa;
-  --newneed-card: #fff;
+  --newneed-card: #ffffff;
   --newneed-border: #e1e6eb;
   --newneed-primary: #2563eb;
   --newneed-primary-hover: #1d4ed8;
