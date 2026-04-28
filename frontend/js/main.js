@@ -98,10 +98,20 @@ function renderUserIdForm() {
     onOpenNeeds: ({ facilityId, personId }) => {
       const preferredRound = Number(formState?._meta?.assessmentRound || 1);
       const round = [1, 2, 3].includes(preferredRound) ? preferredRound : 1;
-      const url = new URL("/newneed/static/display.html", window.location.origin);
+      try {
+        localStorage.setItem("office_id", facilityId);
+        localStorage.setItem("personal_id", personId);
+        localStorage.setItem("session", String(round));
+      } catch (_) {
+        /* ignore */
+      }
+      const url = new URL("/api/newneed/static/display.html", window.location.origin);
       url.searchParams.set("office_id", facilityId);
       url.searchParams.set("personal_id", personId);
       url.searchParams.set("round", String(round));
+      const path = window.location.pathname || "";
+      const returnTo = path.endsWith("form.html") ? "/form.html" : "/frontend/index.html";
+      url.searchParams.set("return_to", returnTo);
       window.location.href = url.toString();
     },
   });
