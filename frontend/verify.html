@@ -77,6 +77,7 @@
     <div class="row">
       <input id="userIdInput" type="text" placeholder="user_id 例: 001_1001">
       <button id="btnUserRows">このユーザーの全行</button>
+      <button id="btnUserCsv">このユーザーをCSV保存</button>
       <button id="btnRoundStatus">このユーザーの回数状況</button>
       <button id="btnConsistency">one-hot整合性チェック</button>
     </div>
@@ -89,20 +90,40 @@
   </div>
 
   <div class="card">
+    <h2>CSVカラム説明</h2>
+    <div id="guideRoot">データ未取得</div>
+  </div>
+
+  <div class="card">
     <h2>JSON</h2>
     <pre id="jsonRoot">データ未取得</pre>
   </div>
 
   <script>
-    const apiBase = "http://localhost:8000";
+    function resolveApiBase() {
+      try {
+        const qp = new URLSearchParams(window.location.search || "");
+        const fromQuery = (qp.get("apiBase") || "").trim();
+        if (fromQuery) return fromQuery.replace(/\/+$/, "");
+      } catch (_) {}
+
+      try {
+        const o = window.location.origin;
+        if (o && o !== "null") return o.replace(/\/+$/, "");
+      } catch (_) {}
+
+      return "http://127.0.0.1:8010";
+    }
+    const apiBase = resolveApiBase();
     const statusEl = document.getElementById("status");
     const tableRoot = document.getElementById("tableRoot");
+    const guideRoot = document.getElementById("guideRoot");
     const jsonRoot = document.getElementById("jsonRoot");
     const userIdInput = document.getElementById("userIdInput");
     const limitInput = document.getElementById("limitInput");
 
     function setStatus(message, isError = false) {
-      statusEl.textContent = message;
+      statusEl.textContent = `[API: ${apiBase}] ${message}`;
       statusEl.className = isError ? "error" : "";
     }
 
@@ -129,6 +150,123 @@
       tableRoot.innerHTML = html;
     }
 
+    function toLabel(text) {
+      return String(text || "")
+        .replace(/_/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function firstNonEmpty(rows, col) {
+      for (const row of rows) {
+        const val = row[col];
+        if (val !== null && val !== undefined && String(val).trim() !== "") {
+          return val;
+        }
+      }
+      return "";
+    }
+
+    function inferKind(col, rows) {
+      const vals = rows.map((r) => r[col]).filter((v) => v !== null && v !== undefined && String(v).trim() !== "");
+      if (vals.length === 0) return "不明";
+      const asText = vals.map((v) => String(v).trim());
+      const isBinary = asText.every((v) => v === "0" || v === "1");
+      if (isBinary) return "one-hot(0/1)";
+      const isNumber = asText.every((v) => !Number.isNaN(Number(v)));
+      if (isNumber) return "数値";
+      return "文字列";
+    }
+
+    function inferDescription(col, kind) {
+      const fixed = {
+        updated_at: "更新日時",
+        last_saved_kind: "保存種別（draft/final）",
+        final_submitted_at: "確定日時",
+        user_id: "ユーザーID（office_id_personal_id）",
+        assessment_round: "アセスメント回（1/2/3）",
+        office_id: "事業所ID",
+        personal_id: "個人ID"
+      };
+      if (fixed[col]) return fixed[col];
+      if (/_filename$/i.test(col)) return "画像ファイル名";
+      if (/_year$|_month$|_day$/i.test(col)) return "日付の分割値";
+      if (/_count$/i.test(col)) return "件数/回数";
+      if (/_note$|_detail$|_reason$|_other$/i.test(col)) return "自由記述テキスト";
+      if (kind === "one-hot(0/1)") {
+        const m = col.match(/^(.*)_([^_]+)$/);
+        if (m) {
+          return `${toLabel(m[1])} の選択肢フラグ（${m[2]}=1）`;
+        }
+        return "選択肢フラグ（1=該当）";
+      }
+      return `${toLabel(col)} の値`;
+    }
+
+    function buildGuideRows(rows) {
+      if (!Array.isArray(rows) || rows.length === 0) {
+        return [];
+      }
+      const columns = Object.keys(rows[0]);
+      return columns.map((col) => {
+        const kind = inferKind(col, rows);
+        const desc = inferDescription(col, kind);
+        const sample = firstNonEmpty(rows, col);
+        return {
+          column_name: col,
+          kind: kind,
+          description: desc,
+          sample_value: sample == null ? "" : String(sample),
+        };
+      });
+    }
+
+    function renderGuide(rows) {
+      const guideRows = buildGuideRows(rows);
+      if (guideRows.length === 0) {
+        guideRoot.innerHTML = "データがありません。";
+        return;
+      }
+      let html = "<table><thead><tr><th>カラム名</th><th>種別</th><th>説明</th><th>例値</th></tr></thead><tbody>";
+      guideRows.forEach((row) => {
+        html += `<tr><td>${row.column_name}</td><td>${row.kind}</td><td>${row.description}</td><td>${row.sample_value}</td></tr>`;
+      });
+      html += "</tbody></table>";
+      guideRoot.innerHTML = html;
+    }
+
+    function toCsv(rows) {
+      if (!Array.isArray(rows) || rows.length === 0) {
+        return "";
+      }
+      const columns = Object.keys(rows[0]);
+      const escapeCsv = (value) => {
+        const text = value == null ? "" : String(value);
+        if (/[",\n\r]/.test(text)) {
+          return `"${text.replace(/"/g, '""')}"`;
+        }
+        return text;
+      };
+      const header = columns.join(",");
+      const body = rows
+        .map((row) => columns.map((col) => escapeCsv(row[col])).join(","))
+        .join("\n");
+      return `${header}\n${body}`;
+    }
+
+    function downloadCsv(filename, content) {
+      const bom = "\uFEFF"; // Excel 文字化け対策
+      const blob = new Blob([bom + content], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      URL.revokeObjectURL(url);
+    }
+
     async function fetchAndRender(path) {
       setStatus("取得中...");
       try {
@@ -138,6 +276,7 @@
           setStatus(`取得失敗: HTTP ${res.status}`, true);
           jsonRoot.textContent = JSON.stringify(data, null, 2);
           tableRoot.innerHTML = "エラー";
+          guideRoot.innerHTML = "エラー";
           return;
         }
         setStatus("取得成功");
@@ -146,6 +285,7 @@
           ? data.rows
           : (Array.isArray(data) ? data : [data]);
         renderTable(rows);
+        renderGuide(rows);
       } catch (error) {
         setStatus(`通信失敗: ${error}`, true);
       }
@@ -167,6 +307,37 @@
         return;
       }
       fetchAndRender(`/verify/user/${encodeURIComponent(userId)}`);
+    });
+
+    document.getElementById("btnUserCsv").addEventListener("click", async () => {
+      const userId = userIdInput.value.trim();
+      if (!userId) {
+        setStatus("user_id を入力してください", true);
+        return;
+      }
+      setStatus("CSV作成中...");
+      try {
+        const res = await fetch(`${apiBase}/verify/user/${encodeURIComponent(userId)}`);
+        const data = await res.json();
+        if (!res.ok) {
+          setStatus(`取得失敗: HTTP ${res.status}`, true);
+          return;
+        }
+        const rows = Array.isArray(data.rows) ? data.rows : [];
+        if (rows.length === 0) {
+          setStatus("対象データがありません", true);
+          return;
+        }
+        const csv = toCsv(rows);
+        const guideRows = buildGuideRows(rows);
+        const guideCsv = toCsv(guideRows);
+        const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+        downloadCsv(`form0_legacy_${userId}_${timestamp}.csv`, csv);
+        downloadCsv(`form0_legacy_${userId}_${timestamp}_guide.csv`, guideCsv);
+        setStatus(`CSV保存完了（データ${rows.length}件 + カラム説明）`);
+      } catch (error) {
+        setStatus(`CSV作成失敗: ${error}`, true);
+      }
     });
 
     document.getElementById("btnRoundStatus").addEventListener("click", () => {
