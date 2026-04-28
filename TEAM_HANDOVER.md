@@ -1,107 +1,178 @@
-# APOS-HC 引き継ぎメモ（ローカル起動と構成）
+# APOS-HC 引き継ぎガイド（フォルダ構成・起動・検証）
 
-このドキュメントは、チームメンバーがローカルで画面を開き、開発を開始するための最短手順です。
-
-## 1. まず動かす（最短）
-
-このリポジトリは、ローカル確認時に以下の2つを別ターミナルで起動します。
-
-- APIサーバー（`submit_server.py`）
-- フロント配信（`frontend/index.html` を静的配信）
-
-### ターミナル1: APIサーバー起動
-
-```powershell
-cd C:\Users\yukin\Desktop\Apos-hc
-pip install -r requirements.txt
-uvicorn submit_server:app --reload --host 127.0.0.1 --port 8000
-```
-
-### ターミナル2: フロント配信
-
-```powershell
-cd C:\Users\yukin\Desktop\Apos-hc
-python -m http.server 5500
-```
-
-### ブラウザで開くURL
-
-- 全体トップ画面: `http://127.0.0.1:5500/frontend/index.html`
-- APIドキュメント: `http://127.0.0.1:8000/docs`
-
-## 2. 重要な注意（`{"detail":"Not Found"}` の理由）
-
-現在の `submit_server.py` は主に以下のエンドポイントを持つローカル確認用APIです。
-
-- `POST /save`
-- `POST /submit`
-- `GET /verify/latest`
-- `GET /verify/user/{user_id}`
-- `GET /verify/round-status/{user_id}`
-- `GET /verify/consistency/{user_id}`
-
-そのため、`/api/newneed/...` に直接アクセスすると `{"detail":"Not Found"}` になります。
-
-`newneed` 系画面（`/api/newneed/page` など）を使うには、`newneed/api_router.py` を `include_router` した本体FastAPIアプリが別途必要です。
-
-## 3. フォルダ構成（主要）
-
-```text
-Apos-hc/
-├── frontend/                  # 入力UI（ブラウザ）
-│   ├── index.html             # 全体トップ画面
-│   └── js/
-│       ├── main.js            # 画面制御の司令塔
-│       ├── renderer.js        # フォーム描画
-│       └── formDefs/page*.js  # 各ページ定義（0〜19）
-├── newneed/                   # ニーズ領域表示・看護計画モジュール
-│   ├── api_router.py          # newneed APIルーター
-│   ├── static/                # display/care-plan のHTML/CSS
-│   ├── spec/                  # ニーズ判定ルールCSV
-│   └── README.md              # newneed詳細説明
-├── submit_server.py           # ローカル確認用FastAPI（save/submit/verify）
-├── apos_hc.db                 # SQLite DB
-└── requirements.txt
-```
-
-## 4. フロントとAPIの関係
-
-- `frontend/js/main.js` から以下へ送信します。
-  - 一時保存: `http://localhost:8000/save`
-  - 最終送信: `http://localhost:8000/submit`
-- そのため、フロントは `5500` でも、APIは `8000` が必要です。
-
-## 5. よくあるトラブル
-
-### `uvicorn: command not found`
-
-```powershell
-python -m pip install uvicorn
-```
-
-### 画面は開くが保存/送信に失敗する
-
-- `submit_server.py` が `8000` で起動しているか確認
-- ブラウザの開発者ツールで `POST /save` と `POST /submit` のレスポンスを確認
-
-### `{"detail":"Not Found"}` が出る
-
-- `http://127.0.0.1:8000/docs` に目的APIがあるか確認
-- `submit_server.py` 起動中は `/api/newneed/...` は基本的に未提供
-
-## 6. チーム開発時の基本運用（推奨）
-
-- `main` には直接コミットしない
-- 個人ブランチで作業してPRを作る
-  - 例: `feature/<name>`
-- 作業の流れ:
-  1. `git checkout feature/<name>`
-  2. 編集
-  3. `git add .`
-  4. `git commit -m "..."`  
-  5. `git push`
-  6. GitHubで `main` 向けPR作成
+この文書は、**初めてこのリポジトリを触る人**でも「どこに何があるか」「どう動かすか」「どう確認するか」を迷わないようにするための説明です。
 
 ---
 
-必要なら次の担当者向けに、`newneed` を含めた「本体FastAPIの起動手順（1コマンド運用）」版も別紙で追記してください。
+## このプロジェクトでやっていること（ひとこと）
+
+ブラウザで入力したアセスメント（質問フォーム）の内容を、**ローカルのサーバーが受け取り**、**SQLite のデータベースファイルに保存**します。写真もファイルとして保存し、DB にはファイル名などが記録されます。
+
+---
+
+## 1. フォルダ構成（リポジトリの全体像）
+
+リポジトリのルート（例: `Apos-hc`）はだいたい次のような並びです。
+
+```text
+Apos-hc/
+├── submit_server.py      ← メインのサーバープログラム（FastAPI）。画面の配信・API・DB書き込み
+├── requirements.txt      ← Python でインストールするライブラリ一覧
+├── apos_hc.db            ← SQLite のデータベースファイル（起動後・保存後にできる／増える）
+├── uploads/              ← アップロードされた画像ファイル（カテゴリ別フォルダの下に保存）
+├── frontend/             ← 検証画面など、このフォルダ直下に置いた静的 HTML など
+│   ├── verify.html       ← DB の内容を確認・CSV 出力する検証ページ
+│   ├── index.html        ← 入口になりうるページ（運用により URL が異なる場合あり）
+│   └── js/               ← フロント側の JavaScript（フォーム定義・描画ロジックなど）
+│       ├── main.js
+│       ├── renderer.js
+│       ├── components.js
+│       ├── logic.js
+│       └── formDefs/
+│           └── page0.js … page19.js   ← 各ページの入力項目定義（page0〜19）
+├── newneed/              ← 「ニーズ」表示や関連静的ファイルなどのモジュール（README あり）
+│   ├── README.md
+│   ├── api_router.py
+│   ├── static/           ← display / care-plan などの HTML・CSS
+│   └── spec/             ← CSV など仕様データ
+├── forms-layout.css      ← レイアウト用 CSS（パスによりサーバーから配信される）
+├── main.css
+└── TEAM_HANDOVER.md      ← この文書
+```
+
+### フォルダごとの役割（要点）
+
+| 場所 | 何をするところか |
+|------|-------------------|
+| **`submit_server.py`** | アプリの中心。**ブラウザ向けのページの一部**と **API** と **データベース処理**がここにまとまっています。 |
+| **`frontend/`** | ブラウザで動くファイル。**検証ページ `verify.html`** はここにあります。フォームの項目定義は `frontend/js/formDefs/page*.js` にあります。 |
+| **`newneed/`** | アセスメントとは別機能の「ニーズ」関連のコードや静的ファイル。**詳しくは `newneed/README.md`** を見てください。 |
+| **`uploads/`** | 画像アップロード API が保存する場所です（サーバー起動時にフォルダが作られます）。 |
+| **`apos_hc.db`** | **データ本体の SQLite ファイル**です。バックアップや確認はこのファイルを対象にします。 |
+
+### 画面 HTML（form.html / form0.html など）について（重要）
+
+`submit_server.py` は、アセスメントの **本体 HTML** を次のパスから読み込む設定になっています。
+
+- **`<このリポジトリの親フォルダ>/analysis/backend/app/templates/forms/`** 配下の `form.html`、`form0.html` … など
+
+つまり、PC のフォルダ構成によっては **`analysis` フォルダが別の場所にある**と、`/form.html` が「見つからない」状態になります。その場合はパスを用意するか、開発メンバーに実際の配置を確認してください。
+
+一方、**検証ページ `verify.html`** は **`frontend/verify.html`** からそのまま配信されます。
+
+---
+
+## 2. ローカルサーバーの開き方
+
+### 事前準備
+
+- **Python 3** が入っていること  
+- ターミナル（PowerShell など）を開けること  
+
+### 手順（1 つのターミナルで十分）
+
+リポジトリのルートに移動します:
+
+```powershell
+cd C:\Users\yukin\Desktop\Apos-hc
+```
+
+依存ライブラリを入れます（初回または `requirements.txt` が変わったとき）:
+
+```powershell
+pip install -r requirements.txt
+```
+
+サーバーを起動します。
+
+```powershell
+python -m uvicorn submit_server:app --host 127.0.0.1 --port 8010 --reload
+```
+
+- **`--reload`** を付けると、ファイルを編集したときにサーバーが自動で読み直します（開発時便利）。
+- 画面にエラーなくログが流れ続けば、起動できています。**そのウィンドウを閉じないでください**（閉じるとサーバーが止まります）。
+
+### ブラウザで開くアドレス（例: ポート 8010）
+
+| 説明 | URL |
+|------|-----|
+| **ヘルスチェック（動作確認の最短）** | http://127.0.0.1:8010/api/health |
+| **API の一覧（Swagger UI）** | http://127.0.0.1:8010/docs |
+| **検証ページ（保存データ確認・CSV）** | http://127.0.0.1:8010/verify.html |
+| **入口フォーム（環境により存在）** | http://127.0.0.1:8010/form.html |
+
+ポートを変えた場合は、`8010` の部分だけ読み替えてください。
+
+---
+
+## 3. 検証の仕方（データが入っているか確認する）
+
+### 方法 A: 検証ページ（いちばん直感的）
+
+1. サーバーを起動した状態でブラウザを開く  
+2. **`http://127.0.0.1:8010/verify.html`** にアクセス（ポートは自分の環境に合わせる）  
+3. 画面上の説明に沿って **ユーザー ID** を指定してデータを表示します  
+4. **CSV 保存**ボタンがあれば、表の内容をファイルに出力できます。**カラム説明用の `_guide.csv`** が一緒に落ちる運用になっているので、「その列が何か」を後から見返せます  
+
+※ 「対象データがありません」と出るときは、**まだフォーム保存がされていない**か、**別ユーザー ID で見ている**などが考えられます。
+
+
+
+
+
+### サーバー状況の確認: `/api/health` でサーバー生存確認
+
+```text
+http://127.0.0.1:8010/api/health
+```
+
+`{"status":"ok"}` のような JSON が返れば、**サーバーは起動している**と判断できます。
+
+### DB自体を見る方法: データベースファイルを直接見る
+
+`apos_hc.db` は SQLite です。**DB Browser for SQLite** などのツールで開いてテーブルを眺めることもできます。ただし、列が多く **`form0_legacy` は分析向けにフラットな列**になっているので、最初は **`verify.html`** の方がわかりやすいです。
+
+---
+
+## 4. データの流れ（ざっくり）
+
+1. ブラウザでフォームを入力して保存すると、サーバーが JSON を受け取ります。  
+2. **フォームごとの原本 JSON** はテーブル **`form_payloads`** に保存されます（名前は実装に準拠）。  
+3. **`form0_legacy`** には、アセスメント全体をflattenした **一行形式** で値が入ります（チェック項目は **one-hot（0/1）** になる列が多いです）。  
+4. **確定処理**（実装上はセッション確定などのタイミング）でも **`form0_legacy` が更新**されます。通常保存でもドラフトとして反映される運用になっています。  
+5. **画像**は `uploads/` にファイルとして保存され、DB 側にはファイル名などが載ります。
+
+---
+
+## 5. よくあるつまずき
+
+### ポートが使えない・権限エラー
+
+別のアプリが同じポートを使っている可能性があります。**別のポート番号**（例: `8011`）で `uvicorn` を起動し直してください。
+
+### `{"detail":"Not Found"}` が返る
+
+- URL のパスやポートが間違っていないか確認してください。  
+- **`/docs`** にその API が載っているか確認してください。
+
+### `form.html` が見つからない（404）
+
+前述のとおり、`analysis/.../templates/forms` が無い環境だと **本体 HTML が配置されていない**可能性があります。検証だけなら **`verify.html`** と **`/docs`** から進めるのが安全です。
+
+---
+
+## 6. Git・開発運用のメモ（短く）
+
+- `main` に直接コミットせず、**ブランチを切って Pull Request** する運用が無難です。  
+- 詳細なブランチ名やリモート設定は、チームの決め事に従ってください。
+
+---
+
+## 7. もっと詳しい資料
+
+- **`newneed/README.md`** … `newneed` モジュールの説明  
+- **`newneed/操作手順書.md`** … 操作に関する記載（ある場合）
+
+---
+
+質問や環境差分（フォルダがない・ポートがブロックされる等）があれば、**どの URL を開いたか** と **ターミナルのエラー全文** を添えると原因が特定しやすくなります。
