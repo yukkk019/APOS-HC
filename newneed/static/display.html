@@ -59,10 +59,16 @@
     (function() {
       // 「メインフォームに戻る」は、常にトップ画面(frontend/index.html)へ戻す。
       // ローカルで :8000 側から開いていても、入力画面は :5500 側で開く。
+      var qs = new URLSearchParams(window.location.search || "");
+      var returnToParam = qs.get("return_to");
       var backToMainFormEl = document.getElementById("backToMainForm");
       if (backToMainFormEl) {
         var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-        if (isLocal) {
+        if (returnToParam && returnToParam.charAt(0) === "/" && !/^\/\//.test(returnToParam)) {
+          backToMainFormEl.href = returnToParam;
+        } else if (window.location.port === "8000" || window.location.port === "") {
+          backToMainFormEl.href = "/form.html";
+        } else if (isLocal && window.location.port !== "8000") {
           backToMainFormEl.href =
             window.location.protocol + "//" + window.location.hostname + ":5500/frontend/index.html";
         } else {
@@ -70,10 +76,14 @@
         }
       }
 
-      // form.html で localStorage に保存されていれば事業所番号・個人番号・回次を反映
+      // URLクエリまたは form.html / メインフォーム経由の localStorage で事業所番号・個人番号・回次を反映
       try {
-        var storedOffice = localStorage.getItem("office_id");
-        var storedPersonal = localStorage.getItem("personal_id");
+        var qOffice = qs.get("office_id");
+        var qPersonal = qs.get("personal_id");
+        var qRound = qs.get("round");
+        var storedOffice = qOffice != null && qOffice !== "" ? qOffice : localStorage.getItem("office_id");
+        var storedPersonal = qPersonal != null && qPersonal !== "" ? qPersonal : localStorage.getItem("personal_id");
+        var storedRound = qRound === "1" || qRound === "2" || qRound === "3" ? qRound : localStorage.getItem("session");
         if (storedOffice != null) {
           var officeEl = document.getElementById("office_id");
           if (officeEl) officeEl.value = storedOffice;
@@ -82,7 +92,6 @@
           var personEl = document.getElementById("person_id");
           if (personEl) personEl.value = storedPersonal;
         }
-        var storedRound = localStorage.getItem("session");
         if (storedRound === "1" || storedRound === "2" || storedRound === "3") {
           var roundEl = document.getElementById("round");
           if (roundEl) roundEl.value = storedRound;

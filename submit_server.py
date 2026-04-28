@@ -16,12 +16,15 @@ import sqlite3
 from pathlib import Path
 from datetime import datetime
 import json
+import logging
+import os
 import re
 import time
 from uuid import uuid4
 
 app = FastAPI()
 DB_PATH = Path(__file__).with_name("apos_hc.db")
+os.environ.setdefault("APOS_HC_DB_PATH", str(DB_PATH.resolve()))
 UPLOADS_DIR = Path(__file__).with_name("uploads")
 ALLOWED_UPLOAD_CATEGORIES = {"genogram", "room", "medicine", "pain"}
 DESKTOP_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +32,7 @@ FORMS_DIR = DESKTOP_DIR / "analysis" / "backend" / "app" / "templates" / "forms"
 FRONTEND_DIR = Path(__file__).resolve().parent / "frontend"
 STATIC_DIR = DESKTOP_DIR / "analysis" / "backend" / "app" / "static"
 NEWNEED_STATIC_DIR = DESKTOP_DIR / "analysis" / "backend" / "app" / "newneed" / "static"
+_REPO_NEWNEED_STATIC_DIR = Path(__file__).resolve().parent / "newneed" / "static"
 DB_CONNECT_TIMEOUT_SEC = 15
 DB_BUSY_TIMEOUT_MS = 15000
 DB_LOCK_RETRY_ATTEMPTS = 5
@@ -49,8 +53,16 @@ for _cat in ALLOWED_UPLOAD_CATEGORIES:
 app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 if STATIC_DIR.is_dir():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
-if NEWNEED_STATIC_DIR.is_dir():
-    app.mount("/api/newneed/static", StaticFiles(directory=str(NEWNEED_STATIC_DIR)), name="newneed_static")
+_effective_newneed_static = NEWNEED_STATIC_DIR if NEWNEED_STATIC_DIR.is_dir() else _REPO_NEWNEED_STATIC_DIR
+if _effective_newneed_static.is_dir():
+    app.mount("/api/newneed/static", StaticFiles(directory=str(_effective_newneed_static)), name="newneed_static")
+
+try:
+    from newneed.api_router import router as _newneed_api_router
+
+    app.include_router(_newneed_api_router, prefix="/api/newneed", tags=["newneed"])
+except Exception as exc:
+    logging.getLogger(__name__).warning("newneed API をマウントできませんでした: %s", exc)
 
 
 class FormData(BaseModel):

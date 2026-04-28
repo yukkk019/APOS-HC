@@ -15,7 +15,20 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel
 
-from core.storage_db import get_record_db, get_care_plan_db, get_care_plans_for_user_round_db, upsert_care_plan_db
+try:
+    from core.storage_db import (
+        get_record_db,
+        get_care_plan_db,
+        get_care_plans_for_user_round_db,
+        upsert_care_plan_db,
+    )
+except ImportError:
+    from newneed.storage_sqlite import (
+        get_record_db,
+        get_care_plan_db,
+        get_care_plans_for_user_round_db,
+        upsert_care_plan_db,
+    )
 
 router = APIRouter()
 
